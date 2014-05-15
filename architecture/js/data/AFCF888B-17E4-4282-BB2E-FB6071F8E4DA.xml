@@ -1,0 +1,5 @@
+tocTab[tocTab.length] = new Array("0.2.2:1", "", "Submit Paper", "EARoot/EA2/EA2/EA29.htm", "185.png", "23", "0", "", "Sequence diagram0","{89EC37EB-0DED-4567-9B70-E9E350B78C6B}");
+tocTab[tocTab.length] = new Array("0.2.2:2", "", ": Conference", "EARoot/EA2/EA2/EA31.htm", "25.png", "92", "0", "", "Object0","{3111D7BC-7A14-4120-9AAF-28F68899C4F4}");
+tocTab[tocTab.length] = new Array("0.2.2:3", "", ": Paper", "EARoot/EA2/EA2/EA32.htm", "25.png", "91", "0", "", "Object0","{FFA01990-38A8-4440-AB25-F9D7D4D5E272}");
+tocTab[tocTab.length] = new Array("0.2.2:4", "", ": Author", "EARoot/EA2/EA2/EA33.htm", "25.png", "90", "0", "", "Object0","{A4F6ED38-5965-4e2c-834D-C884BD2C1B5D}");
+tocTab[tocTab.length] = new Array("0.2.2:5", "", "Author", "EARoot/EA2/EA2/EA34.htm", "6.png", "89", "0", "", "Actor0","{A3177A1E-C4F1-49d9-AE28-898916F1FFC2}");

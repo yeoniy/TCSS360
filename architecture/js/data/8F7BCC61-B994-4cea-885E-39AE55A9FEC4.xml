@@ -1,0 +1,10 @@
+tocTab[tocTab.length] = new Array("0.3:1", "", "Class Model", "EARoot/EA3/EA35.htm", "175.png", "7", "0", "", "Logical diagram0","{7E8DF6EB-F2B7-4463-B578-354FBE18AAEF}");
+tocTab[tocTab.length] = new Array("0.3:2", "", "Admin", "EARoot/EA3/EA37.htm", "5.png", "70", "0", "", "Class0","{929E425F-DAAF-41bd-B22A-8ED1EBD7F937}");
+tocTab[tocTab.length] = new Array("0.3:3", "", "Author", "EARoot/EA3/EA38.htm", "5.png", "71", "0", "", "Class0","{8190038F-0630-4211-AB33-384C4C15CD53}");
+tocTab[tocTab.length] = new Array("0.3:4", "", "Conference", "EARoot/EA3/EA39.htm", "5.png", "72", "0", "", "Class0","{38B8A398-AA08-48cf-8956-06E60A193B73}");
+tocTab[tocTab.length] = new Array("0.3:5", "", "Paper", "EARoot/EA3/EA40.htm", "5.png", "73", "0", "", "Class0","{AE9DBCEC-BE47-4573-8216-53018F6029DE}");
+tocTab[tocTab.length] = new Array("0.3:6", "", "ProChair", "EARoot/EA3/EA41.htm", "5.png", "74", "0", "", "Class0","{76A021F5-B242-4313-A533-C494B1DFF7B4}");
+tocTab[tocTab.length] = new Array("0.3:7", "", "Reviewer", "EARoot/EA3/EA42.htm", "5.png", "75", "0", "", "Class0","{9676F118-5340-42c0-97A4-53299C309074}");
+tocTab[tocTab.length] = new Array("0.3:8", "", "SubChair", "EARoot/EA3/EA43.htm", "5.png", "76", "0", "", "Class0","{B9967C4B-868F-4066-B31A-9CECFDA9A9CA}");
+tocTab[tocTab.length] = new Array("0.3:9", "", "«enumeration» Type", "EARoot/EA3/EA44.htm", "5.png", "77", "0", "", "Class0","{ADDDA681-2BF5-475e-9A72-7319D97EDD5B}");
+tocTab[tocTab.length] = new Array("0.3:10", "", "User", "EARoot/EA3/EA45.htm", "5.png", "78", "0", "", "Class0","{7C2315EE-0ECB-4c09-B3B0-6D92DFE293DA}");

@@ -1,0 +1,4 @@
+tocTab[tocTab.length] = new Array("0.2.1:1", "", "Get Deadline", "EARoot/EA2/EA1/EA24.htm", "185.png", "22", "0", "", "Sequence diagram0","{0CE6B1FB-7F56-452e-BEE9-CCCC9B337D8F}");
+tocTab[tocTab.length] = new Array("0.2.1:2", "", ": Conference", "EARoot/EA2/EA1/EA26.htm", "25.png", "85", "0", "", "Object0","{E5E420DF-676E-43b3-8C9A-C59B8FD4139C}");
+tocTab[tocTab.length] = new Array("0.2.1:3", "", ": Author", "EARoot/EA2/EA1/EA27.htm", "25.png", "86", "0", "", "Object0","{B61E1CDD-000F-4e92-8B3A-805A20141F22}");
+tocTab[tocTab.length] = new Array("0.2.1:4", "", "Author", "EARoot/EA2/EA1/EA28.htm", "6.png", "88", "0", "", "Actor0","{106DFC60-B80C-4648-BC22-C3D1ABD47330}");
