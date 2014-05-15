@@ -22,6 +22,7 @@ public class Conference implements Observer {
 
     public boolean addPaper(File file) {
 
+
         return true;
     }
 
