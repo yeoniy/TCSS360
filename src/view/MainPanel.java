@@ -1,4 +1,8 @@
+package view;
 import javax.swing.*;
+
+import model.Conference;
+
 import java.util.Observable;
 import java.util.Observer;
 

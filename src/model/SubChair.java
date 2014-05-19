@@ -1,3 +1,5 @@
+package model;
+
 /**
  * Created by Yeonil on 4/22/14.
  */
