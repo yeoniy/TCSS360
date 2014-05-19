@@ -5,6 +5,8 @@ import java.util.Date;
 /**
  * Created by Yeonil on 4/22/14.
  */
+
+// Test push Nick
 public class Author extends User {
     ArrayList<Paper> paper;
 
