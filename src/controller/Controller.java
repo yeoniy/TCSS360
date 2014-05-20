@@ -1,8 +1,11 @@
 package controller;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import model.Author;
 import model.Conference;
+import model.Paper;
 
 /**
  * Main controller class for controlling actions between view and controller. Should not be
@@ -20,6 +23,18 @@ public class Controller extends Observable {
     public Controller(final ArrayList<Conference> aConferenceList) {
     	super();
     	this.myConferenceList = aConferenceList;
+    }
+
+    /**
+     *
+     * @param author author of the paper
+     * @param fileName name of the file
+     *
+     * Creates File object with String of file name then Author class adds File to ArrayList of Paper
+     */
+    public void addPaper (Author author, String fileName) {
+        File file = new File(fileName);
+        author.submit(file);
     }
 
     public void update() {

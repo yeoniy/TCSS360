@@ -1,4 +1,7 @@
 package model;
+
+import exception.InvalidInputException;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -42,8 +45,16 @@ public class Paper {
         return accepted;
     }
 
-    public void setAccepted(int accepted) {
-        this.accepted = accepted;
+    /**
+     *
+     * @param accepted int to choose status of paper. 0=process 1=rejected 2=accepted
+     * @throws InvalidInputException Invalid input for param accepted.
+     */
+    public void setAccepted(int accepted) throws InvalidInputException{
+        if(accepted >= 0 && accepted <= 2)
+            this.accepted = accepted;
+        else
+            throw new InvalidInputException();
     }
 
     public void addComment(String comment) {
