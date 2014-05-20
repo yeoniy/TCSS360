@@ -10,7 +10,6 @@ public class User implements Observer {
     private String id;
     private String password;
     private Type myType;
-    private Type type;
 
 
     public User() {
@@ -53,8 +52,12 @@ public class User implements Observer {
         this.name = name;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public Type getMyType() {
+    	return myType;
+    }
+    
+    public void setMyType(Type type) {
+        this.myType = myType;
     }
 
     @Override

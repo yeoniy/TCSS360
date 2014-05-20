@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -38,11 +39,13 @@ public class LoginPanel extends JPanel {
 	
 	private JPasswordField txtPassword;
     
+	private JComboBox<String> cmbConferences;
+	
     private GridLayout myLayout;
     
     public LoginPanel(ArrayList<Conference> conferences) {
         this.conferences = conferences;
-        ctrlLogin = new LoginController();
+        ctrlLogin = new LoginController(this);
         myLayout = new GridLayout(0, 1);
         initialize();
     }
@@ -59,12 +62,50 @@ public class LoginPanel extends JPanel {
 		txtUsername.setPreferredSize(new Dimension(100, 20));
 		txtPassword = new JPasswordField();
 		txtPassword.setPreferredSize(new Dimension(100, 20));
+		
+		String[] conferenceNames = generateConferenceList();
+		
+		cmbConferences = new JComboBox<String>(conferenceNames);
+		cmbConferences.setPreferredSize(new Dimension(170, 20));
+		// Add the components
 		this.add(lblUsername);
 		this.add(txtUsername);
 		this.add(lblPassword);
 		this.add(txtPassword);
+		this.add(cmbConferences);
 		this.add(btnLogin);
 		this.add(btnExit);
 	}
+	
+	public String getUsername() {
+		return txtUsername.getText();
+	}
+	
+	public char[] getPassword() {
+		return txtPassword.getPassword();
+	}
+	
+	public Conference getConference() {
+		Conference toReturn = null;
+		
+		return toReturn;
+	}
+	
+	private String[] generateConferenceList() {
+		// TODO: Remove later, Replace with conferences
+		ArrayList<Conference> c = new ArrayList<Conference>();
+		Conference a = new Conference("Boston", null, "0000001");
+		Conference b = new Conference("Seattle", null, "0000002");
+		c.add(a);
+		c.add(b);
+		String[] cList = new String[c.size()];
+		for (int i = 0; i < cList.length; i++) {
+			cList[i] = c.get(i).getName();
+		}
+		return cList;
+	}
 
+	public void resetPassField() {
+		txtPassword.setText("");
+	}
 }

@@ -55,8 +55,15 @@ public class Conference implements Observer {
         this.users.add(user);
     }
 
+    public ArrayList<User> getUserList() {
+    	return this.users;
+    }
     @Override
     public void update(Observable o, Object arg) {
 
+    }
+    
+    public String toString() {
+    	return this.name;
     }
 }

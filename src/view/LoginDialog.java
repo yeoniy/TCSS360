@@ -12,14 +12,15 @@ public class LoginDialog extends JDialog {
 	 * Default serial ID.
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Dimension CENTER = Toolkit.getDefaultToolkit().getScreenSize();
+	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	public LoginDialog(JFrame parentFrame) {
 		super(parentFrame, "Login");
 		add(new LoginPanel(null));
-		setLocation(CENTER.width/2-this.getSize().width/2, CENTER.height/2-this.getSize().height/2);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setPreferredSize(new Dimension(200, 150));
+		setLocation(SCREEN_SIZE.width/2 - 150, SCREEN_SIZE.height/2 - 150);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		pack();
 		setVisible(true);
 	}
