@@ -63,16 +63,20 @@ public class LoginController extends Controller implements ActionListener {
 		}
 	}
 	
-	private Type validateCredentials(String user,String pass, Conference c) throws InvalidLoginException {
+	public Type testCredentials(String user, String pass, Conference c) {
+		return validateCredentials(user, pass, c);
+	}
+	
+	private Type validateCredentials(String user, String pass, Conference c) throws InvalidLoginException {
 		
-		//ArrayList<User> userList = c.getUserList();
+		ArrayList<User> userList = c.getUserList();
 		InvalidLoginException ile = new InvalidLoginException(user, pass, c);
 		// TODO: Delete this
-		ArrayList<User> userList = new ArrayList<User>();
-		User u1 = new User();
-		User u2 = new User("Nick", "111", "test", Type.AUTHOR);
-		userList.add(u1);
-		userList.add(u2);
+		//ArrayList<User> userList = new ArrayList<User>();
+		//User u1 = new User();
+		//User u2 = new User("Nick", "111", "test", Type.AUTHOR);
+		//userList.add(u1);
+		//userList.add(u2);
 		
 		if (user.equals("")) {
 			throw ile;
