@@ -6,7 +6,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Created by Yeonil on 4/22/14.
+ * Class for Paper, contains file, arraylist of comment(String), file name, and status of paper (accpeted, rejected, process)
+ *
+ * @version 5/20/2014
+ * @author Yeonil
  */
 public class Paper {
     private File file;
@@ -46,7 +49,7 @@ public class Paper {
     }
 
     /**
-     *
+     * Set status of paper
      * @param accepted int to choose status of paper. 0=process 1=rejected 2=accepted
      * @throws InvalidInputException Invalid input for param accepted.
      */
