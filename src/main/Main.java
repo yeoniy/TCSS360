@@ -1,26 +1,21 @@
 package main;
+import java.awt.EventQueue;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
 import model.Conference;
+import util.Loader;
 import view.ConferenceGui;
 
 /**
  * Created by Yeonil on 4/29/14.
  */
 public class Main {
-    private static ArrayList<Conference> conferences;
     public static void main(String[] args) {
-        loadConference();
-        ConferenceGui conferenceGui = new ConferenceGui(conferences);
-        
+        EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ConferenceGui c = new ConferenceGui();
+			}
+        });
     }
-
-    private static void loadConference() {
-        //fix later
-        conferences = new ArrayList<Conference>();
-    }
-
-
 }

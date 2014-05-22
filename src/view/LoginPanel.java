@@ -1,6 +1,8 @@
 package view;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -10,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import util.Loader;
 import model.Conference;
 import controller.LoginController;
 
@@ -26,8 +29,6 @@ public class LoginPanel extends JPanel {
 	 * Default serial ID.
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private ArrayList<Conference> conferences;
 	
 	private JButton btnLogin;
 	
@@ -40,17 +41,21 @@ public class LoginPanel extends JPanel {
 	private JPasswordField txtPassword;
     
 	private JComboBox<String> cmbConferences;
-	
-    private GridLayout myLayout;
     
-    public LoginPanel(ArrayList<Conference> conferences) {
-        this.conferences = conferences;
+    public LoginPanel() {
         ctrlLogin = new LoginController(this);
-        myLayout = new GridLayout(0, 1);
-        initialize();
+        try {
+			initialize();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
-	private void initialize() {
+	private void initialize() throws FileNotFoundException, IOException {
 		JLabel lblUsername = new JLabel("Username:");
 		JLabel lblPassword = new JLabel("Password:");
 		
@@ -63,7 +68,7 @@ public class LoginPanel extends JPanel {
 		txtPassword = new JPasswordField();
 		txtPassword.setPreferredSize(new Dimension(100, 20));
 		
-		String[] conferenceNames = generateConferenceList();
+		String[] conferenceNames = Loader.loadConferenceList();
 		
 		cmbConferences = new JComboBox<String>(conferenceNames);
 		cmbConferences.setPreferredSize(new Dimension(170, 20));
@@ -89,20 +94,6 @@ public class LoginPanel extends JPanel {
 		Conference toReturn = null;
 		
 		return toReturn;
-	}
-	
-	private String[] generateConferenceList() {
-		// TODO: Remove later, Replace with conferences
-		ArrayList<Conference> c = new ArrayList<Conference>();
-		Conference a = new Conference("Boston", null, "0000001");
-		Conference b = new Conference("Seattle", null, "0000002");
-		c.add(a);
-		c.add(b);
-		String[] cList = new String[c.size()];
-		for (int i = 0; i < cList.length; i++) {
-			cList[i] = c.get(i).getName();
-		}
-		return cList;
 	}
 
 	public void resetPassField() {

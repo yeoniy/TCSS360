@@ -26,14 +26,10 @@ public class ConferenceGui extends JFrame {
 	
     private JPanel mainPanel;
     private JPanel loginPanel;
-    private ArrayList<Conference> conferenceList;
 
-
-
-    public ConferenceGui(ArrayList<Conference> conferences) {
+    public ConferenceGui() {
         mainPanel = new MainPanel(null);
-        loginPanel = new LoginPanel(conferences);
-        this.conferenceList = conferences;
+        loginPanel = new LoginPanel();
         LoginDialog d = new LoginDialog(this);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocation(CENTER.width/2-this.getSize().width/2, CENTER.height/2-this.getSize().height/2);
