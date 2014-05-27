@@ -12,6 +12,7 @@ import model.Type;
 import model.User;
 import view.LoginPanel;
 import exception.InvalidLoginException;
+import view.MainPanel;
 
 /**
  * Controller for the login panel. Handles login and exit functions.
@@ -28,11 +29,16 @@ public class LoginController extends Controller implements ActionListener {
 		this.myPanel = aPanel;
 	}
 
+    /**
+     * Performs Login
+     * @param e
+     */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Get the source of the action
 		if (e.getSource() instanceof JButton) {
 			JButton btn = (JButton) e.getSource();
+            //Button Action for Login
 			if (btn.getText().equals("Login")) {
 				// TODO: Perform the login here
 				System.out.println(myPanel.getUsername());
@@ -46,17 +52,17 @@ public class LoginController extends Controller implements ActionListener {
 					String pass = String.valueOf(myPanel.getPassword());
 					
 					Type t = validateCredentials(user, pass, c);
-					
+
+
 				} catch (InvalidLoginException le) {
 					JOptionPane.showMessageDialog(null, "Username/Password combo not found. Please ensure "
 							+ "your username and password are correct and that you have selected the correct conference.", "Error", JOptionPane.ERROR_MESSAGE);
 				} finally {
 					myPanel.resetPassField();
 				}
-				
 				// Update everything
 				update();
-			} else {
+			} else {    //Action for Exit button
 				// Exit the program
 				System.exit(0);
 			}
