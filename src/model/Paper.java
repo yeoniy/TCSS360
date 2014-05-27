@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class Paper {
     private File file;
     private ArrayList<String> comment;
+
+    private final int PROCESS_PAPER = 0;
+    private final int REJECTED_PAPER = 0;
+    private final int ACCEPTED_PAPER = 0;
     /**
      * int 0=process 1=rejected 2=accepted
      */
@@ -22,7 +26,7 @@ public class Paper {
 
     public Paper(File file) {
         this.file  = file;
-        accepted = 0;
+        accepted = PROCESS_PAPER;
         comment = new ArrayList<String>();
         fileName = file.getName();
     }
@@ -54,7 +58,7 @@ public class Paper {
      * @throws InvalidInputException Invalid input for param accepted.
      */
     public void setAccepted(int accepted) throws InvalidInputException{
-        if(accepted >= 0 && accepted <= 2)
+        if(accepted >= PROCESS_PAPER && accepted <= ACCEPTED_PAPER)
             this.accepted = accepted;
         else
             throw new InvalidInputException();
