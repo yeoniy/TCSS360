@@ -13,7 +13,7 @@ public class Conference implements Observer {
     private Date date;
     private String id;
     private ArrayList<User> users;
-    //a
+
     public Conference (String name, Date date, String id) {
         this.name = name;
         this.date = date;
