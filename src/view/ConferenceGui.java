@@ -1,13 +1,11 @@
 package view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import model.Conference;
+import controller.Controller;
 
 /**
  * Created by Yeonil on 4/29/14.
@@ -27,9 +25,11 @@ public class ConferenceGui extends JFrame {
 	
     private JPanel mainPanel;
     private LoginPanel loginPanel;
+    
+    private Controller ctrlMain;
 
     public ConferenceGui() {
-        //mainPanel = new MainPanel();
+        mainPanel = new MainPanel();
         loginPanel = new LoginPanel();
         LoginDialog d = new LoginDialog(this);
         mainPanel = new MainPanel(loginPanel.getConference(), loginPanel.getUsername());

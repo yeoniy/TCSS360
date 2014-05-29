@@ -28,6 +28,8 @@ public class Author extends User {
 
     public boolean submit(File file) {
         paper.add(new Paper(file));
+        this.setChanged();
+        this.notifyObservers();
         return true;
     }
 

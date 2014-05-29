@@ -22,10 +22,20 @@ import view.MainPanel;
  */
 public class LoginController extends Controller implements ActionListener {
 
+	/**
+	 * The LoginPanel to control.
+	 */
 	private LoginPanel myPanel;
 
+	/**
+	 * The FileController to load the conference data.
+	 */
 	private FileController ctrlFile;
 
+	/**
+	 * Creates a new LoginController for the given LoginPanel.
+	 * @param aPanel the LoginPanel to control
+	 */
 	public LoginController(final LoginPanel aPanel) {
 		super(null);
 		this.myPanel = aPanel;
@@ -33,7 +43,7 @@ public class LoginController extends Controller implements ActionListener {
 
 	/**
 	 * Performs Login
-	 * @param e
+	 * @param e the ActionEvent that triggered this method.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -42,7 +52,7 @@ public class LoginController extends Controller implements ActionListener {
 			JButton btn = (JButton) e.getSource();
 			//Button Action for Login
 			if (btn.getText().equals("Login")) {
-				// TODO: Perform the login here
+				
 				System.out.println(myPanel.getUsername());
 				System.out.println(myPanel.getPassword());
 
@@ -55,7 +65,9 @@ public class LoginController extends Controller implements ActionListener {
 
 					Type t = validateCredentials(user, pass, c);
 
-
+					
+					// Set the mainPanel view for the given type of the user
+					
 				} catch (InvalidLoginException le) {
 					JOptionPane.showMessageDialog(null, "Username/Password combo not found. Please ensure "
 							+ "your username and password are correct and that you have selected the correct conference.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -71,21 +83,31 @@ public class LoginController extends Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * For test purposes.
+	 * @param user
+	 * @param pass
+	 * @param c
+	 * @return
+	 */
 	public Type testCredentials(String user, String pass, Conference c) {
 		return validateCredentials(user, pass, c);
 	}
 
+	/**
+	 * Validates a user based on their name and password.
+	 * @param user the username from the user textfield
+	 * @param pass the password form the password
+	 * @param c
+	 * @return
+	 * @throws InvalidLoginException
+	 */
 	private Type validateCredentials(String user, String pass, Conference c) throws InvalidLoginException {
 		this.ctrlFile = new FileController(c);
 		c = ctrlFile.getMyConference();
 		ArrayList<User> userList = c.getUserList();
 		InvalidLoginException ile = new InvalidLoginException(user, pass, c);
-		// TODO: Delete this
-		//ArrayList<User> userList = new ArrayList<User>();
-		//User u1 = new User();
-		//User u2 = new User("Nick", "111", "test", Type.AUTHOR);
-		//userList.add(u1);
-		//userList.add(u2);
+
 		for (User u : userList) {
 			System.out.println(u.getName());
 		}
