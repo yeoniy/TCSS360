@@ -8,7 +8,7 @@ import java.util.Observer;
 /**
  * Created by Yeonil on 4/22/14.
  */
-public class Conference implements Observer {
+public class Conference extends Observable {
     private String name;
     private Date date;
     private String id;
@@ -24,6 +24,8 @@ public class Conference implements Observer {
     public boolean addPaper(File file) {
 
 
+    	this.setChanged();
+        this.notifyObservers();
         return true;
     }
 
@@ -33,6 +35,8 @@ public class Conference implements Observer {
 
     public void setName(String name) {
         this.name = name;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public Date getDate() {
@@ -41,6 +45,8 @@ public class Conference implements Observer {
 
     public void setDate(Date date) {
         this.date = date;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public String getId() {
@@ -49,18 +55,18 @@ public class Conference implements Observer {
 
     public void setId(String id) {
         this.id = id;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void addUser(User user) {
         this.users.add(user);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public ArrayList<User> getUserList() {
     	return this.users;
-    }
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
     
     public String toString() {

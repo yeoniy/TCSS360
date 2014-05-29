@@ -18,6 +18,11 @@ public class MainPanel extends JPanel implements Observer{
     @Override
     public void update (Observable o, Object arg) {
 
+    
+    	
+    	
+    	
+    	
     }
 
     public MainPanel(Conference c, String user) {

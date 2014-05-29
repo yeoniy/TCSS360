@@ -5,7 +5,7 @@ import java.util.Observer;
 /**
  * Created by Yeonil on 4/22/14.
  */
-public class User implements Observer {
+public class User extends Observable {
     private String name;
     private String id;
     private String password;
@@ -38,18 +38,24 @@ public class User implements Observer {
     }
     public void setId(String id) {
         this.id = id;
+        this.setChanged();
+        this.notifyObservers();
     }
     public String getPassword() {
         return password;
     }
     public void setPassword(String password) {
         this.password = password;
+        this.setChanged();
+        this.notifyObservers();
     }
     public String getName() {
         return name;
     }
     public void setName(String name) {
         this.name = name;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public Type getMyType() {
@@ -57,11 +63,8 @@ public class User implements Observer {
     }
     
     public void setMyType(Type type) {
-        this.myType = myType;
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
+        this.myType = type;
+        this.setChanged();
+        this.notifyObservers();
     }
 }

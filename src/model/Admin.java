@@ -18,17 +18,26 @@ public class Admin extends User {
 
     public boolean addUser(ArrayList<User> users, User user) {
         users.add(new User(user));
+        this.setChanged();
+        this.notifyObservers();
         return true;
     }
 
     public void changePriveledge(User user, Type t) {
         // Create new whatever, author, review, etc.
+    	this.setChanged();
+        this.notifyObservers();
     }
 
     private void addConference(Conference c) {
+    	
         conferences.add(c);
+        this.setChanged();
+        this.notifyObservers();
     }
     private void removeConference(Conference c) {
         conferences.remove(c);
+        this.setChanged();
+        this.notifyObservers();
     }
 }
