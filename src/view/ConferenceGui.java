@@ -30,6 +30,7 @@ public class ConferenceGui extends JFrame {
 	
     private JPanel mainPanel;
     private LoginPanel loginPanel;
+    private MenuBar menuBar;
 
     public ConferenceGui() {
         //mainPanel = new MainPanel();
