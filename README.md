@@ -16,3 +16,5 @@ Go back to java view top right hand side
 Right click project >> Team >> Add to index
 
 Right click project >> Commit and Push
+
+http://stackoverflow.com/questions/19474186/egit-rejected-non-fast-forward
