@@ -20,6 +20,9 @@ public class MainPanel extends JPanel implements Observer{
 
     
     	
+    	
+    	
+    	
     }
 
     public MainPanel(Conference c, String user) {
