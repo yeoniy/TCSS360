@@ -29,7 +29,7 @@ public class ConferenceGui extends JFrame {
     private Controller ctrlMain;
 
     public ConferenceGui() {
-        mainPanel = new MainPanel();
+        //mainPanel = new MainPanel();
         loginPanel = new LoginPanel();
         LoginDialog d = new LoginDialog(this);
         mainPanel = new MainPanel(loginPanel.getConference(), loginPanel.getUsername());
