@@ -21,38 +21,38 @@ import view.MainPanel;
  *
  */
 public class LoginController extends Controller implements ActionListener {
-	
+
 	private LoginPanel myPanel;
-	
+
 	private FileController ctrlFile;
-	
+
 	public LoginController(final LoginPanel aPanel) {
 		super(null);
 		this.myPanel = aPanel;
 	}
 
-    /**
-     * Performs Login
-     * @param e
-     */
+	/**
+	 * Performs Login
+	 * @param e
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Get the source of the action
 		if (e.getSource() instanceof JButton) {
 			JButton btn = (JButton) e.getSource();
-            //Button Action for Login
+			//Button Action for Login
 			if (btn.getText().equals("Login")) {
 				// TODO: Perform the login here
 				System.out.println(myPanel.getUsername());
 				System.out.println(myPanel.getPassword());
-				
+
 				// Get the conference and attempt login
 				try {
 					// Try grabbing the conference
 					Conference c = myPanel.getConference();
 					String user = myPanel.getUsername();
 					String pass = String.valueOf(myPanel.getPassword());
-					
+
 					Type t = validateCredentials(user, pass, c);
 
 
@@ -70,11 +70,11 @@ public class LoginController extends Controller implements ActionListener {
 			}
 		}
 	}
-	
+
 	public Type testCredentials(String user, String pass, Conference c) {
 		return validateCredentials(user, pass, c);
 	}
-	
+
 	private Type validateCredentials(String user, String pass, Conference c) throws InvalidLoginException {
 		this.ctrlFile = new FileController(c);
 		c = ctrlFile.getMyConference();
@@ -89,10 +89,11 @@ public class LoginController extends Controller implements ActionListener {
 		for (User u : userList) {
 			System.out.println(u.getName());
 		}
+		int i = 5;
 		if (user.equals("")) {
 			throw ile;
 		}
-		
+
 		for (User u : userList) {
 			if (u.getName().equals(user)) {
 				if (u.getPassword().equals(pass)) {
