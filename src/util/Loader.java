@@ -18,7 +18,6 @@ public final class Loader {
 	public static final String CONFERENCE_PATH = "Resources\\";
 	
 	private Loader() {
-        total_conference = 0;
 		// Should not be instantiated.
 	}
 	

@@ -41,6 +41,7 @@ public class LoginPanel extends JPanel {
 	private JPasswordField txtPassword;
     
 	private JComboBox<String> cmbConferences;
+    private Conference[] conference;
     
     public LoginPanel() {
         ctrlLogin = new LoginController(this);
@@ -67,10 +68,13 @@ public class LoginPanel extends JPanel {
 		txtUsername.setPreferredSize(new Dimension(100, 20));
 		txtPassword = new JPasswordField();
 		txtPassword.setPreferredSize(new Dimension(100, 20));
-		
-		String[] conferenceNames = Loader.loadConferenceList();
-		
-		cmbConferences = new JComboBox<String>(conferenceNames);
+
+        conference = Loader.loadConferenceList();
+        String[] conferenceName = new String[Loader.total_conference];
+        for (int i = 0; i < conferenceName.length; i++) {
+            conferenceName[i] = conference[i].getName();
+        }
+		cmbConferences = new JComboBox<String>(conferenceName);
 		cmbConferences.setPreferredSize(new Dimension(170, 20));
 		// Add the components
 		this.add(lblUsername);
@@ -91,9 +95,7 @@ public class LoginPanel extends JPanel {
 	}
 	
 	public Conference getConference() {
-		Conference toReturn = null;
-		
-		return toReturn;
+		return conference[cmbConferences.getSelectedIndex()];
 	}
 
 	public void resetPassField() {

@@ -100,7 +100,7 @@ public class FileController extends Controller {
     		} else {
     			File tempfile = new File(temp.get(i));
     			Paper paper = new Paper(tempfile);
-    		  myPapers.add(paper);
+    		    myPapers.add(paper);
     		}
     	}
 
