@@ -10,16 +10,57 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @author Tim Yeonil
+ * @version 1.0
+ */
 public final class Loader {
+    /**
+     * The index of array that indecates conference name String.
+     */
+    private static final int NAME_INDEX = 0;
+    /**
+     * The index of array that indecates date String.
+     */
     private static final int DATE_INDEX = 1;
+    /**
+     * The index of array that indecates conference ID String.
+     */
+    private static final int ID_INDEX = 2;
+    /**
+     * The index of array that indecates int Year.
+     */
+    private static final int YEAR_INDEX = 0;
+    /**
+     * The index of array that indecates int Month.
+     */
+    private static final int MONTH_INDEX = 1;
+    /**
+     * The index of array that indecates int Day.
+     */
+    private static final int DAY_INDEX = 2;
+    /**
+     * The file (including path) that contains list of conference
+     */
 	public static final String CONFERENCE_LIST_PATH = "Resources\\Conference.txt";
 	
 	public static final String CONFERENCE_PATH = "Resources\\";
-	
+
+    /**
+     * Private constructor that we expect to not used..
+     */
 	private Loader() {
 		// Should not be instantiated.
 	}
-	
+
+    /**
+     * Loads all Conference from CONFERENCE_LIST_PATH and creates array of Conference class.
+     * This method is being called by LoginPanel to let user choose conference.
+     * If file is not found, let it throws exception and it's not being catched here.
+     * @return Array of conference
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
 	public static Conference[] loadConferenceList() throws FileNotFoundException, IOException {
 		File conferenceFile = new File(CONFERENCE_LIST_PATH);
 		FileReader fr = new FileReader(conferenceFile);
@@ -33,8 +74,8 @@ public final class Loader {
 			current = br.readLine();
             String[] list = current.split(",");
             String[] tempDate = list[DATE_INDEX].split("/");
-            Date date = new Date(Integer.parseInt(tempDate[0]), Integer.parseInt(tempDate[1]), Integer.parseInt(tempDate[2]));
-            Conference tempConference = new Conference(list[0], date, list[2]);
+            Date date = new Date(Integer.parseInt(tempDate[YEAR_INDEX]), Integer.parseInt(tempDate[MONTH_INDEX]), Integer.parseInt(tempDate[DAY_INDEX]));
+            Conference tempConference = new Conference(list[NAME_INDEX], date, list[ID_INDEX]);
 			conferenceList.add(tempConference);
 		}
 		br.close();
