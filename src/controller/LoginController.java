@@ -24,6 +24,8 @@ public class LoginController extends Controller implements ActionListener {
 	
 	private LoginPanel myPanel;
 	
+	private FileController ctrlFile;
+	
 	public LoginController(final LoginPanel aPanel) {
 		super(null);
 		this.myPanel = aPanel;
@@ -74,7 +76,8 @@ public class LoginController extends Controller implements ActionListener {
 	}
 	
 	private Type validateCredentials(String user, String pass, Conference c) throws InvalidLoginException {
-		
+		this.ctrlFile = new FileController(c);
+		c = ctrlFile.getMyConference();
 		ArrayList<User> userList = c.getUserList();
 		InvalidLoginException ile = new InvalidLoginException(user, pass, c);
 		// TODO: Delete this
@@ -83,7 +86,9 @@ public class LoginController extends Controller implements ActionListener {
 		//User u2 = new User("Nick", "111", "test", Type.AUTHOR);
 		//userList.add(u1);
 		//userList.add(u2);
-		
+		for (User u : userList) {
+			System.out.println(u.getName());
+		}
 		if (user.equals("")) {
 			throw ile;
 		}

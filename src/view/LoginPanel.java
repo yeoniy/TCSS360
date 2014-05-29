@@ -70,7 +70,7 @@ public class LoginPanel extends JPanel {
 		txtPassword.setPreferredSize(new Dimension(100, 20));
 
         conference = Loader.loadConferenceList();
-        String[] conferenceName = new String[Loader.total_conference];
+        String[] conferenceName = new String[conference.length];
         for (int i = 0; i < conferenceName.length; i++) {
             conferenceName[i] = conference[i].getName();
         }

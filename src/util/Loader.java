@@ -12,7 +12,6 @@ import java.util.Date;
 
 public final class Loader {
     private static final int DATE_INDEX = 1;
-	public static int total_conference;
 	public static final String CONFERENCE_LIST_PATH = "Resources\\Conference.txt";
 	
 	public static final String CONFERENCE_PATH = "Resources\\";
@@ -41,7 +40,6 @@ public final class Loader {
 		br.close();
 		fr.close();
 		toReturn = new Conference[conferenceList.size()];
-        total_conference = conferenceList.size();
 		for (int i = 0; i < toReturn.length; i++) {
 			toReturn[i] = conferenceList.get(i);
 		}

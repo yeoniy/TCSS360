@@ -19,6 +19,8 @@ public class FileController extends Controller {
     private String myConf;
     private ArrayList<User> myUser;
     private ArrayList<Paper> myPapers;
+    
+    private Conference myConference;
 /**
  * Constructor for the FileController
  * 
@@ -26,25 +28,30 @@ public class FileController extends Controller {
  */
     public FileController(Conference the_conference) {
         super(null);
+        myUser = new ArrayList<User>();
+        myPapers = new ArrayList<Paper>();
         myConf = the_conference.getName(); //TOCHECK: if this is the way we want to do it.
+        myConference = the_conference;
         readFile();
     }
     /**
      * Reads the file and adds users to the program.
      */
     private void readFile() { 
-        File myfile = new File("\\Resources\\" + myConf + ".txt");
+        File myfile = new File("Resources\\" + myConf + ".txt");
         try {
 			Scanner file = new Scanner(new FileInputStream(myfile));
         while (file.hasNext()) {
-        	String username = file.next();
-        	String ID = file.next();
-        	String password = file.next();
-        	String t1 = file.next();
-        	String p1 = file.next();
-        	String p2 = file.next();
-        	String p3 = file.next();
-        	String p4 = file.next();
+        	String lineString = file.nextLine();
+        	String[] line = lineString.split(",");
+        	String username = line[0];
+        	String ID = line[1];
+        	String password = line[2];
+        	String t1 = line[3];
+        	String p1 = line[4];
+        	String p2 = line[5];
+        	String p3 = line[6];
+        	String p4 = line[7];
         	Type type = Type.AUTHOR;
         	if(t1.toLowerCase().equals("prochair")) {
         		type = Type.PROCHAIR;
@@ -60,6 +67,7 @@ public class FileController extends Controller {
         	}
         	addUser(username, ID, password, type);
         	addPapers(p1,p2,p3,p4);
+        	addToConference(myUser);
         }
         file.close();
         } catch (FileNotFoundException e) {
@@ -67,7 +75,12 @@ public class FileController extends Controller {
 		e.printStackTrace();
 		}   
     }
-    /**
+    private void addToConference(ArrayList<User> myUser) {
+		for (User u: myUser) {
+			myConference.addUser(u);
+		}
+	}
+	/**
      * Adds Users to the program.
      * 
      * @param name name of user.
@@ -77,7 +90,7 @@ public class FileController extends Controller {
      */
     private void addUser (String name, String id, String password, Type type) {
         User user = new User (name, id, password, type);
-        myUser.add(user);
+        myConference.addUser(user);
     }
     /**
      * Adds papers for each user.
@@ -105,4 +118,10 @@ public class FileController extends Controller {
     	}
 
     }
+	public Conference getMyConference() {
+		return myConference;
+	}
+	public void setMyConference(Conference myConference) {
+		this.myConference = myConference;
+	}
 }
