@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JPanel;
+
 /**
  * Created by Yeonil on 4/22/14.
  */
@@ -72,4 +74,10 @@ public class Conference extends Observable {
     public String toString() {
     	return this.name;
     }
+
+	public void addObservers(ArrayList<JPanel> observers) {
+		for (JPanel j : observers) {
+			addObserver((Observer) j);
+		}
+	}
 }

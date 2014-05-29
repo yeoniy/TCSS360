@@ -1,11 +1,11 @@
 package controller;
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Observable;
+
+import javax.swing.JPanel;
 
 import model.Author;
 import model.Conference;
-import model.Paper;
 
 /**
  * Main controller class for controlling actions between view and controller. Should not be
@@ -24,7 +24,12 @@ public class Controller {
 	/**
 	 * The current active conference.
 	 */
-	private Conference myActiveConference;
+	public static Conference myActiveConference;
+	
+	/**
+	 * List for the observers.
+	 */
+	public static ArrayList<JPanel> observers = new ArrayList<JPanel>();
 	
 	/**
 	 * Creates a new Controller. This is a generic controller that will only

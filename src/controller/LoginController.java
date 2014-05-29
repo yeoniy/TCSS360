@@ -65,7 +65,7 @@ public class LoginController extends Controller implements ActionListener {
 
 					Type t = validateCredentials(user, pass, c);
 
-					
+					Controller.myActiveConference = c;
 					// Set the mainPanel view for the given type of the user
 					
 				} catch (InvalidLoginException le) {
@@ -111,6 +111,7 @@ public class LoginController extends Controller implements ActionListener {
 		for (User u : userList) {
 			System.out.println(u.getName());
 		}
+		
 		if (user.equals("")) {
 			throw ile;
 		}
