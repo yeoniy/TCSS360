@@ -37,7 +37,7 @@ public class LoginController extends Controller implements ActionListener {
 	 * @param aPanel the LoginPanel to control
 	 */
 	public LoginController(final LoginPanel aPanel) {
-		super(null);
+		super();
 		this.myPanel = aPanel;
 	}
 

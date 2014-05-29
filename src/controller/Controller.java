@@ -36,9 +36,8 @@ public class Controller {
 	 * supply basic control. For more specific applications use inherited controllers.
 	 * @param aConferenceList The list of conferences.
 	 */
-    public Controller(final ArrayList<Conference> aConferenceList) {
+    public Controller() {
     	super();
-    	this.myConferenceList = aConferenceList;
     }
 
     /**

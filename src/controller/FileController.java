@@ -44,7 +44,7 @@ public class FileController extends Controller {
 	 * @param aConference the conference we are dealing with.
 	 */
 	public FileController(Conference aConference) {
-		super(null);
+		super();
 		myUser = new ArrayList<User>();
 		myPapers = new ArrayList<Paper>();
 		myConf = aConference.getName(); 
