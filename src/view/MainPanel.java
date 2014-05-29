@@ -24,10 +24,4 @@ public class MainPanel extends JPanel implements Observer{
         this.c = c;
         this.user = user;
     }
-
-    //TODO For temp use only. Will delete this
-    public MainPanel()
-    {
-
-    }
 }

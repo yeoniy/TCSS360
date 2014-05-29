@@ -89,7 +89,6 @@ public class LoginController extends Controller implements ActionListener {
 		for (User u : userList) {
 			System.out.println(u.getName());
 		}
-		int i = 5;
 		if (user.equals("")) {
 			throw ile;
 		}

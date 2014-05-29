@@ -24,4 +24,8 @@ public class SubmitDialog extends JDialog implements Observer{
 
         return true;
     }
+
+    public String getFilePath() {
+        return "";
+    }
 }
