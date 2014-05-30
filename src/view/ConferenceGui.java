@@ -28,16 +28,15 @@ public class ConferenceGui extends JFrame {
 	 */
 	private static final String FRAME_TITLE = "Conference Software";
 	private ArrayList<JPanel> observers;
-    private JPanel mainPanel;
+    private static JPanel mainPanel;
     private LoginPanel loginPanel;
-    private MenuBar menuBar;
+    private static MenuBar menuBar;
 
     public ConferenceGui() {
         //mainPanel = new MainPanel();
         loginPanel = new LoginPanel();
         LoginDialog d = new LoginDialog(this);
         mainPanel = new MainPanel(loginPanel.getConference(), loginPanel.getUsername());
-
 		observers = new ArrayList<JPanel>();
 
 		// Add all the views that need updating on data changes
@@ -53,9 +52,14 @@ public class ConferenceGui extends JFrame {
 		//Testing purpose
 		menuBar = new MenuBar(new Controller(), new Author("", loginPanel.getUsername(), ""));
 		setJMenuBar(menuBar);
-
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(CENTER.width/2-this.getSize().width/2, CENTER.height/2-this.getSize().height/2);
-		setVisible(true);
+		//setVisible(true);
+
+	}
+
+	public static void startConf() {
+		mygui.rungui();
 	}
 }

@@ -36,7 +36,7 @@ public class LoginPanel extends JPanel {
 	
 	private LoginController ctrlLogin;
 	
-	private JTextField txtUsername;
+	private static JTextField txtUsername;
 	
 	private JPasswordField txtPassword;
     
@@ -86,7 +86,7 @@ public class LoginPanel extends JPanel {
 		this.add(btnExit);
 	}
 	
-	public String getUsername() {
+	public static String getUsername() {
 		return txtUsername.getText();
 	}
 	

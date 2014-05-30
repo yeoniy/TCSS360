@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import model.Conference;
 import model.Type;
 import model.User;
+import view.ConferenceGui;
 import view.LoginPanel;
 import exception.InvalidLoginException;
 import view.MainPanel;
@@ -52,7 +53,6 @@ public class LoginController extends Controller implements ActionListener {
 			JButton btn = (JButton) e.getSource();
 			//Button Action for Login
 			if (btn.getText().equals("Login")) {
-				
 				System.out.println(myPanel.getUsername());
 				System.out.println(myPanel.getPassword());
 
@@ -119,7 +119,9 @@ public class LoginController extends Controller implements ActionListener {
 		for (User u : userList) {
 			if (u.getName().equals(user)) {
 				if (u.getPassword().equals(pass)) {
-					return u.getMyType();
+					ConferenceGui.startConf();
+					myPanel.setVisible(false);
+					return u.getMyType();	
 				}
 			}
 		}

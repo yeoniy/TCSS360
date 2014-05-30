@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -24,5 +25,8 @@ public class LoginDialog extends JDialog {
 		pack();
 		setVisible(true);
 	}
-	
+	public void pullThePlug(JFrame parentFrame) {
+        WindowEvent wev = new WindowEvent(parentFrame, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+	}
 }

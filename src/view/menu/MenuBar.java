@@ -12,8 +12,9 @@ import java.awt.event.KeyEvent;
 /**
  * Created by Yeonil on 5/29/14.
  */
-public class MenuBar extends JMenuBar{
-    private JMenu fileMenu;
+public class MenuBar extends JMenuBar {
+   
+	private JMenu fileMenu;
     private JMenu helpMenu;
 
     private Author author;
@@ -24,8 +25,8 @@ public class MenuBar extends JMenuBar{
         this.ctrl = ctrl;
         this.author = author;
 
-        add(fileMenu);
-        add(helpMenu);
+       // add(fileMenu);
+       // add(helpMenu);
     }
 
     private void fileSetup() {
