@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import java.awt.CardLayout;
-
+import controller.Controller;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -64,7 +64,7 @@ public class mygui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		myType = Type.PROCHAIR; //TEMP FOR TESTING
+		myType = Controller.getUserType();
 		frame = new JFrame();
 		cards = new JPanel(new CardLayout());
 		frame.setBounds(100, 100, 450, 442);

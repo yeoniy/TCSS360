@@ -22,7 +22,8 @@ import view.MainPanel;
  *
  */
 public class LoginController extends Controller implements ActionListener {
-
+	
+	private User myUser;
 	/**
 	 * The LoginPanel to control.
 	 */
@@ -121,6 +122,7 @@ public class LoginController extends Controller implements ActionListener {
 				if (u.getPassword().equals(pass)) {
 					myPanel.setVisible(false);
 					ConferenceGui.startConf();
+					Controller.setActiveUser(u);
 					return u.getMyType();	
 				}
 			}

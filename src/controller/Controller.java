@@ -3,9 +3,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
-
+import model.Type;
 import model.Author;
 import model.Conference;
+import model.User;
 
 /**
  * Main controller class for controlling actions between view and controller. Should not be
@@ -15,7 +16,10 @@ import model.Conference;
  * @author Nick Ames
  */
 public class Controller {
-
+	/**
+	 * current user logged in.
+	 */
+	private static User myUser;
 	/**
 	 * The list of all the conferences.
 	 */
@@ -86,4 +90,19 @@ public class Controller {
 	public void setMyActiveConference(Conference myActiveConference) {
 		this.myActiveConference = myActiveConference;
 	} 
+	/**
+	 * Sets the active user
+	 * 
+	 * @param theUser user thats active
+	 */
+	public static void setActiveUser(User theUser) {
+		myUser = theUser;
+	}
+	/**
+	 * returns the active user. 
+	 * @return the user thats active.
+	 */
+	public static Type getUserType() {
+		return myUser.getMyType();	
+	}
 }
