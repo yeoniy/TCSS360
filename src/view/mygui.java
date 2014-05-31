@@ -202,7 +202,8 @@ public class mygui {
 		lblStatistics.setBounds(191, 11, 54, 14);
 		Statspanel.add(lblStatistics);
 		
-		JComboBox comboBox = new JComboBox();
+		
+		JComboBox comboBox = new JComboBox(comboBoxItems);
 		comboBox.setBounds(26, 47, 147, 20);
 		Statspanel.add(comboBox);
 		
@@ -266,7 +267,7 @@ public class mygui {
 		ChairAssign.add(button_2);
 		
 		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(154, 65, 28, 20);
+		comboBox_1.setBounds(25, 65, 157, 20);
 		ChairAssign.add(comboBox_1);
 		
 		JButton btnAssign = new JButton("Assign");
@@ -290,7 +291,7 @@ public class mygui {
 		ChairAssign.add(lblNewLabel_5);
 		
 		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(358, 65, 28, 20);
+		comboBox_2.setBounds(229, 65, 157, 20);
 		ChairAssign.add(comboBox_2);
 		
 		ReviewerView = new JPanel();
@@ -307,7 +308,7 @@ public class mygui {
 		ReviewerView.add(button_4);
 		
 		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(128, 37, 28, 20);
+		comboBox_5.setBounds(23, 37, 165, 20);
 		ReviewerView.add(comboBox_5);
 		
 		JLabel label_2 = new JLabel("Select Paper");
@@ -348,7 +349,7 @@ public class mygui {
 		ChairReview.add(button_5);
 		
 		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(148, 64, 28, 20);
+		comboBox_4.setBounds(31, 64, 145, 20);
 		ChairReview.add(comboBox_4);
 		
 		JLabel lblViewReviewsFor = new JLabel("View Reviews for");
