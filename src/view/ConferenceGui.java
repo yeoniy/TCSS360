@@ -1,6 +1,7 @@
 package view;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -56,10 +57,10 @@ public class ConferenceGui extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(CENTER.width/2-this.getSize().width/2, CENTER.height/2-this.getSize().height/2);
 		//setVisible(true);
-
 	}
 
 	public static void startConf() {
 		mygui.rungui();
 	}
+
 }

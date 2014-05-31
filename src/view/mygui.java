@@ -1,5 +1,7 @@
 package view;
-
+/**
+ * Created by Tim Loverin on 5/29/14.
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -26,9 +28,6 @@ public class mygui {
 	
 	private JPanel cards;
 	private CardLayout c;
-	private JTextField txtUser;
-	private JTextField txtThePaper;
-	private JTextField txtThePaper_2;
 	
 	private JPanel Statspanel;
 	private JPanel Entrypanel;
@@ -65,7 +64,7 @@ public class mygui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		myType = Type.PROCHAIR;
+		myType = Type.PROCHAIR; //TEMP FOR TESTING
 		frame = new JFrame();
 		cards = new JPanel(new CardLayout());
 		frame.setBounds(100, 100, 450, 442);
@@ -84,6 +83,7 @@ public class mygui {
 		Entrypanel.setLayout(null);
 		c = (CardLayout) cards.getLayout();
 		c.show(cards, Entrypanel.getName());
+		frame.setName("Welcome");
 		JButton btnNewButton = new JButton(getbtn1Txt());
 		btnNewButton.setBounds(216, 199, 163, 23);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -170,16 +170,12 @@ public class mygui {
 		lblPaperFour.setBounds(43, 148, 89, 14);
 		Paperpanel.add(lblPaperFour);
 		
-		TextField textField_2 = new TextField();
-		textField_2.setBounds(155, 64, 164, 23);
-		Paperpanel.add(textField_2);
-		
 		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(325, 64, 28, 26);
+		comboBox_3.setBounds(284, 67, 28, 26);
 		Paperpanel.add(comboBox_3);
 		
 		JButton btnNewButton_4 = new JButton("Remove Paper");
-		btnNewButton_4.setBounds(190, 94, 129, 23);
+		btnNewButton_4.setBounds(186, 114, 129, 23);
 		Paperpanel.add(btnNewButton_4);
 		
 		JLabel lblNewLabel_7 = new JLabel("Remove Paper");
@@ -202,7 +198,7 @@ public class mygui {
 		Statspanel.add(lblStatistics);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(114, 47, 28, 20);
+		comboBox.setBounds(145, 47, 28, 20);
 		Statspanel.add(comboBox);
 		
 		JLabel lblSelectPaper = new JLabel("Select Paper");
@@ -264,12 +260,6 @@ public class mygui {
 		});
 		ChairAssign.add(button_2);
 		
-		txtUser = new JTextField();
-		txtUser.setText("REVIEWER/SUBCHAIR");
-		txtUser.setBounds(37, 65, 112, 20);
-		ChairAssign.add(txtUser);
-		txtUser.setColumns(10);
-		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setBounds(154, 65, 28, 20);
 		ChairAssign.add(comboBox_1);
@@ -293,12 +283,6 @@ public class mygui {
 		JLabel lblNewLabel_5 = new JLabel("assigned paper4");
 		lblNewLabel_5.setBounds(37, 174, 112, 14);
 		ChairAssign.add(lblNewLabel_5);
-		
-		txtThePaper = new JTextField();
-		txtThePaper.setText("THE PAPER");
-		txtThePaper.setBounds(251, 65, 102, 20);
-		ChairAssign.add(txtThePaper);
-		txtThePaper.setColumns(10);
 		
 		JComboBox comboBox_2 = new JComboBox();
 		comboBox_2.setBounds(358, 65, 28, 20);
@@ -358,14 +342,8 @@ public class mygui {
 		});
 		ChairReview.add(button_5);
 		
-		txtThePaper_2 = new JTextField();
-		txtThePaper_2.setText("THE PAPER");
-		txtThePaper_2.setBounds(31, 64, 132, 20);
-		ChairReview.add(txtThePaper_2);
-		txtThePaper_2.setColumns(10);
-		
 		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(173, 64, 28, 20);
+		comboBox_4.setBounds(148, 64, 28, 20);
 		ChairReview.add(comboBox_4);
 		
 		JLabel lblViewReviewsFor = new JLabel("View Reviews for");
@@ -385,7 +363,7 @@ public class mygui {
 		ChairReview.add(lblReviewersComments);
 		
 		JButton btnNewButton_1 = new JButton("View Paper");
-		btnNewButton_1.setBounds(224, 63, 89, 23);
+		btnNewButton_1.setBounds(210, 63, 89, 23);
 		ChairReview.add(btnNewButton_1);
 		
 		JLabel lblRecommendationsToProgram = new JLabel("RECOMMENDATIONS TO PROGRAM CHAIR");

@@ -119,8 +119,8 @@ public class LoginController extends Controller implements ActionListener {
 		for (User u : userList) {
 			if (u.getName().equals(user)) {
 				if (u.getPassword().equals(pass)) {
-					ConferenceGui.startConf();
 					myPanel.setVisible(false);
+					ConferenceGui.startConf();
 					return u.getMyType();	
 				}
 			}
