@@ -14,6 +14,8 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
+import model.Type;
+import java.awt.Color;
 import java.awt.TextArea;
 import java.awt.TextField;
 import javax.swing.JSpinner;
@@ -24,7 +26,6 @@ public class mygui {
 	
 	private JPanel cards;
 	private CardLayout c;
-	private JTextField textField;
 	private JTextField txtUser;
 	private JTextField txtThePaper;
 	private JTextField txtThePaper_2;
@@ -36,6 +37,7 @@ public class mygui {
 	private JPanel ChairAssign;
 	private JPanel ChairReview;
 	private JPanel ReviewerView;
+	private Type myType;
 
 	/**
 	 * Launch the application.
@@ -64,6 +66,7 @@ public class mygui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		myType = Type.REVIEWER;
 		frame = new JFrame();
 		cards = new JPanel(new CardLayout());
 		frame.setBounds(100, 100, 450, 442);
@@ -86,16 +89,30 @@ public class mygui {
 		btnNewButton.setBounds(216, 199, 85, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AssignPane(Statspanel);
+				if(myType == Type.AUTHOR || myType == Type.REVIEWER) {
+					AssignPane(Statspanel);
+				}
+				if(myType == Type.PROCHAIR || myType == Type.SUBCHAIR) {
+					AssignPane(ChairReview);
+				}
 			}
 		});
 		Entrypanel.add(btnNewButton);
 		Entrypanel.setLayout(null);
+		Entrypanel.setBackground(Color.WHITE);
 		JButton btnSubmitPaper = new JButton("Submit Paper");
 		btnSubmitPaper.setBounds(75, 199, 131, 23);
 		btnSubmitPaper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AssignPane(Paperpanel);
+				if(myType == Type.AUTHOR) {
+					AssignPane(Paperpanel);
+				}
+				if(myType == Type.REVIEWER) {
+					AssignPane(ReviewerView);
+				}
+				if(myType == Type.PROCHAIR || myType == Type.SUBCHAIR) {
+					AssignPane(ChairAssign);
+				}
 			}
 		});
 		Entrypanel.add(btnSubmitPaper);
@@ -185,13 +202,8 @@ public class mygui {
 		lblStatistics.setBounds(191, 11, 54, 14);
 		Statspanel.add(lblStatistics);
 		
-		textField = new JTextField();
-		textField.setBounds(29, 47, 117, 20);
-		Statspanel.add(textField);
-		textField.setColumns(10);
-		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(156, 47, 28, 20);
+		comboBox.setBounds(114, 47, 28, 20);
 		Statspanel.add(comboBox);
 		
 		JLabel lblSelectPaper = new JLabel("Select Paper");
