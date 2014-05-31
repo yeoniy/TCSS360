@@ -29,7 +29,6 @@ public class mygui {
 	private JTextField txtUser;
 	private JTextField txtThePaper;
 	private JTextField txtThePaper_2;
-	private JTextField textField_3;
 	
 	private JPanel Statspanel;
 	private JPanel Entrypanel;
@@ -66,7 +65,7 @@ public class mygui {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		myType = Type.REVIEWER;
+		myType = Type.PROCHAIR;
 		frame = new JFrame();
 		cards = new JPanel(new CardLayout());
 		frame.setBounds(100, 100, 450, 442);
@@ -85,8 +84,8 @@ public class mygui {
 		Entrypanel.setLayout(null);
 		c = (CardLayout) cards.getLayout();
 		c.show(cards, Entrypanel.getName());
-		JButton btnNewButton = new JButton("Stats");
-		btnNewButton.setBounds(216, 199, 85, 23);
+		JButton btnNewButton = new JButton(getbtn1Txt());
+		btnNewButton.setBounds(216, 199, 163, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(myType == Type.AUTHOR || myType == Type.REVIEWER) {
@@ -100,8 +99,8 @@ public class mygui {
 		Entrypanel.add(btnNewButton);
 		Entrypanel.setLayout(null);
 		Entrypanel.setBackground(Color.WHITE);
-		JButton btnSubmitPaper = new JButton("Submit Paper");
-		btnSubmitPaper.setBounds(75, 199, 131, 23);
+		JButton btnSubmitPaper = new JButton(getbtn2Txt());
+		btnSubmitPaper.setBounds(43, 199, 163, 23);
 		btnSubmitPaper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(myType == Type.AUTHOR) {
@@ -318,17 +317,12 @@ public class mygui {
 		});
 		ReviewerView.add(button_4);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(23, 37, 117, 20);
-		ReviewerView.add(textField_3);
-		
 		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(150, 37, 28, 20);
+		comboBox_5.setBounds(128, 37, 28, 20);
 		ReviewerView.add(comboBox_5);
 		
 		JLabel label_2 = new JLabel("Select Paper");
-		label_2.setBounds(23, 21, 71, 14);
+		label_2.setBounds(23, 21, 89, 14);
 		ReviewerView.add(label_2);
 		
 		TextArea textArea_2 = new TextArea();
@@ -340,15 +334,15 @@ public class mygui {
 		ReviewerView.add(lblComments);
 		
 		JButton btnSubmitReview = new JButton("Submit Review");
-		btnSubmitReview.setBounds(167, 354, 103, 23);
+		btnSubmitReview.setBounds(145, 354, 140, 23);
 		ReviewerView.add(btnSubmitReview);
 		
 		JLabel lblPaperRating = new JLabel("Paper Rating:");
-		lblPaperRating.setBounds(23, 78, 71, 14);
+		lblPaperRating.setBounds(23, 78, 79, 14);
 		ReviewerView.add(lblPaperRating);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setBounds(92, 75, 48, 20);
+		spinner.setBounds(108, 75, 48, 20);
 		ReviewerView.add(spinner);
 		
 		ChairReview = new JPanel();
@@ -426,6 +420,38 @@ public class mygui {
 		ChairReview.setVisible(false);
 		ReviewerView.setVisible(false);
 		the_panel.setVisible(true);
+	}
+	private String getbtn1Txt() {
+		String s = "";
+		if(myType == Type.AUTHOR) {
+			s = "Stats";
+		}
+		if(myType == Type.REVIEWER) {
+			s = "info";
+		}
+		if(myType == Type.PROCHAIR ) {
+			s = "Finalize Papers";
+		}
+		if(myType == Type.SUBCHAIR) {
+			s = "Recommendations";
+		}
+		return s;
+	}
+	private String getbtn2Txt() {
+		String s = "";
+		if(myType == Type.AUTHOR) {
+			s = "Submit Paper";
+		}
+		if(myType == Type.REVIEWER) {
+			s = "Submit Review";
+		}
+		if(myType == Type.PROCHAIR ) {
+			s = "Assign Subchairs";
+		}
+		if(myType == Type.SUBCHAIR) {
+			s = "Assign Reviewers";
+		}
+		return s;
 	}
 }
 
