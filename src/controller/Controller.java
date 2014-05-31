@@ -3,6 +3,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import model.Paper;
 import model.Type;
 import model.Author;
 import model.Conference;
@@ -16,6 +18,7 @@ import model.User;
  * @author Nick Ames
  */
 public class Controller {
+	private static ArrayList<Paper> myPapers;
 	/**
 	 * current user logged in.
 	 */
@@ -104,5 +107,12 @@ public class Controller {
 	 */
 	public static Type getUserType() {
 		return myUser.getMyType();	
+	}
+	public static ArrayList<Paper> getUserPapers() {
+		return myPapers;
+	}
+
+	public static void setUserPapers(ArrayList<Paper> temp) {
+		myPapers = temp;
 	}
 }

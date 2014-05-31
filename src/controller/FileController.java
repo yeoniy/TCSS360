@@ -125,7 +125,6 @@ public class FileController extends Controller {
 	 * @param s4 fourth paper file string name
 	 */
 	private void addPapers(String s1, String s2, String s3, String s4) {
-		//TOFIX still need to eliminate bad file names.
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add(s1);
 		temp.add(s2);
@@ -133,7 +132,8 @@ public class FileController extends Controller {
 		temp.add(s4);
 		for (int i = 0; i < temp.size(); i++) {
 			if(temp.get(i).toLowerCase().equals("empty")) {
-				System.out.println("no file found");
+				Paper epaper = new Paper(new File("empty.txt")); //blank text document
+				myPapers.add(epaper);
 			} else {
 				File tempfile = new File(temp.get(i));
 				Paper paper = new Paper(tempfile);
@@ -150,4 +150,19 @@ public class FileController extends Controller {
 	public Conference getMyConference() {
 		return myConference;
 	}
+	
+	public ArrayList<Paper> getPapers(User u) {;
+	ArrayList<Paper> temp = new ArrayList<Paper>();
+	for (int i = 0; i < myConference.getUserList().size(); i++) {
+		if(myConference.getUserList().get(i).getName().equals(u.getName())) {
+			int j=(i + 1)*4;
+			temp.add(myPapers.get(j - 4));
+			temp.add(myPapers.get(j - 3));
+			temp.add(myPapers.get(j - 2));
+			temp.add(myPapers.get(j - 1));
+			Controller.setUserPapers(temp);
+		}
+	}
+		return temp;
+	}	
 }

@@ -11,15 +11,18 @@ import java.awt.CardLayout;
 import controller.Controller;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JProgressBar;
+
+import model.Paper;
 import model.Type;
 import java.awt.Color;
 import java.awt.TextArea;
 import java.awt.TextField;
+import java.util.ArrayList;
+
 import javax.swing.JSpinner;
 
 public class mygui {
@@ -154,19 +157,19 @@ public class mygui {
 		lblCurrentPapers.setBounds(43, 51, 89, 14);
 		Paperpanel.add(lblCurrentPapers);
 		
-		JLabel lblPaperOne = new JLabel("Paper One");
+		JLabel lblPaperOne = new JLabel(getPaperlbls(Controller.getUserPapers().get(0).getFileName()));
 		lblPaperOne.setBounds(43, 73, 106, 14);
 		Paperpanel.add(lblPaperOne);
 		
-		JLabel lblPaperTwo = new JLabel("Paper Two");
+		JLabel lblPaperTwo = new JLabel(getPaperlbls(Controller.getUserPapers().get(1).getFileName()));
 		lblPaperTwo.setBounds(43, 98, 106, 14);
 		Paperpanel.add(lblPaperTwo);
 		
-		JLabel lblPaperThree = new JLabel("Paper Three");
+		JLabel lblPaperThree = new JLabel(getPaperlbls(Controller.getUserPapers().get(2).getFileName()));
 		lblPaperThree.setBounds(43, 123, 89, 14);
 		Paperpanel.add(lblPaperThree);
 		
-		JLabel lblPaperFour = new JLabel("Paper Four");
+		JLabel lblPaperFour = new JLabel(getPaperlbls(Controller.getUserPapers().get(3).getFileName()));
 		lblPaperFour.setBounds(43, 148, 89, 14);
 		Paperpanel.add(lblPaperFour);
 		
@@ -428,6 +431,12 @@ public class mygui {
 		}
 		if(myType == Type.SUBCHAIR) {
 			s = "Assign Reviewers";
+		}
+		return s;
+	}
+	private String getPaperlbls(String s) {
+		if (s.equals("empty.txt")) {
+			return "";
 		}
 		return s;
 	}

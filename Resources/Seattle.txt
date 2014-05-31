@@ -1,6 +1,6 @@
-NAME1,ID1,PASS1,AUTHOR,empty,empty,empty,empty
-NAME2,ID2,PASS2,AUTHOR,empty,empty,empty,empty
-NAME3,ID3,PASS3,AUTHOR,empty,empty,empty,empty
-NAME4,ID4,PASS4,AUTHOR,empty,empty,empty,empty
+NAME1,ID1,PASS1,AUTHOR,testpaper.txt,empty,empty,empty
+NAME2,ID2,PASS2,REVIEWER,empty,empty,empty,empty
+NAME3,ID3,PASS3,PROCHAIR,empty,empty,empty,empty
+NAME4,ID4,PASS4,SUBCHAIR,empty,empty,empty,empty
 NAME5,ID5,PASS5,AUTHOR,empty,empty,empty,empty
 NAME6,ID6,PASS6,AUTHOR,empty,empty,empty,empty
