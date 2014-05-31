@@ -173,12 +173,14 @@ public class mygui {
 		lblPaperFour.setBounds(43, 148, 89, 14);
 		Paperpanel.add(lblPaperFour);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(284, 67, 28, 26);
+		String comboBoxItems[] = { getPaperlbls(Controller.getUserPapers().get(0).getFileName()),getPaperlbls(Controller.getUserPapers().get(1).getFileName()),
+				getPaperlbls(Controller.getUserPapers().get(2).getFileName()),getPaperlbls(Controller.getUserPapers().get(3).getFileName())} ;
+		JComboBox comboBox_3 = new JComboBox(comboBoxItems);
+		comboBox_3.setBounds(141, 67, 171, 26);
 		Paperpanel.add(comboBox_3);
 		
 		JButton btnNewButton_4 = new JButton("Remove Paper");
-		btnNewButton_4.setBounds(186, 114, 129, 23);
+		btnNewButton_4.setBounds(183, 98, 129, 23);
 		Paperpanel.add(btnNewButton_4);
 		
 		JLabel lblNewLabel_7 = new JLabel("Remove Paper");
@@ -201,7 +203,7 @@ public class mygui {
 		Statspanel.add(lblStatistics);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(145, 47, 28, 20);
+		comboBox.setBounds(26, 47, 147, 20);
 		Statspanel.add(comboBox);
 		
 		JLabel lblSelectPaper = new JLabel("Select Paper");
