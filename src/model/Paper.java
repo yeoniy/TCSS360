@@ -36,6 +36,14 @@ public class Paper extends Observable {
     public String getFileName() {
         return fileName;
     }
+    
+    public String getFileHeader() {
+    	String s = fileName;
+    	if(fileName.equals("empty.txt")) {
+    		return "empty";
+    	}
+        return s;
+    }
 
     public void setFileName(String fileName) {
         this.fileName = fileName;

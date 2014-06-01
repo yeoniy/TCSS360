@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 
 import java.awt.CardLayout;
 import controller.Controller;
+
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -173,14 +175,36 @@ public class mygui {
 		lblPaperFour.setBounds(43, 148, 89, 14);
 		Paperpanel.add(lblPaperFour);
 		
-		String comboBoxItems[] = { getPaperlbls(Controller.getUserPapers().get(0).getFileName()),getPaperlbls(Controller.getUserPapers().get(1).getFileName()),
+		String[] comboBoxItems= { getPaperlbls(Controller.getUserPapers().get(0).getFileName()),getPaperlbls(Controller.getUserPapers().get(1).getFileName()),
 				getPaperlbls(Controller.getUserPapers().get(2).getFileName()),getPaperlbls(Controller.getUserPapers().get(3).getFileName())} ;
-		JComboBox comboBox_3 = new JComboBox(comboBoxItems);
+		
+		final JComboBox comboBox_3 = new JComboBox(comboBoxItems);
 		comboBox_3.setBounds(141, 67, 171, 26);
+		for (int i = comboBoxItems.length-1; i > -1; i--) {
+			if(comboBox_3.getItemAt(i).equals("")) {
+				comboBox_3.removeItemAt(i);
+			}
+		}
+		final JComboBox comboBox = new JComboBox(comboBoxItems);
+		comboBox.setBounds(26, 47, 147, 20);
+		for (int i = comboBoxItems.length-1; i > -1; i--) {
+			if(comboBox.getItemAt(i).equals("")) {
+				comboBox.removeItemAt(i);
+			}
+		}
 		Paperpanel.add(comboBox_3);
 		
 		JButton btnNewButton_4 = new JButton("Remove Paper");
 		btnNewButton_4.setBounds(183, 98, 129, 23);
+		btnNewButton_4.addActionListener(new java.awt.event.ActionListener() {
+		      public void actionPerformed(ActionEvent e) {
+		    	  if(comboBox_3.getSelectedIndex() != -1) {
+		    		  Controller.removePaper(comboBox_3.getSelectedIndex());
+		    		  comboBox_3.removeItemAt(comboBox_3.getSelectedIndex());
+		    		  comboBox.removeItemAt(comboBox.getSelectedIndex());
+		    	  }
+		        }
+		      });
 		Paperpanel.add(btnNewButton_4);
 		
 		JLabel lblNewLabel_7 = new JLabel("Remove Paper");
@@ -202,9 +226,6 @@ public class mygui {
 		lblStatistics.setBounds(191, 11, 54, 14);
 		Statspanel.add(lblStatistics);
 		
-		
-		JComboBox comboBox = new JComboBox(comboBoxItems);
-		comboBox.setBounds(26, 47, 147, 20);
 		Statspanel.add(comboBox);
 		
 		JLabel lblSelectPaper = new JLabel("Select Paper");

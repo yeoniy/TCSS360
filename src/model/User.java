@@ -67,4 +67,7 @@ public class User extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+    public String typeToString() {
+    	return myType.toString();
+    }
 }

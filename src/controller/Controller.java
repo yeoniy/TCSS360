@@ -1,6 +1,14 @@
 package controller;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JPanel;
 
@@ -115,4 +123,31 @@ public class Controller {
 	public static void setUserPapers(ArrayList<Paper> temp) {
 		myPapers = temp;
 	}
+	public static void removePaper(int x) {
+		String old = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
+				(",") + myPapers.get(0).getFileHeader() + (",") + myPapers.get(1).getFileHeader() + (",") + myPapers.get(2).getFileHeader()
+				 + (",") + myPapers.get(3).getFileHeader();
+		Paper p = new Paper(new File("empty.txt"));
+		myPapers.set(x,p);
+		String content = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
+				(",") + myPapers.get(0).getFileHeader() + (",") + myPapers.get(1).getFileHeader() + (",") + myPapers.get(2).getFileHeader()
+				 + (",") + myPapers.get(3).getFileHeader();
+		 try{
+		 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
+		 BufferedReader reader = new BufferedReader(new FileReader(file));
+		 String line = "", oldtext = "";
+		 while((line = reader.readLine()) != null){
+			 oldtext += line + "\n";
+		 }
+		 reader.close();
+		 //To replace a line in a file
+		 String newtext = oldtext.replaceAll(old, content);
+		  
+		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
+		 writer.write(newtext);writer.close();
+			} catch (IOException e) {
+			  e.printStackTrace();
+		    }
+		}
+	
 }
