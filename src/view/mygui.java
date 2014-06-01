@@ -286,9 +286,13 @@ public class mygui {
 			}
 		});
 		ChairAssign.add(button_2);
+		String[] reviewers = {};
 		
-		JComboBox comboBox_1 = new JComboBox();
+		JComboBox comboBox_1 = new JComboBox(reviewers);
 		comboBox_1.setBounds(25, 65, 157, 20);
+		for (int i = 0; i < Controller.getAllReviewers().size(); i++) {
+			comboBox_1.addItem(Controller.getAllReviewers().get(i).getName());
+		}
 		ChairAssign.add(comboBox_1);
 		
 		JButton btnAssign = new JButton("Assign");
@@ -313,6 +317,9 @@ public class mygui {
 		
 		JComboBox comboBox_2 = new JComboBox();
 		comboBox_2.setBounds(229, 65, 157, 20);
+		for (int i = 0; i < Controller.getAllSubChairs().size(); i++) {
+			comboBox_2.addItem(Controller.getAllSubChairs().get(i).getName());
+		}
 		ChairAssign.add(comboBox_2);
 		
 		ReviewerView = new JPanel();

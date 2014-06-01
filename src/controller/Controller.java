@@ -1,15 +1,10 @@
 package controller;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import javax.swing.JPanel;
 
 import model.Paper;
@@ -35,7 +30,14 @@ public class Controller {
 	 * The list of all the conferences.
 	 */
 	private ArrayList<Conference> myConferenceList;
-	
+	/**
+	 * A list of every subchair
+	 */
+	private ArrayList<User> mySubChairs;
+	/**
+	 * a list of all reviewers
+	 */
+	private ArrayList<User> myReviewers;
 	/**
 	 * The current active conference.
 	 */
@@ -116,6 +118,24 @@ public class Controller {
 	public static Type getUserType() {
 		return myUser.getMyType();	
 	}
+	public static ArrayList<User> getAllSubChairs() {
+		ArrayList<User> temp = new ArrayList<User>();
+		for(int i = 0; i < myActiveConference.getUserList().size(); i++) {
+			if (myActiveConference.getUserList().get(i).typeToString().equals("SUBCHAIR")) {
+				temp.add(myActiveConference.getUserList().get(i));
+			}
+		}
+		return temp;
+	}
+	public static ArrayList<User> getAllReviewers() {
+		ArrayList<User> temp = new ArrayList<User>();
+		for(int i = 0; i < myActiveConference.getUserList().size(); i++) {
+			if (myActiveConference.getUserList().get(i).typeToString().equals("REVIEWER")) {
+				temp.add(myActiveConference.getUserList().get(i));
+			}
+		}
+		return temp;
+	}
 	public static ArrayList<Paper> getUserPapers() {
 		return myPapers;
 	}
@@ -133,14 +153,13 @@ public class Controller {
 				(",") + myPapers.get(0).getFileHeader() + (",") + myPapers.get(1).getFileHeader() + (",") + myPapers.get(2).getFileHeader()
 				 + (",") + myPapers.get(3).getFileHeader();
 		 try{
-		 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
-		 BufferedReader reader = new BufferedReader(new FileReader(file));
-		 String line = "", oldtext = "";
+			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
+			 BufferedReader reader = new BufferedReader(new FileReader(file));
+			 String line = "", oldtext = "";
 		 while((line = reader.readLine()) != null){
 			 oldtext += line + "\n";
 		 }
 		 reader.close();
-		 //To replace a line in a file
 		 String newtext = oldtext.replaceAll(old, content);
 		  
 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
