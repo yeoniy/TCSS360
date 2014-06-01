@@ -21,6 +21,8 @@ import model.User;
  * @author Nick Ames
  */
 public class Controller {
+	private static ArrayList<Paper> allPapers;
+	
 	private static ArrayList<Paper> myPapers;
 	/**
 	 * current user logged in.
@@ -139,6 +141,9 @@ public class Controller {
 	public static ArrayList<Paper> getUserPapers() {
 		return myPapers;
 	}
+	public static ArrayList<Paper> getAllPapers() {
+		return allPapers;
+	}
 
 	public static void setUserPapers(ArrayList<Paper> temp) {
 		myPapers = temp;
@@ -168,5 +173,10 @@ public class Controller {
 			  e.printStackTrace();
 		    }
 		}
+
+	public static void setAllPapers(ArrayList<Paper> p) {
+		allPapers = p;
+		
+	}
 	
 }

@@ -17,6 +17,7 @@ import java.util.Scanner;
  * @author Tim Loverin, Yeonil, Nick, Rich
  */
 public class FileController extends Controller {
+	private ArrayList<Paper> allPapers;
 	/**
 	 * The name of the conference to load.
 	 */
@@ -47,6 +48,7 @@ public class FileController extends Controller {
 		super();
 		myUser = new ArrayList<User>();
 		myPapers = new ArrayList<Paper>();
+		allPapers = new ArrayList<Paper>();
 		myConf = aConference.getName(); 
 		myConference = aConference;
 		readFile();
@@ -138,6 +140,8 @@ public class FileController extends Controller {
 				File tempfile = new File(temp.get(i));
 				Paper paper = new Paper(tempfile);
 				myPapers.add(paper);
+				allPapers.add(paper);
+				Controller.setAllPapers(allPapers);
 			}
 		}
 

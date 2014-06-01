@@ -290,9 +290,18 @@ public class mygui {
 		
 		JComboBox comboBox_1 = new JComboBox(reviewers);
 		comboBox_1.setBounds(25, 65, 157, 20);
-		for (int i = 0; i < Controller.getAllReviewers().size(); i++) {
-			comboBox_1.addItem(Controller.getAllReviewers().get(i).getName());
+		
+		if(myType == Type.PROCHAIR) {
+			for (int i = 0; i < Controller.getAllSubChairs().size(); i++) {
+				comboBox_1.addItem(Controller.getAllSubChairs().get(i).getName());
+			}
 		}
+		if(myType == Type.SUBCHAIR) {
+			for (int i = 0; i < Controller.getAllReviewers().size(); i++) {   //NEED TO CHANGE FOR REVIEWERS ASSIGNED AND PAPERS.
+				comboBox_1.addItem(Controller.getAllReviewers().get(i).getName());
+			}
+		}
+		
 		ChairAssign.add(comboBox_1);
 		
 		JButton btnAssign = new JButton("Assign");
@@ -317,8 +326,9 @@ public class mygui {
 		
 		JComboBox comboBox_2 = new JComboBox();
 		comboBox_2.setBounds(229, 65, 157, 20);
-		for (int i = 0; i < Controller.getAllSubChairs().size(); i++) {
-			comboBox_2.addItem(Controller.getAllSubChairs().get(i).getName());
+
+		for (int i = 0; i < Controller.getAllPapers().size(); i++) {
+			comboBox_2.addItem(Controller.getAllPapers().get(i).getFileName());
 		}
 		ChairAssign.add(comboBox_2);
 		
@@ -337,6 +347,7 @@ public class mygui {
 		
 		JComboBox comboBox_5 = new JComboBox();
 		comboBox_5.setBounds(23, 37, 165, 20);
+
 		ReviewerView.add(comboBox_5);
 		
 		JLabel label_2 = new JLabel("Select Paper");
@@ -378,6 +389,11 @@ public class mygui {
 		
 		JComboBox comboBox_4 = new JComboBox();
 		comboBox_4.setBounds(31, 64, 145, 20);
+		if(myType == Type.PROCHAIR) {
+			for (int i = 0; i < Controller.getAllPapers().size(); i++) {
+				comboBox_4.addItem(Controller.getAllPapers().get(i).getFileName());
+			}
+		}
 		ChairReview.add(comboBox_4);
 		
 		JLabel lblViewReviewsFor = new JLabel("View Reviews for");
