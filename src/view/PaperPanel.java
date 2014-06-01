@@ -173,6 +173,8 @@ public class PaperPanel extends JPanel {
 		for (int i = 0; i < p.length; i++) {
 			for (int j = 0; j < Controller.getMyPapers().size(); j++) {
 				if (paperList.getModel().getElementAt(i).equals(Controller.getMyPapers().get(j).getFileName())) {
+					System.out.print(Controller.getMyPapers().get(j) +" " + j);
+					Controller.removePaper(j);
 					Controller.getMyPapers().remove(j);
 				}
 			}

@@ -66,8 +66,8 @@ public class Controller {
      * @param fileName name of the file
      */
     public void addPaper (Author author, String fileName) {
-        File file = new File(fileName);
-        author.submit(file);
+        File nfile = new File(fileName);
+        author.submit(nfile);
     }
 
     public void update() {
@@ -169,7 +169,6 @@ public class Controller {
 			  e.printStackTrace();
 		    }
 		}
-
 	public static void setAllPapers(ArrayList<Paper> p) {
 		allPapers = p;
 		

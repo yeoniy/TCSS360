@@ -161,13 +161,14 @@ public class FileController extends Controller {
 			if(myConference.getUserList().get(i).getName().equals(u.getName())) {
 				int j=(i + 1)*4;
 				// Added the if statements to remove unnecessary empty.txt
-				if (!myPapers.get(j - 4).getFileName().equals("empty.txt"))
+//removed if statements to reallow for file overwriting of empty.txt to refix the remove user story ~Tim
+			//	if (!myPapers.get(j - 4).getFileName().equals("empty.txt"))
 					temp.add(myPapers.get(j - 4));
-				if (!myPapers.get(j - 3).getFileName().equals("empty.txt"))
+			//	if (!myPapers.get(j - 3).getFileName().equals("empty.txt"))
 					temp.add(myPapers.get(j - 3));
-				if (!myPapers.get(j - 2).getFileName().equals("empty.txt"))
+			//	if (!myPapers.get(j - 2).getFileName().equals("empty.txt"))
 					temp.add(myPapers.get(j - 2));
-				if (!myPapers.get(j - 1).getFileName().equals("empty.txt"))
+			//	if (!myPapers.get(j - 1).getFileName().equals("empty.txt"))
 					temp.add(myPapers.get(j - 1));
 				Controller.setMyPapers(temp);
 				break; // Found users paper, no need continue iterating.
