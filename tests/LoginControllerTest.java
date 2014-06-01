@@ -25,7 +25,7 @@ public class LoginControllerTest {
 	public void setUp() throws Exception {
 		c = new Conference("", null, "");
 		user = new User("Nick", "id", "Pass", Type.AUTHOR);
-		lc = new LoginController(null);
+		lc = new LoginController(null, null);
 		c.addUser(user);
 	}
 

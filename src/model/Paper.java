@@ -84,4 +84,8 @@ public class Paper extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+
+    public String toString() {
+    	return fileName;
+    }
 }

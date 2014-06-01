@@ -159,24 +159,24 @@ public class mygui {
 		lblCurrentPapers.setBounds(43, 51, 89, 14);
 		Paperpanel.add(lblCurrentPapers);
 		
-		JLabel lblPaperOne = new JLabel(getPaperlbls(Controller.getUserPapers().get(0).getFileName()));
+		JLabel lblPaperOne = new JLabel(getPaperlbls(Controller.getMyPapers().get(0).getFileName()));
 		lblPaperOne.setBounds(43, 73, 106, 14);
 		Paperpanel.add(lblPaperOne);
 		
-		JLabel lblPaperTwo = new JLabel(getPaperlbls(Controller.getUserPapers().get(1).getFileName()));
+		JLabel lblPaperTwo = new JLabel(getPaperlbls(Controller.getMyPapers().get(1).getFileName()));
 		lblPaperTwo.setBounds(43, 98, 106, 14);
 		Paperpanel.add(lblPaperTwo);
 		
-		JLabel lblPaperThree = new JLabel(getPaperlbls(Controller.getUserPapers().get(2).getFileName()));
+		JLabel lblPaperThree = new JLabel(getPaperlbls(Controller.getMyPapers().get(2).getFileName()));
 		lblPaperThree.setBounds(43, 123, 89, 14);
 		Paperpanel.add(lblPaperThree);
 		
-		JLabel lblPaperFour = new JLabel(getPaperlbls(Controller.getUserPapers().get(3).getFileName()));
+		JLabel lblPaperFour = new JLabel(getPaperlbls(Controller.getMyPapers().get(3).getFileName()));
 		lblPaperFour.setBounds(43, 148, 89, 14);
 		Paperpanel.add(lblPaperFour);
 		
-		String[] comboBoxItems= { getPaperlbls(Controller.getUserPapers().get(0).getFileName()),getPaperlbls(Controller.getUserPapers().get(1).getFileName()),
-				getPaperlbls(Controller.getUserPapers().get(2).getFileName()),getPaperlbls(Controller.getUserPapers().get(3).getFileName())} ;
+		String[] comboBoxItems= { getPaperlbls(Controller.getMyPapers().get(0).getFileName()),getPaperlbls(Controller.getMyPapers().get(1).getFileName()),
+				getPaperlbls(Controller.getMyPapers().get(2).getFileName()),getPaperlbls(Controller.getMyPapers().get(3).getFileName())} ;
 		
 		final JComboBox comboBox_3 = new JComboBox(comboBoxItems);
 		comboBox_3.setBounds(141, 67, 171, 26);

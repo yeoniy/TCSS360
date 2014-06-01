@@ -8,13 +8,12 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import model.Conference;
-import model.Paper;
 import model.Type;
 import model.User;
 import view.ConferenceGui;
+import view.LoginDialog;
 import view.LoginPanel;
 import exception.InvalidLoginException;
-import view.MainPanel;
 
 /**
  * Controller for the login panel. Handles login and exit functions.
@@ -33,12 +32,15 @@ public class LoginController extends Controller implements ActionListener {
 	 */
 	private FileController ctrlFile;
 
+	private LoginDialog myParent;
+
 	/**
 	 * Creates a new LoginController for the given LoginPanel.
 	 * @param aPanel the LoginPanel to control
 	 */
-	public LoginController(final LoginPanel aPanel) {
+	public LoginController(final LoginPanel aPanel, final LoginDialog parent) {
 		super();
+		this.myParent = parent;
 		this.myPanel = aPanel;
 	}
 
@@ -67,10 +69,11 @@ public class LoginController extends Controller implements ActionListener {
 
 					Controller.myActiveConference = c;
 					// Set the mainPanel view for the given type of the user
-					
+					myParent.dispose();
 				} catch (InvalidLoginException le) {
 					JOptionPane.showMessageDialog(null, "Username/Password combo not found. Please ensure "
 							+ "your username and password are correct and that you have selected the correct conference.", "Error", JOptionPane.ERROR_MESSAGE);
+					
 				} finally {
 					myPanel.resetPassField();
 				}
@@ -120,9 +123,10 @@ public class LoginController extends Controller implements ActionListener {
 			if (u.getName().equals(user)) {
 				if (u.getPassword().equals(pass)) {
 					myPanel.setVisible(false);
-					ConferenceGui.startConf();
 					ctrlFile.getPapers(u);
 					Controller.setActiveUser(u);
+					Controller.setActiveConference(c);
+					ConferenceGui.startConf();
 					return u.getMyType();	
 				}
 			}

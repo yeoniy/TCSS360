@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 import model.Paper;
@@ -138,25 +139,20 @@ public class Controller {
 		}
 		return temp;
 	}
-	public static ArrayList<Paper> getUserPapers() {
-		return myPapers;
-	}
+	
 	public static ArrayList<Paper> getAllPapers() {
 		return allPapers;
 	}
 
-	public static void setUserPapers(ArrayList<Paper> temp) {
-		myPapers = temp;
-	}
 	public static void removePaper(int x) {
 		String old = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
-				(",") + myPapers.get(0).getFileHeader() + (",") + myPapers.get(1).getFileHeader() + (",") + myPapers.get(2).getFileHeader()
-				 + (",") + myPapers.get(3).getFileHeader();
+				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
+				 + (",") + getMyPapers().get(3).getFileHeader();
 		Paper p = new Paper(new File("empty.txt"));
-		myPapers.set(x,p);
+		getMyPapers().set(x,p);
 		String content = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
-				(",") + myPapers.get(0).getFileHeader() + (",") + myPapers.get(1).getFileHeader() + (",") + myPapers.get(2).getFileHeader()
-				 + (",") + myPapers.get(3).getFileHeader();
+				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
+				 + (",") + getMyPapers().get(3).getFileHeader();
 		 try{
 			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
 			 BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -177,6 +173,26 @@ public class Controller {
 	public static void setAllPapers(ArrayList<Paper> p) {
 		allPapers = p;
 		
+	}
+
+	public static ArrayList<Paper> getMyPapers() {
+		return myPapers;
+	}
+
+	public static void setMyPapers(ArrayList<Paper> myPapers) {
+		Controller.myPapers = myPapers;
+	}
+	
+	public static User getCurrentUser() {
+		return myUser;
+	}
+
+	public static Conference getCurrentConference() {
+		return myActiveConference;
+	}
+
+	public static void setActiveConference(Conference c) {
+		myActiveConference = c;
 	}
 	
 }

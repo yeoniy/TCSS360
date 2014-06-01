@@ -1,16 +1,18 @@
 package view;
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
-import controller.Controller;
 import model.Author;
-import model.Conference;
 import view.menu.MenuBar;
+import controller.Controller;
 
 /**
  * Created by Yeonil on 4/29/14.
@@ -22,21 +24,37 @@ public class ConferenceGui extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Dimension CENTER = Toolkit.getDefaultToolkit().getScreenSize();
+	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	/**
 	 * Title of the Window.
 	 */
-	private static final String FRAME_TITLE = "Conference Software";
+	private static final String FRAME_TITLE = "Conference";
+
 	private ArrayList<JPanel> observers;
-    private static JPanel mainPanel;
+    private static MainPanel mainPanel;
     private LoginPanel loginPanel;
     private static MenuBar menuBar;
 
     public ConferenceGui() {
-        //mainPanel = new MainPanel();
-        loginPanel = new LoginPanel();
+    	super("Conference 1.0");
+        initialize();
+        setVisible(true);
+	}
+
+    /**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		this.setTitle("Conference");
+		this.setResizable(false);
+		
+		this.setBounds(100, 100, 450, 442);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(null);
+		this.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
+		//mainPanel = new MainPanel();
         LoginDialog d = new LoginDialog(this);
-        mainPanel = new MainPanel(loginPanel.getConference(), loginPanel.getUsername());
+        mainPanel = new MainPanel(null, null);
 		observers = new ArrayList<JPanel>();
 
 		// Add all the views that need updating on data changes
@@ -53,13 +71,43 @@ public class ConferenceGui extends JFrame {
 		menuBar = new MenuBar(new Controller(), new Author("", loginPanel.getUsername(), ""));
 		setJMenuBar(menuBar);
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocation(CENTER.width/2-this.getSize().width/2, CENTER.height/2-this.getSize().height/2);
-		//setVisible(true);
-	}
+		
+		mainPanel.add(new EntryPanel(mainPanel), "entry");
+		mainPanel.add(new PaperPanel(mainPanel), "paper");
+		mainPanel.add(new ProChairReviewPanel(mainPanel), "pro");
+		mainPanel.add(new ReviewerAssignPanel(mainPanel), "reviewerAssign");
+		mainPanel.add(new ReviewerPanel(mainPanel), "reviewer");
+		mainPanel.add(new StatsPanel(mainPanel), "stats");
+		mainPanel.add(new SubAssignPanel(mainPanel), "subAssign");
+		
+		CardLayout c = (CardLayout) mainPanel.getLayout();
+		c.show(mainPanel, "entry");
+		
+		this.getContentPane().add(mainPanel);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 444, 21);
+		this.getContentPane().add(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenu mnAbout = new JMenu("About");
+		menuBar.add(mnAbout);
 
+	}
+    
 	public static void startConf() {
-		mygui.rungui();
+		Component[] c = mainPanel.getComponents();
+		for (Component a : c) {
+			if (a instanceof EntryPanel) {
+				((EntryPanel) a).updateUserInformation();
+				break;
+			}
+		}
 	}
 
 }

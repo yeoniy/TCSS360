@@ -43,8 +43,8 @@ public class LoginPanel extends JPanel {
 	private JComboBox<String> cmbConferences;
     private Conference[] conference;
     
-    public LoginPanel() {
-        ctrlLogin = new LoginController(this);
+    public LoginPanel(final LoginDialog l) {
+        ctrlLogin = new LoginController(this, l);
         try {
 			initialize();
 		} catch (FileNotFoundException e) {

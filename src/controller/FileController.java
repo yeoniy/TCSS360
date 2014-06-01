@@ -37,7 +37,7 @@ public class FileController extends Controller {
 	 * The conference that is being loaded.
 	 */
 	private Conference myConference;
-	
+
 	/**
 	 * Creates a new FileController for the given conference. The conference
 	 * will be updated with data from the conference file.
@@ -53,7 +53,7 @@ public class FileController extends Controller {
 		myConference = aConference;
 		readFile();
 	}
-	
+
 	/**
 	 * Reads the file and adds users to the conference.
 	 */
@@ -95,7 +95,7 @@ public class FileController extends Controller {
 			e.printStackTrace();
 		}   
 	}
-	
+
 	/**
 	 * Adds the users to the conference.
 	 * @param myUser the list of users to add
@@ -146,7 +146,7 @@ public class FileController extends Controller {
 		}
 
 	}
-	
+
 	/**
 	 * Returns the conference with all users already added.
 	 * @return the conference
@@ -154,19 +154,25 @@ public class FileController extends Controller {
 	public Conference getMyConference() {
 		return myConference;
 	}
-	
-	public ArrayList<Paper> getPapers(User u) {;
-	ArrayList<Paper> temp = new ArrayList<Paper>();
-	for (int i = 0; i < myConference.getUserList().size(); i++) {
-		if(myConference.getUserList().get(i).getName().equals(u.getName())) {
-			int j=(i + 1)*4;
-			temp.add(myPapers.get(j - 4));
-			temp.add(myPapers.get(j - 3));
-			temp.add(myPapers.get(j - 2));
-			temp.add(myPapers.get(j - 1));
-			Controller.setUserPapers(temp);
+
+	public ArrayList<Paper> getPapers(User u) {
+		ArrayList<Paper> temp = new ArrayList<Paper>();
+		for (int i = 0; i < myConference.getUserList().size(); i++) {
+			if(myConference.getUserList().get(i).getName().equals(u.getName())) {
+				int j=(i + 1)*4;
+				// Added the if statements to remove unnecessary empty.txt
+				if (!myPapers.get(j - 4).getFileName().equals("empty.txt"))
+					temp.add(myPapers.get(j - 4));
+				if (!myPapers.get(j - 3).getFileName().equals("empty.txt"))
+					temp.add(myPapers.get(j - 3));
+				if (!myPapers.get(j - 2).getFileName().equals("empty.txt"))
+					temp.add(myPapers.get(j - 2));
+				if (!myPapers.get(j - 1).getFileName().equals("empty.txt"))
+					temp.add(myPapers.get(j - 1));
+				Controller.setMyPapers(temp);
+				break; // Found users paper, no need continue iterating.
+			}
 		}
-	}
 		return temp;
 	}
 }
