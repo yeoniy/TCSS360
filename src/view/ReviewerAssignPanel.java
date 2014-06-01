@@ -85,7 +85,7 @@ public class ReviewerAssignPanel extends JPanel {
 		cmbReviewerBox.setBounds(10, 65, 172, 20);
 
 		cmbAuthorSelectBox = new JComboBox<String>();
-		cmbAuthorSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select an Author..."}));
+		cmbAuthorSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
 		cmbAuthorSelectBox.setBounds(192, 65, 157, 20);
 
 		// Text Area

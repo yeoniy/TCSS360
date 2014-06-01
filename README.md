@@ -31,6 +31,8 @@ Sorry for no comments. I will go through tomorrow and comment things more.
 Update 6/1 - Tim
 ================
 
-I connected the remove function to the textfile. I've commented up the Controller and file controller classes. The submit function still needs the file name updated into the 
+I connected the remove function to the textfile. I've commented up the Controller and file controller classes. The submit function should be full operational now as well. To me 
 
-conference text file. I'll start working on that.
+it seems easiest for us to do assignments with papers to the subchair and reviewer with our text file. They wont submit papers anyway so we can just use the paper slots in 
+
+the text file to make for there assignments. I just also fixed various issues in the gui to make sure we fulfill all the user stories.

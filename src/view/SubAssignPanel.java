@@ -86,7 +86,7 @@ public class SubAssignPanel extends JPanel {
 		cmbSubSelectBox.setBounds(10, 65, 172, 20);
 
 		cmbSubAuthorSelectBox = new JComboBox<String>();
-		cmbSubAuthorSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select an Author..."}));
+		cmbSubAuthorSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
 		cmbSubAuthorSelectBox.setBounds(192, 65, 157, 20);
 
 		// Text Area
