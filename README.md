@@ -5,16 +5,24 @@ mu
 
 To solve conflicts:
 
-Right Click Project >> Team >> Synchronize Workspace
+-Back-up your exisitng files.
 
-It will show red arrows, fix all red spots and code (add it to yours or delete it to make them match)
+-Delete project from eclipse (yes to delete contents on disk)
 
-Save the file
+-Import the project from git, as a general project.
 
-Go back to java view top right hand side
+-It will say .project already exists. Go to the directory of the project and move the .project and .classpath files from the directory to the desktop.
 
-Right click project >> Team >> Add to index
+-Hit back in eclipse wizard and then forward. Then finish. Put the .project and .classpath files back into the project directory and reload eclipse.
 
-Right click project >> Commit and Push
+-Go through the files and edit as needed.
 
-http://stackoverflow.com/questions/19474186/egit-rejected-non-fast-forward
+Update 5/31 - Nick
+==================
+I extrapolated the view into more seperated classes. Basically one panel for each view. I also implemented inner action listeners to take care of the button events on each panel.
+
+Submitting papers and removing papers works so far. The submit panel is the only fully working panel besides the entry panel and login panel.
+
+I also fixed various bugs I found along the way.
+
+Sorry for no comments. I will go through tomorrow and comment things more.
