@@ -22,8 +22,13 @@ import model.User;
  * @author Nick Ames
  */
 public class Controller {
+	/**
+	 * all papers in the system.
+	 */
 	private static ArrayList<Paper> allPapers;
-	
+	/**
+	 * Papers for current user.
+	 */
 	private static ArrayList<Paper> myPapers;
 	/**
 	 * current user logged in.
@@ -121,6 +126,10 @@ public class Controller {
 	public static Type getUserType() {
 		return myUser.getMyType();	
 	}
+	/**
+	 * 
+	 * @return all the subchairs in the active conference.
+	 */
 	public static ArrayList<User> getAllSubChairs() {
 		ArrayList<User> temp = new ArrayList<User>();
 		for(int i = 0; i < myActiveConference.getUserList().size(); i++) {
@@ -130,6 +139,10 @@ public class Controller {
 		}
 		return temp;
 	}
+	/**
+	 * 
+	 * @return all the reviewers in the active conference.
+	 */
 	public static ArrayList<User> getAllReviewers() {
 		ArrayList<User> temp = new ArrayList<User>();
 		for(int i = 0; i < myActiveConference.getUserList().size(); i++) {
@@ -139,11 +152,18 @@ public class Controller {
 		}
 		return temp;
 	}
-	
+	/**
+	 * 
+	 * @return all the papers in the active conference.
+	 */
 	public static ArrayList<Paper> getAllPapers() {
 		return allPapers;
 	}
-
+	/**
+	 * removes a paper based on location and updates the text file for the active conference.
+	 * 
+	 * @param x the location of the paper to remove.
+	 */
 	public static void removePaper(int x) {
 		String old = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
 				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
@@ -169,27 +189,51 @@ public class Controller {
 			  e.printStackTrace();
 		    }
 		}
+	/**
+	 * sets the list of all the papers.
+	 * 
+	 * @param p Array list of papers.
+	 */
 	public static void setAllPapers(ArrayList<Paper> p) {
-		allPapers = p;
-		
+		allPapers = p;	
 	}
-
+	/**
+	 * gets the papers for the active user.
+	 * 
+	 * @return myPapers.
+	 */
 	public static ArrayList<Paper> getMyPapers() {
 		return myPapers;
 	}
-
+	/**
+	 * Sets myPapers
+	 * 
+	 * @param myPapers users papers.
+	 */
 	public static void setMyPapers(ArrayList<Paper> myPapers) {
 		Controller.myPapers = myPapers;
 	}
-	
+	/**
+	 * gets the active user.
+	 * 
+	 * @return the user.
+	 */
 	public static User getCurrentUser() {
 		return myUser;
 	}
-
+	/**
+	 * gets the current conference.
+	 * 
+	 * @return the active conference.
+	 */
 	public static Conference getCurrentConference() {
 		return myActiveConference;
 	}
-
+	/**
+	 * sets the active conference.
+	 * 
+	 * @param c the conference.
+	 */
 	public static void setActiveConference(Conference c) {
 		myActiveConference = c;
 	}

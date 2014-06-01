@@ -154,7 +154,11 @@ public class FileController extends Controller {
 	public Conference getMyConference() {
 		return myConference;
 	}
-
+	/**
+	 * gets all the files for the given user.
+	 * @param u user
+	 * @return array list of papers
+	 */
 	public ArrayList<Paper> getPapers(User u) {
 		ArrayList<Paper> temp = new ArrayList<Paper>();
 		for (int i = 0; i < myConference.getUserList().size(); i++) {
