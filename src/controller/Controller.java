@@ -67,12 +67,33 @@ public class Controller {
 
     /**
      * Adds a new paper to the current user within the current active conference.
-     * @param author author of the paper
-     * @param fileName name of the file
+     * @param x the index to add to.
+     * @param fileName name of the file.
      */
-    public void addPaper (Author author, String fileName) {
-        File nfile = new File(fileName);
-        author.submit(nfile);
+    public static void addPaper (String fileName, int x) {
+        String old = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
+				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
+				 + (",") + getMyPapers().get(3).getFileHeader();
+        Paper p = new Paper(new File(fileName));
+		getMyPapers().set(x,p);
+		String content = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
+				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
+				 + (",") + getMyPapers().get(3).getFileHeader();
+		 try{
+			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
+			 BufferedReader reader = new BufferedReader(new FileReader(file));
+			 String line = "", oldtext = "";
+		 while((line = reader.readLine()) != null){
+			 oldtext += line + "\n";
+		 }
+		 reader.close();
+		 String newtext = oldtext.replaceAll(old, content);
+		  
+		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
+		 writer.write(newtext);writer.close();
+			} catch (IOException e) {
+			  e.printStackTrace();
+		    }
     }
 
     public void update() {

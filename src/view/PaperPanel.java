@@ -149,6 +149,7 @@ public class PaperPanel extends JPanel {
 							Controller.getMyPapers().add(p);
 							JOptionPane.showMessageDialog(null, p.getFileName() + " was uploaded successfully!");
 							addPaper(p.getFileName());
+							Controller.addPaper(p.getFileName(), paperList.getModel().getSize()-1);
 						}
 					} else {
 						JOptionPane.showMessageDialog(null, "Cannot add more than 4 papers.", "Error", JOptionPane.ERROR_MESSAGE);
