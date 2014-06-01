@@ -26,3 +26,11 @@ Submitting papers and removing papers works so far. The submit panel is the only
 I also fixed various bugs I found along the way.
 
 Sorry for no comments. I will go through tomorrow and comment things more.
+
+
+Update 6/1 - Tim
+================
+
+I connected the remove function to the textfile. I've commented up the Controller and file controller classes. The submit function still needs the file name updated into the 
+
+conference text file. I'll start working on that.
