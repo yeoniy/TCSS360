@@ -189,6 +189,42 @@ public class Controller {
  		    }
     	
     }
+    public static void setSCrec(String paper, int x) {
+    	String old = "";
+    	String content = "";
+    	for(int i = 0; i < allPapers.size(); i++) {
+    		if (paper.equals(allPapers.get(i).getFileName())) {
+    			 old = paper + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
+    			 content = paper + " " + x + " " + allPapers.get(i).isAccepted();
+    			 try {
+    				if(x == 1) {
+						allPapers.get(i).setSCrec(1);
+					} else if (x == 2) {
+						allPapers.get(i).setSCrec(2);
+					}
+    			 } catch (InvalidInputException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+			     }
+    		}
+    	}
+    	 try{
+ 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 			 BufferedReader reader = new BufferedReader(new FileReader(file));
+ 			 String line = "", oldtext = "";
+ 		 while((line = reader.readLine()) != null){
+ 			 oldtext += line + "\n";
+ 		 }
+ 		 reader.close();
+ 		 String newtext = oldtext.replaceAll(old, content);
+ 		  
+ 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 		 writer.write(newtext);writer.close();
+ 			} catch (IOException e) {
+ 			  e.printStackTrace();
+ 		    }
+    	
+    }
     public static int getPCrec(String paper) {
     	int x = 0;
     	for(int i = 0; i < allPapers.size(); i++) {
