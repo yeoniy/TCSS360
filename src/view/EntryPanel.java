@@ -179,9 +179,11 @@ public class EntryPanel extends JPanel {
 				} else if (btn.getText().equals("Assign Reviewers")) {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "reviewerAssign");
+					loadrevassignpan();
 				} else if (btn.getText().equals("Assign Sub-Chairs")) {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "subAssign");
+					loadsubpan();
 				} else if (btn.getText().equals("Chair Review")) {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "pro");
@@ -220,7 +222,24 @@ public class EntryPanel extends JPanel {
 				}
 			}
 		}
-		
-		
+		private void loadsubpan() {
+			Component[] c = myMainPanel.getComponents();
+			for (Component a : c) {
+				if (a instanceof SubAssignPanel) {
+					((SubAssignPanel) a).addPapers();
+					((SubAssignPanel) a).SubChairs();
+					break;	
+				}
+			}
+		}	
+		private void loadrevassignpan() {
+			Component[] c = myMainPanel.getComponents();
+			for (Component a : c) {
+				if (a instanceof ReviewerAssignPanel) {
+					((ReviewerAssignPanel) a).assignReviewers();
+					break;	
+				}
+			}
+		}	
 	}
 }

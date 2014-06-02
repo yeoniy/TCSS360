@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import controller.Controller;
+
 public class ReviewerAssignPanel extends JPanel {
 
 	private JLabel lblTitle;
@@ -23,8 +25,10 @@ public class ReviewerAssignPanel extends JPanel {
 	private JButton btnRemove;
 	private JButton btnBack;
 
+	private boolean ran;
+	
 	private JComboBox<String> cmbReviewerBox;
-	private JComboBox<String> cmbAuthorSelectBox;
+	private JComboBox<String> cmbPaperSelectBox;
 
 	private JScrollPane reviewerPane;
 	private JScrollPane authorSelectPane;
@@ -38,6 +42,7 @@ public class ReviewerAssignPanel extends JPanel {
 
 	public ReviewerAssignPanel(final MainPanel m) {
 		super(null);
+		ran = false;
 		myMainPanel = m;
 		myListener = new ReviewerAssignListener();
 		initialize();
@@ -84,9 +89,9 @@ public class ReviewerAssignPanel extends JPanel {
 		cmbReviewerBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a Reviewer..."}));
 		cmbReviewerBox.setBounds(10, 65, 172, 20);
 
-		cmbAuthorSelectBox = new JComboBox<String>();
-		cmbAuthorSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
-		cmbAuthorSelectBox.setBounds(192, 65, 157, 20);
+		cmbPaperSelectBox = new JComboBox<String>();
+		cmbPaperSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
+		cmbPaperSelectBox.setBounds(192, 65, 157, 20);
 
 		// Text Area
 		txtReviewers = new JTextArea();
@@ -113,12 +118,23 @@ public class ReviewerAssignPanel extends JPanel {
 		add(btnRemove);
 		add(btnBack);
 		add(cmbReviewerBox);
-		add(cmbAuthorSelectBox);
+		add(cmbPaperSelectBox);
 		add(reviewerPane);
 		add(authorSelectPane);
 
 	}
-	
+	public void assignReviewers() {
+		int size = Controller.getAllReviewers().size();
+		String[] reviewers = new String[size];
+		for (int i = 0; i < Controller.getAllReviewers().size(); i++) {
+			reviewers[i] = Controller.getAllReviewers().get(i).getName();
+			if(!ran) {
+				cmbReviewerBox.addItem(reviewers[i]);
+			}
+		}
+		ran = true;
+	//	subAssignPaperList.setListData(reviewers);
+	}
 	private class ReviewerAssignListener implements ActionListener {
 
 		@Override

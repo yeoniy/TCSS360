@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import controller.Controller;
+
 public class SubAssignPanel extends JPanel {
 
 	private JLabel lblTitle;
@@ -22,6 +24,14 @@ public class SubAssignPanel extends JPanel {
 	private JButton btnAssign;
 	private JButton btnRemove;
 	private JButton btnBack;
+	/**
+	 * boolean which ensures combobox only initializes once
+	 */
+	private boolean test;
+	/**
+	 * boolean which ensures combobox only initializes once
+	 */
+	private boolean ran;
 
 	private JComboBox<String> cmbSubSelectBox;
 	private JComboBox<String> cmbSubAuthorSelectBox;
@@ -31,7 +41,8 @@ public class SubAssignPanel extends JPanel {
 
 	private JTextArea txtSubAssignedPapers;
 
-	private JList subAssignPaperList;
+	private JList<String> subAssignPaperList;
+	private JList<String> paperList;
 	
 	private MainPanel myMainPanel;
 	
@@ -39,6 +50,8 @@ public class SubAssignPanel extends JPanel {
 
 	public SubAssignPanel(final MainPanel m) {
 		super(null);
+		test = false;
+		ran = false;
 		myListener = new SubAssignListener();
 		myMainPanel = m;
 		initialize();
@@ -95,6 +108,7 @@ public class SubAssignPanel extends JPanel {
 
 		// List
 		subAssignPaperList = new JList();
+		paperList = new JList();
 
 		// Scroll Panes
 		reviewerPane = new JScrollPane();
@@ -118,6 +132,35 @@ public class SubAssignPanel extends JPanel {
 		add(authorSelectPane);
 
 	}
+	public void SubChairs() {
+		int size = Controller.getAllSubChairs().size();
+		String[] subchairs = new String[size];
+		for (int i = 0; i < Controller.getAllSubChairs().size(); i++) {
+			subchairs[i] = Controller.getAllSubChairs().get(i).getName();
+			if(!ran) {
+				cmbSubSelectBox.addItem(subchairs[i]);
+			}
+		}
+		ran = true;
+		subAssignPaperList.setListData(subchairs);
+	}
+	public void addPapers() {
+		int size = 0;
+		for (int i = 0; i < Controller.getAllPapers().size(); i++) {
+			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+				size++;
+		}
+		String[] papers = new String[size];
+		for (int i = 0; i < papers.length; i++) {
+			if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
+				papers[i] = Controller.getAllPapers().get(i).getFileName();
+				if(!test) {
+					cmbSubAuthorSelectBox.addItem(papers[i]);
+				}	
+		}
+		test = true;
+		paperList.setListData(papers);
+	} 
 	
 	private class SubAssignListener implements ActionListener {
 
