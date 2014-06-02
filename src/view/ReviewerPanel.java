@@ -28,6 +28,11 @@ public class ReviewerPanel extends JPanel {
 	private JButton btnBack;
 	private JButton btnViewPaper;
 	
+	/**
+	 * boolean which prevents multiple instances of the same text file in the comboboxes.
+	 */
+	private boolean test;
+	
 	private JComboBox<String> cmbPaperSelectBox;
 	private JList<String> paperList;
 	
@@ -41,6 +46,7 @@ public class ReviewerPanel extends JPanel {
 	
 	public ReviewerPanel(final MainPanel m) {
 		super(null);
+		test = false;
 		myMainPanel = m;
 		myListener = new ReviewerListener();
 		initialize();
@@ -127,8 +133,11 @@ public class ReviewerPanel extends JPanel {
 		for (int i = 0; i < papers.length; i++) {
 			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
 				papers[i] = Controller.getMyPapers().get(i).getFileName();
-				cmbPaperSelectBox.addItem(papers[i]);
+				if(!test) {
+					cmbPaperSelectBox.addItem(papers[i]);
+				}	
 		}
+		test = true;
 		paperList.setListData(papers);
 	} 
 	private class ReviewerListener implements ActionListener {

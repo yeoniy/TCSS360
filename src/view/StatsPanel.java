@@ -9,10 +9,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+
+import controller.Controller;
 
 public class StatsPanel extends JPanel {
 	
@@ -29,8 +32,13 @@ public class StatsPanel extends JPanel {
 	
 	private JButton btnView;
 	private JButton btnBack;
+	/**
+	 * boolean which prevents multiple instances of the same text file in the comboboxes.
+	 */
+	private boolean test;
 	
 	private JComboBox<String> cmbPaperBox;
+	private JList<String> paperList;
 	
 	private JProgressBar progressBar;
 	
@@ -42,6 +50,7 @@ public class StatsPanel extends JPanel {
 	
 	public StatsPanel(final MainPanel m) {
 		super(null);
+		test = false;
 		myMainPanel = m;
 		myListener = new StatsListener();
 		initialize();
@@ -103,6 +112,7 @@ public class StatsPanel extends JPanel {
 		/*
 		 * Others
 		 */
+		paperList = new JList<String>();
 		
 		// Combo Box
 		cmbPaperBox = new JComboBox<String>();
@@ -135,6 +145,23 @@ public class StatsPanel extends JPanel {
 		add(txtComments);
 
 	}
+	public void addPapers() {
+		int size = 0;
+		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
+			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+				size++;
+		}
+		String[] papers = new String[size];
+		for (int i = 0; i < papers.length; i++) {
+			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+				papers[i] = Controller.getMyPapers().get(i).getFileName();	
+				if(!test) {
+					cmbPaperBox.addItem(Controller.getMyPapers().get(i).getFileName());
+				}
+		}
+		test = true;
+		paperList.setListData(papers);
+	} 
 	
 	private class StatsListener implements ActionListener {
 
