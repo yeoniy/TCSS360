@@ -2,12 +2,19 @@ package view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -171,7 +178,26 @@ public class StatsPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("View")) {
-					
+					JFrame frame = new JFrame(cmbPaperBox.getSelectedItem().toString());
+					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					frame.setSize(500,500);
+					frame.setLayout(new FlowLayout());
+					List list = new List();
+					frame.add(list);
+					try {
+					File file = new File("Resources\\" + cmbPaperBox.getSelectedItem().toString());
+					FileReader fr = new FileReader(file);
+					BufferedReader br = new BufferedReader(fr);
+					String line = "";
+					    while((line = br.readLine()) != null)    {  
+					            list.add(line);
+					    }
+					br.close();
+					}
+					catch(IOException e1) {
+					    System.out.println("Error opening file");
+					}
 				
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
