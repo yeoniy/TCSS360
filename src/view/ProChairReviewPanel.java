@@ -27,7 +27,11 @@ import javax.swing.SwingConstants;
 
 import model.Paper;
 import controller.Controller;
-
+/**
+ * 
+ * @author Tim Loverin, Nick Names
+ * @version 6/2/2014
+ */
 public class ProChairReviewPanel extends JPanel {
 
 	private JLabel lblTitle;
@@ -39,7 +43,9 @@ public class ProChairReviewPanel extends JPanel {
 	private JLabel lblRecommendation;
 	private JLabel lblRec;
 	private JLabel lblComments;
-	
+	/**
+	 * boolean to assist with loading authors.
+	 */
 	private boolean ran;
 	
 	private JButton btnAccept;
@@ -54,7 +60,10 @@ public class ProChairReviewPanel extends JPanel {
 	
 	private MainPanel myMainPanel;
 	private ProChairListener myListener;
-
+	/**
+	 * constructor.
+	 * @param m the main panel
+	 */
 	public ProChairReviewPanel(final MainPanel m) {
 		super(null);
 		ran = false;
@@ -63,7 +72,9 @@ public class ProChairReviewPanel extends JPanel {
 		initialize();
 		setName("pro");
 	}
-
+	/**
+	 * initializes the panel.
+	 */
 	private void initialize() {
 
 		/*
@@ -155,6 +166,9 @@ public class ProChairReviewPanel extends JPanel {
 		add(cmbProPaperSelect);
 		add(txtComments);
 	}
+	/**
+	 * loads authors into combo box.
+	 */
 	public void assignAuthors() {
 		int size = Controller.getAllAuthors().size();
 		String[] authors = new String[size];
@@ -166,7 +180,11 @@ public class ProChairReviewPanel extends JPanel {
 		}
 		ran = true;
 	}
-	public void assignPapers(String s) {
+	/**
+	 * helps load papers into combobox
+	 * @param s the author string name to assign papers to.
+	 */
+	private void assignPapers(String s) {
 		cmbProPaperSelect.removeAllItems();
 		for (int i = 0; i < Controller.getUserPapers(s).size(); i++) {
 			if(!Controller.getUserPapers(s).get(i).getFileName().equals("empty.txt")) {
@@ -174,7 +192,11 @@ public class ProChairReviewPanel extends JPanel {
 			}
 		}
 	}
-
+	/**
+	 * 
+	 * @author Tim Loverin, Nick Names
+	 * @version 6/2/2014
+	 */
 	private class ProChairListener implements ActionListener {
 
 		@Override
@@ -217,6 +239,11 @@ public class ProChairReviewPanel extends JPanel {
 		}
 
 	}
+	/**
+	 * 
+	 * @author Tim Loverin
+	 * @version 6/2/2014
+	 */
 	class MyItemListener implements ItemListener {
 		  // This method is called only if a new item has been selected.
 		  public void itemStateChanged(ItemEvent evt) {

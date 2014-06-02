@@ -13,7 +13,11 @@ import javax.swing.JPanel;
 import model.Type;
 
 import controller.Controller;
-
+/**
+ * 
+ * @author Tim Loverin, Nick Ames.
+ * @version 1.0
+ */
 public class EntryPanel extends JPanel {
 
 	private JLabel lblUsername;
@@ -33,7 +37,10 @@ public class EntryPanel extends JPanel {
 	private MainPanel myMainPanel;
 
 	private EntryListener myListener;
-	
+	/**
+	 * constructor
+	 * @param m main panel
+	 */
 	public EntryPanel(final MainPanel m) {
 		super(null);
 		myMainPanel = m;
@@ -41,7 +48,9 @@ public class EntryPanel extends JPanel {
 		initialize();
 		setName("entry");
 	}
-
+	/**
+	 * initializes the entry panel.
+	 */
 	private void initialize() {
 		
 		/*
@@ -131,7 +140,9 @@ public class EntryPanel extends JPanel {
 		add(btnProReview);
 		add(btnExit);
 	}
-	
+	/**
+	 * updates the user information.
+	 */
 	public void updateUserInformation() {
 		lblUsername.setText(lblUsername.getText() + " " + Controller.getCurrentUser().getName());
 		lblID.setText(lblID.getText() + " " + Controller.getCurrentUser().getId());
@@ -140,7 +151,9 @@ public class EntryPanel extends JPanel {
 		lblDeadline.setText(lblDeadline.getText() + " " + Controller.getCurrentConference().getDate().toString());
 		setButtonAuthority();
 	}
-	
+	/**
+	 * sets visibility of buttons based on user type.
+	 */
 	private void setButtonAuthority() {
 		Type T = Controller.getCurrentUser().getMyType();
 	
@@ -167,7 +180,11 @@ public class EntryPanel extends JPanel {
 			btnAssignReviewers.setEnabled(true);
 		}
 	}
-
+	/**
+	 * 
+	 * @author Tim Loverin, Nick Ames.
+	 * @version 6/2/2014
+	 */
 	private class EntryListener implements ActionListener {
 
 		@Override
@@ -206,7 +223,9 @@ public class EntryPanel extends JPanel {
 				}
 			}
 		}
-
+		/**
+		 * loads data into the PaperPanel
+		 */
 		private void loadPapers() {
 			Component[] c = myMainPanel.getComponents();
 			for (Component a : c) {
@@ -216,6 +235,9 @@ public class EntryPanel extends JPanel {
 				}
 			}
 		}
+		/**
+		 * loads review data into ReviewerPanel.
+		 */
 		private void loadReviews() {
 			Component[] c = myMainPanel.getComponents();
 			for (Component a : c) {
@@ -225,6 +247,9 @@ public class EntryPanel extends JPanel {
 				}
 			}
 		}
+		/**
+		 * loads data into the StatsPanel.
+		 */
 		private void loadStats() {
 			Component[] c = myMainPanel.getComponents();
 			for (Component a : c) {
@@ -234,6 +259,9 @@ public class EntryPanel extends JPanel {
 				}
 			}
 		}
+		/**
+		 * loads data into the SubAssignPanel.
+		 */
 		private void loadsubpan() {
 			Component[] c = myMainPanel.getComponents();
 			for (Component a : c) {
@@ -244,6 +272,9 @@ public class EntryPanel extends JPanel {
 				}
 			}
 		}	
+		/**
+		 * loads data into the ReviewerAssignPanel.
+		 */
 		private void loadrevassignpan() {
 			Component[] c = myMainPanel.getComponents();
 			for (Component a : c) {
@@ -254,6 +285,9 @@ public class EntryPanel extends JPanel {
 				}
 			}
 		}	
+		/**
+		 * loads data into the ProChairReviewPanel.
+		 */
 		private void prochairrevpanel() {
 			Component[] c = myMainPanel.getComponents();
 			for (Component a : c) {

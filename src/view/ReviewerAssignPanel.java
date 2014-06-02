@@ -20,7 +20,11 @@ import javax.swing.SwingConstants;
 import model.Paper;
 
 import controller.Controller;
-
+/**
+ * 
+ * @author Tim Loverin, Nick Ames.
+ * @version 6/2/2014
+ */
 public class ReviewerAssignPanel extends JPanel {
 
 	private JLabel lblTitle;
@@ -28,8 +32,13 @@ public class ReviewerAssignPanel extends JPanel {
 	private JButton btnAssign;
 	private JButton btnRemove;
 	private JButton btnBack;
-
+	/**
+	 * boolean which ensures comboboxes only initialize data once
+	 */
 	private boolean ran;
+	/**
+	 * boolean which ensures comboboxes only initialize data once
+	 */
 	private boolean test;
 	
 	private JComboBox<String> cmbReviewerBox;
@@ -44,7 +53,10 @@ public class ReviewerAssignPanel extends JPanel {
 	
 	private MainPanel myMainPanel;
 	private ReviewerAssignListener myListener;
-
+	/**
+	 * Constructor.
+	 * @param m main panel.
+	 */
 	public ReviewerAssignPanel(final MainPanel m) {
 		super(null);
 		ran = false;
@@ -54,7 +66,9 @@ public class ReviewerAssignPanel extends JPanel {
 		initialize();
 		setName("reviewerAssign");
 	}
-
+	/**
+	 * initializes the ReviewerAssignPanel.
+	 */
 	private void initialize() {
 
 		/*
@@ -128,6 +142,9 @@ public class ReviewerAssignPanel extends JPanel {
 		add(authorSelectPane);
 
 	}
+	/**
+	 * adds papers to the combobox.
+	 */
 	public void addPapers() {
 		int size = 0;
 		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
@@ -143,7 +160,10 @@ public class ReviewerAssignPanel extends JPanel {
 				}
 		}
 		test = true;
-	} 
+	}
+	/**
+	 * assigns reviewers to the combobox.
+	 */
 	public void assignReviewers() {
 		int size = Controller.getAllReviewers().size();
 		String[] reviewers = new String[size];
@@ -155,6 +175,11 @@ public class ReviewerAssignPanel extends JPanel {
 		}
 		ran = true;
 	}
+	/**
+	 * 
+	 * @author Tim Loverin, Nick Ames.
+	 * @version 6/2/2014
+	 */
 	private class ReviewerAssignListener implements ActionListener {
 
 		@Override

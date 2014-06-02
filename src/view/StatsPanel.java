@@ -23,7 +23,11 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import controller.Controller;
-
+/**
+ * 
+ * @author Tim Loverin, Nick Ames.
+ * @version 6/2/2014.
+ */
 public class StatsPanel extends JPanel {
 	
 	private JLabel lbl0;
@@ -54,7 +58,10 @@ public class StatsPanel extends JPanel {
 	private MainPanel myMainPanel;
 	
 	private StatsListener myListener;
-	
+	/**
+	 * Constructor.
+	 * @param m main panel.
+	 */
 	public StatsPanel(final MainPanel m) {
 		super(null);
 		test = false;
@@ -63,7 +70,9 @@ public class StatsPanel extends JPanel {
 		initialize();
 		setName("stats");
 	}
-
+	/**
+	 * initializes the StatsPanel.
+	 */
 	private void initialize() {
 		
 		/*
@@ -150,8 +159,10 @@ public class StatsPanel extends JPanel {
 		add(cmbPaperBox);
 		add(progressBar);
 		add(txtComments);
-
 	}
+	/**
+	 * adds papers to the comboBox.
+	 */
 	public void addPapers() {
 		int size = 0;
 		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
@@ -169,7 +180,12 @@ public class StatsPanel extends JPanel {
 		test = true;
 		paperList.setListData(papers);
 	} 
-	
+	/**
+	 * ActionListener for the statspanel.
+	 * 
+	 * @author Tim Loverin Nick Ames.
+	 * @version 6/2/2014
+	 */
 	private class StatsListener implements ActionListener {
 
 		@Override

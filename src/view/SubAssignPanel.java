@@ -22,7 +22,11 @@ import javax.swing.SwingConstants;
 import model.Paper;
 
 import controller.Controller;
-
+/**
+ * 
+ * @author Tim Loverin, Nick Names
+ * @version 6/2/2014
+ */
 public class SubAssignPanel extends JPanel {
 
 	private JLabel lblTitle;
@@ -31,11 +35,11 @@ public class SubAssignPanel extends JPanel {
 	private JButton btnRemove;
 	private JButton btnBack;
 	/**
-	 * boolean which ensures combobox only initializes once
+	 * boolean which ensures combobox only initializes once.
 	 */
 	private boolean test;
 	/**
-	 * boolean which ensures combobox only initializes once
+	 * boolean which ensures combobox only initializes once.
 	 */
 	private boolean ran;
 
@@ -140,6 +144,9 @@ public class SubAssignPanel extends JPanel {
 		add(authorSelectPane);
 
 	}
+	/**
+	 * Loads subchairs into combobox.
+	 */
 	public void SubChairs() {
 		int size = Controller.getAllSubChairs().size();
 		String[] subchairs = new String[size];
@@ -152,6 +159,9 @@ public class SubAssignPanel extends JPanel {
 		ran = true;
 		//subAssignPaperList.setListData(subchairs);
 	}
+	/**
+	 * Loads papers into combobox.
+	 */
 	public void addPapers() {
 		int size = 0;
 		for (int i = 0; i < Controller.getAllPapers().size(); i++) {
@@ -169,7 +179,11 @@ public class SubAssignPanel extends JPanel {
 		test = true;
 	//	paperList.setListData(papers);
 	} 
-	
+	/**
+	 * 
+	 * @author Tim Loverin, Nick Names.
+	 * @version 6/2/2014
+	 */
 	private class SubAssignListener implements ActionListener {
 
 		@Override
@@ -203,6 +217,11 @@ public class SubAssignPanel extends JPanel {
 		}
 
 	}
+	/**
+	 * 
+	 * @author Tim Loverin
+	 * @version 6/2/2014
+	 */
 	class MyItemListener implements ItemListener {
 		  // This method is called only if a new item has been selected.
 		  public void itemStateChanged(ItemEvent evt) {

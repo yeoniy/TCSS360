@@ -15,32 +15,47 @@ import view.menu.MenuBar;
 import controller.Controller;
 
 /**
- * Created by Yeonil on 4/29/14.
+ * 
+ * @author Tim Loverin, Nick Ames, Yeonil
+ * @version 6/2/2014
  */
 public class ConferenceGui extends JFrame {
-
 	/**
 	 * Default serial ID.
 	 */
 	private static final long serialVersionUID = 1L;
-
+	/**
+	 * Dimension of screen.
+	 */
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	/**
 	 * Title of the Window.
 	 */
 	private static final String FRAME_TITLE = "Conference";
-
+	/**
+	 * ArrayList of observers.
+	 */
 	private ArrayList<JPanel> observers;
+	/**
+	 * the main panel
+	 */
     private static MainPanel mainPanel;
+    /**
+     * Login Panel.
+     */
     private LoginPanel loginPanel;
+    /**
+     * The menu bar.
+     */
     private static MenuBar menuBar;
-
+    /**
+     * Constructor
+     */
     public ConferenceGui() {
     	super("Conference 1.0");
         initialize();
         setVisible(true);
 	}
-
     /**
 	 * Initialize the contents of the frame.
 	 */
@@ -99,7 +114,9 @@ public class ConferenceGui extends JFrame {
 		menuBar.add(mnAbout);
 
 	}
-    
+    /**
+     * Starts the conference.
+     */
 	public static void startConf() {
 		Component[] c = mainPanel.getComponents();
 		for (Component a : c) {

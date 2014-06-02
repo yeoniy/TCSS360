@@ -23,7 +23,11 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 
 import controller.Controller;
-
+/**
+ * 
+ * @author Tim Loverin, Nick Ames.
+ * @version 6/2/2014
+ */
 public class ReviewerPanel extends JPanel {
 	
 	private JLabel lblTitle;
@@ -50,7 +54,10 @@ public class ReviewerPanel extends JPanel {
 	private MainPanel myMainPanel;
 	
 	private ReviewerListener myListener;
-	
+	/**
+	 * Constructor.
+	 * @param m main panel
+	 */
 	public ReviewerPanel(final MainPanel m) {
 		super(null);
 		test = false;
@@ -60,7 +67,9 @@ public class ReviewerPanel extends JPanel {
 		setName("reviewer");
 		
 	}
-
+	/**
+	 * initializes the ReviewerPanel.
+	 */
 	private void initialize() {
 		
 		/*
@@ -129,7 +138,9 @@ public class ReviewerPanel extends JPanel {
 		add(txtComments);
 
 	}
-	
+	/**
+	 * Adds papers to the combobox
+	 */
 	public void addPapers() {
 		int size = 0;
 		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
@@ -147,6 +158,12 @@ public class ReviewerPanel extends JPanel {
 		test = true;
 		paperList.setListData(papers);
 	} 
+	/**
+	 * Action Listener for the Reviewer Panel.
+	 * 
+	 * @author Tim Loverin, Nick Ames.
+	 * @version 6/2/2014
+	 */
 	private class ReviewerListener implements ActionListener {
 
 		@Override

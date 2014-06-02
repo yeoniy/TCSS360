@@ -10,12 +10,20 @@ import model.Conference;
 import model.Type;
 import exception.InvalidLoginException;
 import view.MainPanel;
-
+/**
+ * 
+ * @author Tim Loverin, Yeonil, Nick Ames.
+ * @version 6/2/2014
+ */
 public class EntryPanelListener implements ActionListener {
-
-
+	/**
+	 * Main Panel.
+	 */
 	private MainPanel myMainPanel;
-
+	/**
+	 * constuctor
+	 * @param m main panel.
+	 */
 	public EntryPanelListener(MainPanel m) {
 		myMainPanel = m;
 	}

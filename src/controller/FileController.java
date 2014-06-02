@@ -14,9 +14,12 @@ import java.util.Scanner;
 /**
  * Controller class for opening conference files and parsing them. This class is used
  * for gathering the conference data and allowing for easy data gathering.
- * @author Tim Loverin, Yeonil, Nick, Rich
+ * @author Tim Loverin, Yeonil, Nick Ames, Rich
  */
 public class FileController extends Controller {
+	/**
+	 * all author papers
+	 */
 	private ArrayList<Paper> allPapers;
 	/**
 	 * The name of the conference to load.

@@ -22,7 +22,11 @@ import javax.swing.text.StyleConstants;
 
 import model.Paper;
 import controller.Controller;
-
+/**
+ * 
+ * @author Tim Loverin, Nick Ames.
+ * @version 6/2/2014
+ */
 public class PaperPanel extends JPanel {
 
 	private JLabel lblTitle;
@@ -42,7 +46,10 @@ public class PaperPanel extends JPanel {
 	private JTextPane numberPane;
 
 	private JList<String> paperList;
-
+	/**
+	 * Contructor for the PaperPanel
+	 * @param m main panel
+	 */
 	public PaperPanel(final MainPanel m) {
 		super(null);
 		myMainPanel = m;
@@ -50,7 +57,9 @@ public class PaperPanel extends JPanel {
 		initialize();
 		setName("paper");
 	}
-
+	/**
+	 * initializes the PaperPanel.
+	 */
 	private void initialize() {
 
 		/*
@@ -118,7 +127,9 @@ public class PaperPanel extends JPanel {
 		add(btnRemove);
 		add(paperScrollPane);
 	}
-	
+	/**
+	 * Loads Papers into paperlist.
+	 */
 	public void addPapers() {
 		int size = 0;
 		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
@@ -132,7 +143,11 @@ public class PaperPanel extends JPanel {
 		}
 		paperList.setListData(papers);
 	} 
-	
+	/**
+	 * 
+	 * @author Tim Loverin, Nick Ames.
+	 * @version 6/2/2014
+	 */
 	private class PaperPanelListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -168,7 +183,10 @@ public class PaperPanel extends JPanel {
 			}
 		}
 	}
-
+	/**
+	 * removes a paper
+	 * @param p
+	 */
 	private void removePaper(int[] p) {
 		String[] s = new String[paperList.getModel().getSize() - p.length];
 		for (int i = 0; i < p.length; i++) {
@@ -186,7 +204,10 @@ public class PaperPanel extends JPanel {
 		}
 		paperList.setListData(s);
 	}
-
+	/**
+	 * adds a paper
+	 * @param a
+	 */
 	private void addPaper(String a) {
 		String[] s = new String[paperList.getModel().getSize() + 1];
 		int i;

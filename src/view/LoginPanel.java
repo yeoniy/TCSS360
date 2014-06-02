@@ -20,29 +20,46 @@ import controller.LoginController;
  * An implementation of a login panel for the ConferenceGui class. This login panel will
  * allow a user to login to a specific conference with their unique id and password.
  * 
- * @version 5/18/2014
- * @author Nick Ames
+ * @version 6/2/2014
+ * @author Nick Ames, Tim Loverin.
  */
-public class LoginPanel extends JPanel {
-	
+public class LoginPanel extends JPanel {	
     /**
 	 * Default serial ID.
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * Login Button.
+	 */
 	private JButton btnLogin;
-	
+	/**
+	 * Logout Button.
+	 */
 	private JButton btnExit;
-	
+	/**
+	 * Login controller.
+	 */
 	private LoginController ctrlLogin;
-	
+	/**
+	 * user name text field.
+	 */
 	private static JTextField txtUsername;
-	
+	/**
+	 * password field.
+	 */
 	private JPasswordField txtPassword;
-    
+    /**
+     * combo box of conferences.
+     */
 	private JComboBox<String> cmbConferences;
+	/**
+	 * array of conferences.
+	 */
     private Conference[] conference;
-    
+    /**
+     * Constructor.
+     * @param l login Dialog
+     */
     public LoginPanel(final LoginDialog l) {
         ctrlLogin = new LoginController(this, l);
         try {
@@ -55,7 +72,12 @@ public class LoginPanel extends JPanel {
 			e.printStackTrace();
 		}
     }
-
+    /**
+     * initializes the LoginPanel.
+     * 
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
 	private void initialize() throws FileNotFoundException, IOException {
 		JLabel lblUsername = new JLabel("Username:");
 		JLabel lblPassword = new JLabel("Password:");
@@ -85,19 +107,30 @@ public class LoginPanel extends JPanel {
 		this.add(btnLogin);
 		this.add(btnExit);
 	}
-	
+	/**
+	 * gets the username.
+	 * @return username in string form.
+	 */
 	public static String getUsername() {
 		return txtUsername.getText();
 	}
-	
+	/**
+	 *  gets the password.
+	 * @return the password.
+	 */
 	public char[] getPassword() {
 		return txtPassword.getPassword();
 	}
-	
+	/**
+	 * gets the Conference.
+	 * @return Conference.
+	 */
 	public Conference getConference() {
 		return conference[cmbConferences.getSelectedIndex()];
 	}
-
+	/**
+	 * resets the password data field.
+	 */
 	public void resetPassField() {
 		txtPassword.setText("");
 	}

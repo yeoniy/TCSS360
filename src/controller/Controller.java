@@ -18,12 +18,12 @@ import model.User;
  * Main controller class for controlling actions between view and controller. Should not be
  * used for specific control of small subtasks but as a general purpose class for easier model
  * access.
- * @version 5/19/2014
- * @author Nick Ames
+ * @version 6/2/2014
+ * @author Nick Ames, Tim Loverin
  */
 public class Controller {
 	/**
-	 * all non empty papers in the system.
+	 * all non empty author papers in the system.
 	 */
 	private static ArrayList<Paper> allPapers;
 	/**
@@ -256,7 +256,11 @@ public class Controller {
 	public void setMyActiveConference(Conference myActiveConference) {
 		this.myActiveConference = myActiveConference;
 	} 
-
+	/**
+	 * gets a list of all the authors in the conference.
+	 * 
+	 * @return list of all the authors
+	 */
 	public static ArrayList<User> getAllAuthors() {
 		ArrayList<User> temp = new ArrayList<User>();
 		for(int i = 0; i < myActiveConference.getUserList().size(); i++) {
@@ -282,7 +286,7 @@ public class Controller {
 		return myUser.getMyType();	
 	}
 	/**
-	 * 
+	 * gets all the subchairs in a list.
 	 * @return all the subchairs in the active conference.
 	 */
 	public static ArrayList<User> getAllSubChairs() {
@@ -295,7 +299,7 @@ public class Controller {
 		return temp;
 	}
 	/**
-	 * 
+	 * gets all the reviewers in a list.
 	 * @return all the reviewers in the active conference.
 	 */
 	public static ArrayList<User> getAllReviewers() {
@@ -308,14 +312,14 @@ public class Controller {
 		return temp;
 	}
 	/**
-	 * 
+	 * gets all the papers an author has submitted in a list
 	 * @return all the papers in the active conference.
 	 */
 	public static ArrayList<Paper> getAllPapers() {
 		return allPapers;
 	}
 	/**
-	 * 
+	 * gets all the non empty papers.
 	 * @return all the papers real or fake in the active conference.
 	 */
 	public static ArrayList<Paper> getMaxPapers() {
