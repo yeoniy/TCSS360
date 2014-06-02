@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import model.Type;
+
 import controller.Controller;
 
 public class EntryPanel extends JPanel {
@@ -140,20 +142,22 @@ public class EntryPanel extends JPanel {
 	}
 	
 	private void setButtonAuthority() {
-		switch (Controller.getCurrentUser().getMyType()) {
-		case ADMIN:
-		case PROCHAIR:
-			btnProReview.setEnabled(true);
-			btnAssignSubChair.setEnabled(true);
-		case SUBCHAIR:
-			btnAssignReviewers.setEnabled(true);
-		case REVIEWER:
-			btnReview.setEnabled(true);
-		case AUTHOR:
+		Type T = Controller.getCurrentUser().getMyType();
+	
+		if (T == Type.AUTHOR) {
 			btnSubmit.setEnabled(true);
 			btnStats.setEnabled(true);
-		default:
-			break;
+		} else if (T == Type.REVIEWER) {
+			btnStats.setEnabled(true);
+			btnReview.setEnabled(true);
+		} else if (T == Type.SUBCHAIR) {
+			btnStats.setEnabled(true);
+			btnAssignReviewers.setEnabled(true);
+		} else if(T == Type.PROCHAIR) {
+			btnReview.setEnabled(false);
+			btnAssignReviewers.setEnabled(false);
+			btnProReview.setEnabled(true);
+			btnAssignSubChair.setEnabled(true);
 		}
 	}
 
