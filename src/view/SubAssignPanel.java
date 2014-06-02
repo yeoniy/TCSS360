@@ -4,16 +4,20 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+
+import model.Paper;
 
 import controller.Controller;
 
@@ -142,7 +146,7 @@ public class SubAssignPanel extends JPanel {
 			}
 		}
 		ran = true;
-		subAssignPaperList.setListData(subchairs);
+		//subAssignPaperList.setListData(subchairs);
 	}
 	public void addPapers() {
 		int size = 0;
@@ -159,7 +163,7 @@ public class SubAssignPanel extends JPanel {
 				}	
 		}
 		test = true;
-		paperList.setListData(papers);
+	//	paperList.setListData(papers);
 	} 
 	
 	private class SubAssignListener implements ActionListener {
@@ -170,10 +174,22 @@ public class SubAssignPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
-					
+					ArrayList<Paper> p = new ArrayList<Paper>();
+					for (int i = 0; i < Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).size(); i++) {
+						if (!Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).get(i).getFileName().equals("empty.txt")) {
+							p.add(Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).get(i));
+						} else {
+							
+						}
+					}
+					if (p.size() < 4) {
+						Controller.assignPaper(cmbSubAuthorSelectBox.getSelectedItem().toString(),cmbSubSelectBox.getSelectedItem().toString());
+					} else {
+						JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
 				
 				} else if (btn.getText().equals("Remove")) {
-					
+					Controller.deAssignPaper(cmbSubAuthorSelectBox.getSelectedItem().toString(),cmbSubSelectBox.getSelectedItem().toString());
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");
