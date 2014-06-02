@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -123,6 +125,8 @@ public class ProChairReviewPanel extends JPanel {
 		cmbProAuthorSelectBox = new JComboBox<String>();
 		cmbProAuthorSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select an Author..."}));
 		cmbProAuthorSelectBox.setBounds(26, 76, 155, 20);
+		MyItemListener actionListener = new MyItemListener();
+		cmbProAuthorSelectBox.addItemListener(actionListener);
 
 		cmbProPaperSelect = new JComboBox<String>();
 		cmbProPaperSelect.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a Paper..."}));
@@ -161,6 +165,14 @@ public class ProChairReviewPanel extends JPanel {
 			}
 		}
 		ran = true;
+	}
+	public void assignPapers(String s) {
+		cmbProPaperSelect.removeAllItems();
+		for (int i = 0; i < Controller.getUserPapers(s).size(); i++) {
+			if(!Controller.getUserPapers(s).get(i).getFileName().equals("empty.txt")) {
+				cmbProPaperSelect.addItem(Controller.getUserPapers(s).get(i).getFileName());
+			}
+		}
 	}
 
 	private class ProChairListener implements ActionListener {
@@ -205,5 +217,22 @@ public class ProChairReviewPanel extends JPanel {
 		}
 
 	}
+	class MyItemListener implements ItemListener {
+		  // This method is called only if a new item has been selected.
+		  public void itemStateChanged(ItemEvent evt) {
+		    JComboBox cb = (JComboBox) evt.getSource();
 
+		    Object item = evt.getItem();
+
+		    if (evt.getStateChange() == ItemEvent.SELECTED) {
+		    	if(!cb.getSelectedItem().toString().equals("Select an Author...")) {
+		    		assignPapers(cb.getSelectedItem().toString());
+		    	} else {
+		    		
+		    	}
+		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+		      // Item is no longer selected
+		    }
+		  }
+	}
 }
