@@ -92,7 +92,7 @@ public class ReviewerAssignPanel extends JPanel {
 		cmbPaperSelectBox = new JComboBox<String>();
 		cmbPaperSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
 		cmbPaperSelectBox.setBounds(192, 65, 157, 20);
-
+		cmbPaperSelectBox.addItem("dummyfile.txt");
 		// Text Area
 		txtReviewers = new JTextArea();
 		txtReviewers.setEditable(false);
@@ -143,8 +143,7 @@ public class ReviewerAssignPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
-					
-				
+					Controller.assignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());	
 				} else if (btn.getText().equals("Remove")) {
 					
 				} else {

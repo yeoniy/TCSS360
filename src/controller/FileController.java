@@ -32,7 +32,10 @@ public class FileController extends Controller {
 	 * The list of papers for each user within the conference.
 	 */
 	private ArrayList<Paper> myPapers;
-
+	/**
+	 * a list of all paper files empty and full within a conference.
+	 */
+	private ArrayList<Paper> maxPapers;
 	/**
 	 * The conference that is being loaded.
 	 */
@@ -48,6 +51,7 @@ public class FileController extends Controller {
 		super();
 		myUser = new ArrayList<User>();
 		myPapers = new ArrayList<Paper>();
+		maxPapers = new ArrayList<Paper>();
 		allPapers = new ArrayList<Paper>();
 		myConf = aConference.getName(); 
 		myConference = aConference;
@@ -136,15 +140,17 @@ public class FileController extends Controller {
 			if(temp.get(i).toLowerCase().equals("empty")) {
 				Paper epaper = new Paper(new File("empty.txt")); //blank text document
 				myPapers.add(epaper);
+				maxPapers.add(epaper);
 			} else {
 				File tempfile = new File(temp.get(i));
 				Paper paper = new Paper(tempfile);
 				myPapers.add(paper);
 				allPapers.add(paper);
+				maxPapers.add(paper);
 				Controller.setAllPapers(allPapers);
 			}
 		}
-
+		Controller.setMaxPapers(maxPapers);
 	}
 
 	/**

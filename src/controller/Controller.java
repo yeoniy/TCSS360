@@ -23,13 +23,17 @@ import model.User;
  */
 public class Controller {
 	/**
-	 * all papers in the system.
+	 * all non empty papers in the system.
 	 */
 	private static ArrayList<Paper> allPapers;
 	/**
 	 * Papers for current user.
 	 */
 	private static ArrayList<Paper> myPapers;
+	/**
+	 * all paper files empty or real.
+	 */
+	private static ArrayList<Paper> maxPapers;
 	/**
 	 * current user logged in.
 	 */
@@ -95,7 +99,51 @@ public class Controller {
 			  e.printStackTrace();
 		    }
     }
-
+    public static void assignPaper (String fileName, String user) {
+    	User u = new User();
+    	int x = 0;
+    	for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
+    		if (myActiveConference.getUserList().get(i).getName().equals(user)) {
+    			u = myActiveConference.getUserList().get(i);
+    			x = (i + 1)*4;
+    		}
+    	}
+    	System.out.println(x);
+    	System.out.println(maxPapers.size());
+    	String old = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
+ 			(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
+ 			 + (",") + getMaxPapers().get(x - 1).getFileHeader();
+         Paper p = new Paper(new File(fileName));
+        if(getMaxPapers().get(x - 4).getFileHeader().equals("empty")) {
+        	getMaxPapers().set(x - 4,p);
+        } else if (getMaxPapers().get(x - 3).getFileHeader().equals("empty")) {
+        	getMaxPapers().set(x - 3,p);
+        } else if (getMaxPapers().get(x - 2).getFileHeader().equals("empty")) {
+        	getMaxPapers().set(x - 2,p);
+        } else {
+        	getMaxPapers().set(x - 1,p);
+        }
+ 		
+ 		String content = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
+ 	 		(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
+ 	 		 + (",") + getMaxPapers().get(x - 1).getFileHeader();
+ 		 try{
+ 			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
+ 			 BufferedReader reader = new BufferedReader(new FileReader(file));
+ 			 String line = "", oldtext = "";
+ 		 while((line = reader.readLine()) != null){
+ 			 oldtext += line + "\n";
+ 		 }
+ 		 reader.close();
+ 		 String newtext = oldtext.replaceAll(old, content);
+ 		  
+ 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
+ 		 writer.write(newtext);writer.close();
+ 			} catch (IOException e) {
+ 			  e.printStackTrace();
+ 		    }
+    }
+    
     public void update() {
     	
 
@@ -181,6 +229,13 @@ public class Controller {
 		return allPapers;
 	}
 	/**
+	 * 
+	 * @return all the papers real or fake in the active conference.
+	 */
+	public static ArrayList<Paper> getMaxPapers() {
+		return maxPapers;
+	}
+	/**
 	 * removes a paper based on location and updates the text file for the active conference.
 	 * 
 	 * @param x the location of the paper to remove.
@@ -217,6 +272,14 @@ public class Controller {
 	 */
 	public static void setAllPapers(ArrayList<Paper> p) {
 		allPapers = p;	
+	}
+	/**
+	 * sets the list of all the papers.
+	 * 
+	 * @param p Array list of papers.
+	 */
+	public static void setMaxPapers(ArrayList<Paper> p) {
+		maxPapers = p;	
 	}
 	/**
 	 * gets the papers for the active user.

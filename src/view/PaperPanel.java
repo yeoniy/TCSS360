@@ -177,6 +177,7 @@ public class PaperPanel extends JPanel {
 					System.out.print(Controller.getMyPapers().get(j) +" " + j);
 					Controller.removePaper(j);
 					Controller.getMyPapers().remove(j);
+					Controller.getAllPapers().remove(j);
 				}
 			}
 		}
