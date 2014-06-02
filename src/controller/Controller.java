@@ -99,6 +99,12 @@ public class Controller {
 			  e.printStackTrace();
 		    }
     }
+    /**
+     * assigns a paper to a user
+     * 
+     * @param fileName
+     * @param user
+     */
     public static void assignPaper (String fileName, String user) {
     	User u = new User();
     	int x = 0;

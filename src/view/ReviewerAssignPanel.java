@@ -26,6 +26,7 @@ public class ReviewerAssignPanel extends JPanel {
 	private JButton btnBack;
 
 	private boolean ran;
+	private boolean test;
 	
 	private JComboBox<String> cmbReviewerBox;
 	private JComboBox<String> cmbPaperSelectBox;
@@ -43,6 +44,7 @@ public class ReviewerAssignPanel extends JPanel {
 	public ReviewerAssignPanel(final MainPanel m) {
 		super(null);
 		ran = false;
+		test = false;
 		myMainPanel = m;
 		myListener = new ReviewerAssignListener();
 		initialize();
@@ -92,7 +94,6 @@ public class ReviewerAssignPanel extends JPanel {
 		cmbPaperSelectBox = new JComboBox<String>();
 		cmbPaperSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
 		cmbPaperSelectBox.setBounds(192, 65, 157, 20);
-		cmbPaperSelectBox.addItem("dummyfile.txt");
 		// Text Area
 		txtReviewers = new JTextArea();
 		txtReviewers.setEditable(false);
@@ -123,6 +124,22 @@ public class ReviewerAssignPanel extends JPanel {
 		add(authorSelectPane);
 
 	}
+	public void addPapers() {
+		int size = 0;
+		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
+			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+				size++;
+		}
+		String[] papers = new String[size];
+		for (int i = 0; i < papers.length; i++) {
+			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+				papers[i] = Controller.getMyPapers().get(i).getFileName();	
+				if(!test) {
+					cmbPaperSelectBox.addItem(Controller.getMyPapers().get(i).getFileName());
+				}
+		}
+		test = true;
+	} 
 	public void assignReviewers() {
 		int size = Controller.getAllReviewers().size();
 		String[] reviewers = new String[size];
@@ -133,7 +150,6 @@ public class ReviewerAssignPanel extends JPanel {
 			}
 		}
 		ran = true;
-	//	subAssignPaperList.setListData(reviewers);
 	}
 	private class ReviewerAssignListener implements ActionListener {
 
