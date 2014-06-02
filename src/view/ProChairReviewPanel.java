@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -120,7 +121,7 @@ public class ProChairReviewPanel extends JPanel {
 		// Text Area
 		txtComments = new JTextArea();
 		txtComments.setBounds(26, 202, 380, 120);
-
+		
 		// Add
 
 		add(lblTitle);
@@ -140,7 +141,7 @@ public class ProChairReviewPanel extends JPanel {
 		add(cmbProPaperSelect);
 		add(txtComments);
 	}
-
+	
 	private class ProChairListener implements ActionListener {
 
 		@Override

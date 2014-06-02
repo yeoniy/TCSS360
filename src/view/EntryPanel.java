@@ -174,6 +174,7 @@ public class EntryPanel extends JPanel {
 				} else if (btn.getText().equals("Review Paper")) {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "reviewer");
+					loadReviews();
 				} else if (btn.getText().equals("Assign Reviewers")) {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "reviewerAssign");
@@ -196,6 +197,15 @@ public class EntryPanel extends JPanel {
 			for (Component a : c) {
 				if (a instanceof PaperPanel) {
 					((PaperPanel) a).addPapers();
+					break;
+				}
+			}
+		}
+		private void loadReviews() {
+			Component[] c = myMainPanel.getComponents();
+			for (Component a : c) {
+				if (a instanceof ReviewerPanel) {
+					((ReviewerPanel) a).addPapers();
 					break;
 				}
 			}

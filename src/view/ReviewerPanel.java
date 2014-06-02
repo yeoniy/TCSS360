@@ -8,11 +8,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
+
+import controller.Controller;
 
 public class ReviewerPanel extends JPanel {
 	
@@ -25,6 +28,7 @@ public class ReviewerPanel extends JPanel {
 	private JButton btnBack;
 	
 	private JComboBox<String> cmbPaperSelectBox;
+	private JList<String> paperList;
 	
 	private JSpinner reviewRatingSpinner;
 	
@@ -77,8 +81,9 @@ public class ReviewerPanel extends JPanel {
 		/*
 		 * Other
 		 */
-		
+		paperList = new JList<String>();
 		// Combo Box
+		
 		cmbPaperSelectBox = new JComboBox<String>();
 		cmbPaperSelectBox.setBounds(23, 76, 117, 20);
 		
@@ -104,7 +109,21 @@ public class ReviewerPanel extends JPanel {
 		add(txtComments);
 
 	}
-
+	
+	public void addPapers() {
+		int size = 0;
+		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
+			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+				size++;
+		}
+		String[] papers = new String[size];
+		for (int i = 0; i < papers.length; i++) {
+			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+				papers[i] = Controller.getMyPapers().get(i).getFileName();
+				cmbPaperSelectBox.addItem(papers[i]);
+		}
+		paperList.setListData(papers);
+	} 
 	private class ReviewerListener implements ActionListener {
 
 		@Override

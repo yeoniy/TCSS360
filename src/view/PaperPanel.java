@@ -131,7 +131,7 @@ public class PaperPanel extends JPanel {
 				papers[i] = Controller.getMyPapers().get(i).getFileName();
 		}
 		paperList.setListData(papers);
-	}
+	} 
 	
 	private class PaperPanelListener implements ActionListener{
 		@Override
