@@ -28,11 +28,21 @@ I also fixed various bugs I found along the way.
 Sorry for no comments. I will go through tomorrow and comment things more.
 
 
-Update 6/1 - Tim
+Update 6/2 - Tim
 ================
 
-I connected the remove function to the textfile. I've commented up the Controller and file controller classes. The submit function should be full operational now as well. To me 
+We currently have 7 of the 12 User Stories active and working. The 5 User stories we need to get working are...
 
-it seems easiest for us to do assignments with papers to the subchair and reviewer with our text file. They wont submit papers anyway so we can just use the paper slots in 
+Program Chair can Accept or Reject papers and Author is informed.
 
-the text file to make for there assignments. I just also fixed various issues in the gui to make sure we fulfill all the user stories.
+Reviewer can submit a review.
+
+Author can obtain a review for a paper they submitted.
+
+Subchair can submit recommendations to the Program chair for acceptance or rejection.
+
+Program Chair can see papers assigned to each SubChair.
+
+In addition to this last one we should also probably allow the SubChairs to see the papers they assigned to each reviewer, which once we figure out that last user story
+should not be difficult. I'm thinking we're going to need at least one more text file per conference to store review data and paper status information.
+We also might want another panel at the entry screen so subchairs can submit recommendations to the program chair. 

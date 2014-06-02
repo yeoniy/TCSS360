@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -101,6 +103,8 @@ public class SubAssignPanel extends JPanel {
 		cmbSubSelectBox = new JComboBox<String>();
 		cmbSubSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a Sub-Chair..."}));
 		cmbSubSelectBox.setBounds(10, 65, 172, 20);
+		MyItemListener actionListener = new MyItemListener();
+		cmbSubSelectBox.addItemListener(actionListener);
 
 		cmbSubAuthorSelectBox = new JComboBox<String>();
 		cmbSubAuthorSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
@@ -198,6 +202,21 @@ public class SubAssignPanel extends JPanel {
 
 		}
 
+	}
+	class MyItemListener implements ItemListener {
+		  // This method is called only if a new item has been selected.
+		  public void itemStateChanged(ItemEvent evt) {
+		    JComboBox cb = (JComboBox) evt.getSource();
+
+		    Object item = evt.getItem();
+
+		    if (evt.getStateChange() == ItemEvent.SELECTED) {
+		      		
+		 
+		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+		      // Item is no longer selected
+		    }
+		  }
 	}
 
 }
