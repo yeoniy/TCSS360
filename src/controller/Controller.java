@@ -160,6 +160,15 @@ public class Controller {
     	}
     	return x;
     }
+    public static int getSCrec(String paper) {
+    	int x = 0;
+    	for(int i = 0; i < allPapers.size(); i++) {
+    		if (paper.equals(allPapers.get(i).getFileName())) {
+    			x = allPapers.get(i).isScrec();
+    		}
+    	}
+    	return x;
+    }
     /**
      * gets a list of papers a user has.
      * 

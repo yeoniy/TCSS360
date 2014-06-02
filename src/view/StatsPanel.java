@@ -143,6 +143,8 @@ public class StatsPanel extends JPanel {
 		//Progress Bar
 		progressBar = new JProgressBar();
 		progressBar.setBounds(201, 67, 157, 20);
+		progressBar.setMinimum(0);
+		progressBar.setMaximum(100);
 		
 		// Text Area
 		txtComments = new JTextArea();
@@ -242,14 +244,20 @@ public class StatsPanel extends JPanel {
 
 		    Object item = evt.getItem();
 		    int x = 0;
+		    int y = 0;
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
 		      		x = Controller.getPCrec(cb.getSelectedItem().toString());
+		      		y = Controller.getSCrec(cb.getSelectedItem().toString());
 		      		if (x == 0) {
 		      			lblStatus.setText("Awaiting Review");
+		      			if (y == 1 || y == 2) {
+		      				progressBar.setValue(66);
+		      			}
 		      		} else if (x == 1) {
-		      			lblStatus.setText("Paper Rejected D=");
+		      			lblStatus.setText("Paper Rejected");
 		      		} else if ( x == 2) {
-		      			lblStatus.setText("Paper Accepted ^.^");
+		      			lblStatus.setText("Paper Accepted");
+		      			progressBar.setValue(100);
 		      		}
 		 
 		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
