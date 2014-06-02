@@ -4,16 +4,20 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+
+import model.Paper;
 
 import controller.Controller;
 
@@ -159,8 +163,19 @@ public class ReviewerAssignPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
-					Controller.assignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
-					//STILL NEED TO CHECK IF THE REVIEWER HAS ROOM OR THE FILE IS ALREADY ASSIGNED
+					ArrayList<Paper> p = new ArrayList<Paper>();
+					for (int i = 0; i < Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).size(); i++) {
+						if (!Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).get(i).getFileName().equals("empty.txt")) {
+							p.add(Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).get(i));
+						} else {
+							
+						}
+					}
+					if (p.size() < 4) {
+						Controller.assignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
+					} else {
+						JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
 				} else if (btn.getText().equals("Remove")) {
 					Controller.deAssignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
 				} else {

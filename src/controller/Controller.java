@@ -147,6 +147,32 @@ public class Controller {
  			  e.printStackTrace();
  		    }
     }
+    /**
+     * gets a list of papers a user has.
+     * 
+     * @param user the user
+     * @return list of papers for the user
+     */
+    public static ArrayList<Paper> getUserPapers (String user) {
+    	ArrayList<Paper> temp = new ArrayList<Paper>();
+    	int x = 0;
+    	for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
+    		if (myActiveConference.getUserList().get(i).getName().equals(user)) {
+    			x = (i + 1)*4;
+    		}
+    	}
+    	temp.add(getMaxPapers().get(x - 4));
+    	temp.add(getMaxPapers().get(x - 3));
+    	temp.add(getMaxPapers().get(x - 2));
+    	temp.add(getMaxPapers().get(x - 1));
+    	return temp;
+    }
+    /**
+     * primarily used for the removing an assignment.
+     * 
+     * @param fileName
+     * @param user
+     */
     public static void deAssignPaper (String fileName, String user) {
     	User u = new User();
     	int x = 0;
