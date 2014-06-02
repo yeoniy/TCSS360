@@ -87,7 +87,7 @@ public class ProChairReviewPanel extends JPanel {
 		lblAverageRating.setBounds(26, 107, 90, 14);
 
 		lblRating = new JLabel("RATING");
-		lblRating.setBounds(125, 107, 46, 14);
+		lblRating.setBounds(125, 107, 106, 14);
 
 		lblComments = new JLabel("Reviewers comments:");
 		lblComments.setBounds(26, 182, 132, 14);
@@ -99,7 +99,7 @@ public class ProChairReviewPanel extends JPanel {
 		lblAcceptanceStatus.setBounds(26, 132, 120, 14);
 
 		lblStatus = new JLabel("STATUS");
-		lblStatus.setBounds(145, 132, 46, 14);
+		lblStatus.setBounds(145, 132, 95, 14);
 
 		lblTitle = new JLabel("Review Papers");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -107,7 +107,7 @@ public class ProChairReviewPanel extends JPanel {
 		lblTitle.setBounds(10, 11, 424, 29);
 
 		lblRec = new JLabel("REC");
-		lblRec.setBounds(140, 157, 46, 14);
+		lblRec.setBounds(140, 157, 91, 14);
 
 		/*
 		 * Buttons
@@ -142,6 +142,8 @@ public class ProChairReviewPanel extends JPanel {
 		cmbProPaperSelect = new JComboBox<String>();
 		cmbProPaperSelect.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a Paper..."}));
 		cmbProPaperSelect.setBounds(191, 76, 119, 20);
+		MyItemListener2 actionListener2 = new MyItemListener2();
+		cmbProPaperSelect.addItemListener(actionListener2);
 
 		// Text Area
 		txtComments = new JTextArea();
@@ -204,18 +206,20 @@ public class ProChairReviewPanel extends JPanel {
 			if (e.getSource() instanceof JButton) {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
-				if (btn.getText().equals("Accept")) {
-				
-				} else if (btn.getText().equals("Reject")) {
-					
+				if (btn.getText().equals("ACCEPT")) {
+					Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
+					lblStatus.setText("ACCEPTED");
+				} else if (btn.getText().equals("REJECT")) {
+					Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
+					lblStatus.setText("REJECTED");
 				} else if (btn.getText().equals("View")) {
 					JFrame frame = new JFrame(cmbProPaperSelect.getSelectedItem().toString());
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 					frame.setSize(500,500);
-					frame.setLayout(new FlowLayout());
+					frame.getContentPane().setLayout(new FlowLayout());
 					List list = new List();
-					frame.add(list);
+					frame.getContentPane().add(list);
 					try {
 					File file = new File("Resources\\" + cmbProPaperSelect.getSelectedItem().toString());
 					FileReader fr = new FileReader(file);
@@ -254,6 +258,40 @@ public class ProChairReviewPanel extends JPanel {
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
 		    	if(!cb.getSelectedItem().toString().equals("Select an Author...")) {
 		    		assignPapers(cb.getSelectedItem().toString());
+		    	} else {
+		    		
+		    	}
+		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+		      // Item is no longer selected
+		    }
+		  }
+	}
+	class MyItemListener2 implements ItemListener {
+		  // This method is called only if a new item has been selected.
+		  public void itemStateChanged(ItemEvent evt) {
+		    JComboBox cb = (JComboBox) evt.getSource();
+
+		    Object item = evt.getItem();
+		    int x = 0;
+		    int y = 0;
+		    if (evt.getStateChange() == ItemEvent.SELECTED) {
+		    	if(!cb.getSelectedItem().toString().equals("Select a Paper...")) {
+		    		x = Controller.getPCrec(cb.getSelectedItem().toString());
+		      		y = Controller.getSCrec(cb.getSelectedItem().toString());
+		      		if (x == 0) {
+		      			lblStatus.setText("Pending");
+		      		} else if (x == 1) {
+		      			lblStatus.setText("REJECTED");
+		      		} else if (x == 2) {
+		      			lblStatus.setText("ACCEPTED");
+		      		}
+		      		if (y == 0) {
+		      			lblRec.setText("Pending");
+		      		}else if (y == 1) {
+		      			lblRec.setText("REJECT");
+		      		}else if (y == 2) {
+		      			lblRec.setText("ACCEPT");
+		      		}
 		    	} else {
 		    		
 		    	}

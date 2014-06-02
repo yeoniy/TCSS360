@@ -1,2 +1,2 @@
-testpaper.txt 1 0
-yo.txt 1 0
+testpaper.txt 1 2
+yo.txt 1 2

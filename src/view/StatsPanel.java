@@ -255,6 +255,7 @@ public class StatsPanel extends JPanel {
 		      			}
 		      		} else if (x == 1) {
 		      			lblStatus.setText("Paper Rejected");
+		      			progressBar.setValue(100);
 		      		} else if ( x == 2) {
 		      			lblStatus.setText("Paper Accepted");
 		      			progressBar.setValue(100);

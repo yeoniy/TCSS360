@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import exception.InvalidInputException;
+
 import model.Paper;
 import model.Type;
 import model.Author;
@@ -150,6 +152,42 @@ public class Controller {
  			} catch (IOException e) {
  			  e.printStackTrace();
  		    }
+    }
+    public static void setPCrec(String paper, int x) {
+    	String old = "";
+    	String content = "";
+    	for(int i = 0; i < allPapers.size(); i++) {
+    		if (paper.equals(allPapers.get(i).getFileName())) {
+    			 old = paper + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
+    			 content = paper + " " + allPapers.get(i).isScrec() + " " + x;
+    			 try {
+    				if(x == 1) {
+						allPapers.get(i).setAccepted(1);
+					} else if (x == 2) {
+						allPapers.get(i).setAccepted(2);
+					}
+    			 } catch (InvalidInputException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+			     }
+    		}
+    	}
+    	 try{
+ 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 			 BufferedReader reader = new BufferedReader(new FileReader(file));
+ 			 String line = "", oldtext = "";
+ 		 while((line = reader.readLine()) != null){
+ 			 oldtext += line + "\n";
+ 		 }
+ 		 reader.close();
+ 		 String newtext = oldtext.replaceAll(old, content);
+ 		  
+ 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 		 writer.write(newtext);writer.close();
+ 			} catch (IOException e) {
+ 			  e.printStackTrace();
+ 		    }
+    	
     }
     public static int getPCrec(String paper) {
     	int x = 0;
