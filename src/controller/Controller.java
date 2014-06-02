@@ -72,7 +72,7 @@ public class Controller {
     public Controller() {
     	super();
     }
-
+    
     /**
      * Adds a new paper to the current user within the current active conference.
      * @param x the index to add to.
@@ -150,6 +150,15 @@ public class Controller {
  			} catch (IOException e) {
  			  e.printStackTrace();
  		    }
+    }
+    public static int getPCrec(String paper) {
+    	int x = 0;
+    	for(int i = 0; i < allPapers.size(); i++) {
+    		if (paper.equals(allPapers.get(i).getFileName())) {
+    			x = allPapers.get(i).isAccepted();
+    		}
+    	}
+    	return x;
     }
     /**
      * gets a list of papers a user has.

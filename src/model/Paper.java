@@ -17,16 +17,18 @@ public class Paper extends Observable {
     private ArrayList<String> comment;
 
     private final int PROCESS_PAPER = 0;
-    private final int REJECTED_PAPER = 0;
-    private final int ACCEPTED_PAPER = 0;
+    private final int REJECTED_PAPER = 1;
+    private final int ACCEPTED_PAPER = 2;
     /**
      * int 0=process 1=rejected 2=accepted
      */
     private int accepted;
+    private int screc;
     private String fileName;
 
     public Paper(File file) {
         this.file  = file;
+        screc = PROCESS_PAPER;
         accepted = PROCESS_PAPER;
         comment = new ArrayList<String>();
         fileName = file.getName();
@@ -64,7 +66,10 @@ public class Paper extends Observable {
     public int isAccepted() {
         return accepted;
     }
-
+    
+    public int isScrec() {
+        return screc;
+    }
     /**
      * Set status of paper
      * @param accepted int to choose status of paper. 0=process 1=rejected 2=accepted
@@ -73,6 +78,14 @@ public class Paper extends Observable {
     public void setAccepted(int accepted) throws InvalidInputException{
         if(accepted >= PROCESS_PAPER && accepted <= ACCEPTED_PAPER)
             this.accepted = accepted;
+        else
+            throw new InvalidInputException();
+        this.setChanged();
+        this.notifyObservers();
+    }
+    public void setSCrec(int accepted) throws InvalidInputException{
+        if(accepted >= PROCESS_PAPER && accepted <= ACCEPTED_PAPER)
+            this.screc = accepted;
         else
             throw new InvalidInputException();
         this.setChanged();

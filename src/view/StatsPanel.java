@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+
+import view.SubAssignPanel.MyItemListener;
 
 import controller.Controller;
 /**
@@ -133,6 +137,8 @@ public class StatsPanel extends JPanel {
 		// Combo Box
 		cmbPaperBox = new JComboBox<String>();
 		cmbPaperBox.setBounds(29, 67, 132, 20);
+		MyItemListener actionListener = new MyItemListener();
+		cmbPaperBox.addItemListener(actionListener);
 		
 		//Progress Bar
 		progressBar = new JProgressBar();
@@ -223,6 +229,33 @@ public class StatsPanel extends JPanel {
 
 		}
 
+	}
+	/**
+	 * 
+	 * @author Tim Loverin
+	 * @version 6/2/2014
+	 */
+	class MyItemListener implements ItemListener {
+		  // This method is called only if a new item has been selected.
+		  public void itemStateChanged(ItemEvent evt) {
+		    JComboBox cb = (JComboBox) evt.getSource();
+
+		    Object item = evt.getItem();
+		    int x = 0;
+		    if (evt.getStateChange() == ItemEvent.SELECTED) {
+		      		x = Controller.getPCrec(cb.getSelectedItem().toString());
+		      		if (x == 0) {
+		      			lblStatus.setText("Awaiting Review");
+		      		} else if (x == 1) {
+		      			lblStatus.setText("Paper Rejected D=");
+		      		} else if ( x == 2) {
+		      			lblStatus.setText("Paper Accepted ^.^");
+		      		}
+		 
+		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+		      // Item is no longer selected
+		    }
+		  }
 	}
 
 }

@@ -1,0 +1,2 @@
+testpaper.txt 0 2
+yo.txt 1 0

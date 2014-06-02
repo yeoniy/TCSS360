@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import exception.InvalidInputException;
+
 /**
  * Controller class for opening conference files and parsing them. This class is used
  * for gathering the conference data and allowing for easy data gathering.
@@ -59,6 +61,7 @@ public class FileController extends Controller {
 		myConf = aConference.getName(); 
 		myConference = aConference;
 		readFile();
+		readRecommendations();
 	}
 
 	/**
@@ -102,7 +105,33 @@ public class FileController extends Controller {
 			e.printStackTrace();
 		}   
 	}
-
+	private void readRecommendations() { 
+		File myfile = new File("Resources\\" + myConf + "Recs.txt");
+		try {
+			Scanner file = new Scanner(new FileInputStream(myfile));
+			while (file.hasNext()) {
+				String name = file.next();
+				int screc = file.nextInt();
+				int pcrec = file.nextInt();
+				for (int i = 0; i < allPapers.size(); i++) {
+					if (name.equals(allPapers.get(i).getFileName())) {
+						try {
+							allPapers.get(i).setAccepted(pcrec);
+							allPapers.get(i).setSCrec(screc);
+							System.out.println(screc);
+						} catch (InvalidInputException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			file.close();
+		} catch (FileNotFoundException e) {
+			System.out.print("unable to find rec file");
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Adds the users to the conference.
 	 * @param myUser the list of users to add
