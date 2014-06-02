@@ -35,6 +35,10 @@ public class Controller {
 	 */
 	private static ArrayList<Paper> maxPapers;
 	/**
+	 * all authors in the conference.
+	 */
+	private static ArrayList<User> authorList;
+	/**
 	 * current user logged in.
 	 */
 	private static User myUser;
@@ -153,7 +157,7 @@ public class Controller {
      * @param user the user
      * @return list of papers for the user
      */
-    public static ArrayList<Paper> getUserPapers (String user) {
+    public static ArrayList<Paper> getUserPapers(String user) {
     	ArrayList<Paper> temp = new ArrayList<Paper>();
     	int x = 0;
     	for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
@@ -252,6 +256,16 @@ public class Controller {
 	public void setMyActiveConference(Conference myActiveConference) {
 		this.myActiveConference = myActiveConference;
 	} 
+
+	public static ArrayList<User> getAllAuthors() {
+		ArrayList<User> temp = new ArrayList<User>();
+		for(int i = 0; i < myActiveConference.getUserList().size(); i++) {
+			if (myActiveConference.getUserList().get(i).typeToString().equals("AUTHOR")) {
+				temp.add(myActiveConference.getUserList().get(i));
+			}
+		}
+		return temp;
+	}
 	/**
 	 * Sets the active user
 	 * 

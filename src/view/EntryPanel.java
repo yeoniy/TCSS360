@@ -158,6 +158,13 @@ public class EntryPanel extends JPanel {
 			btnAssignReviewers.setEnabled(false);
 			btnProReview.setEnabled(true);
 			btnAssignSubChair.setEnabled(true);
+		} else if(T == Type.ADMIN) {
+			btnSubmit.setEnabled(true);
+			btnStats.setEnabled(true);
+			btnReview.setEnabled(true);
+			btnProReview.setEnabled(true);
+			btnAssignSubChair.setEnabled(true);
+			btnAssignReviewers.setEnabled(true);
 		}
 	}
 
@@ -191,6 +198,7 @@ public class EntryPanel extends JPanel {
 				} else if (btn.getText().equals("Chair Review")) {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "pro");
+					prochairrevpanel();
 				} else {
 					int i = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 					if (i == JOptionPane.OK_OPTION)
@@ -242,6 +250,15 @@ public class EntryPanel extends JPanel {
 				if (a instanceof ReviewerAssignPanel) {
 					((ReviewerAssignPanel) a).assignReviewers();
 					((ReviewerAssignPanel) a).addPapers();
+					break;	
+				}
+			}
+		}	
+		private void prochairrevpanel() {
+			Component[] c = myMainPanel.getComponents();
+			for (Component a : c) {
+				if (a instanceof ProChairReviewPanel) {
+					((ProChairReviewPanel) a).assignAuthors();
 					break;	
 				}
 			}

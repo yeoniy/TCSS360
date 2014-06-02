@@ -27,7 +27,6 @@ public class FileController extends Controller {
 	 * The list of users for the conference to be loaded.
 	 */
 	private ArrayList<User> myUser;
-
 	/**
 	 * The list of papers for each user within the conference.
 	 */
@@ -53,6 +52,7 @@ public class FileController extends Controller {
 		myPapers = new ArrayList<Paper>();
 		maxPapers = new ArrayList<Paper>();
 		allPapers = new ArrayList<Paper>();
+		
 		myConf = aConference.getName(); 
 		myConference = aConference;
 		readFile();

@@ -37,7 +37,9 @@ public class ProChairReviewPanel extends JPanel {
 	private JLabel lblRecommendation;
 	private JLabel lblRec;
 	private JLabel lblComments;
-
+	
+	private boolean ran;
+	
 	private JButton btnAccept;
 	private JButton btnReject;
 	private JButton btnView;
@@ -53,6 +55,7 @@ public class ProChairReviewPanel extends JPanel {
 
 	public ProChairReviewPanel(final MainPanel m) {
 		super(null);
+		ran = false;
 		myMainPanel = m;
 		myListener = new ProChairListener();
 		initialize();
@@ -148,7 +151,18 @@ public class ProChairReviewPanel extends JPanel {
 		add(cmbProPaperSelect);
 		add(txtComments);
 	}
-	
+	public void assignAuthors() {
+		int size = Controller.getAllAuthors().size();
+		String[] authors = new String[size];
+		for (int i = 0; i < Controller.getAllAuthors().size(); i++) {
+			authors[i] = Controller.getAllAuthors().get(i).getName();
+			if(!ran) {
+				cmbProAuthorSelectBox.addItem(authors[i]);
+			}
+		}
+		ran = true;
+	}
+
 	private class ProChairListener implements ActionListener {
 
 		@Override
@@ -157,7 +171,6 @@ public class ProChairReviewPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Accept")) {
-					
 				
 				} else if (btn.getText().equals("Reject")) {
 					
