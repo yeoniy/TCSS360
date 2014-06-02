@@ -90,7 +90,7 @@ public class FileController extends Controller {
 					type = Type.ADMIN;
 				}
 				addUser(username, ID, password, type);
-				addPapers(p1,p2,p3,p4);
+				addPapers(p1,p2,p3,p4, type);
 				addToConference(myUser);
 			}
 			file.close();
@@ -130,7 +130,7 @@ public class FileController extends Controller {
 	 * @param s3 third paper file string name.
 	 * @param s4 fourth paper file string name
 	 */
-	private void addPapers(String s1, String s2, String s3, String s4) {
+	private void addPapers(String s1, String s2, String s3, String s4, Type type) {
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add(s1);
 		temp.add(s2);
@@ -145,7 +145,9 @@ public class FileController extends Controller {
 				File tempfile = new File(temp.get(i));
 				Paper paper = new Paper(tempfile);
 				myPapers.add(paper);
-				allPapers.add(paper);
+				if(type == Type.AUTHOR) {
+					allPapers.add(paper);
+				}
 				maxPapers.add(paper);
 				Controller.setAllPapers(allPapers);
 			}
