@@ -26,6 +26,7 @@ public class ReviewerPanel extends JPanel {
 	
 	private JButton btnSubmitReview;
 	private JButton btnBack;
+	private JButton btnViewPaper;
 	
 	private JComboBox<String> cmbPaperSelectBox;
 	private JList<String> paperList;
@@ -44,6 +45,7 @@ public class ReviewerPanel extends JPanel {
 		myListener = new ReviewerListener();
 		initialize();
 		setName("reviewer");
+		
 	}
 
 	private void initialize() {
@@ -78,6 +80,10 @@ public class ReviewerPanel extends JPanel {
 		btnSubmitReview.setBounds(164, 328, 120, 23);
 		btnSubmitReview.addActionListener(myListener);
 		
+		btnViewPaper = new JButton("View Paper");
+		btnViewPaper.setBounds(155, 75, 106, 23);
+		btnViewPaper.addActionListener(myListener);
+		
 		/*
 		 * Other
 		 */
@@ -104,6 +110,7 @@ public class ReviewerPanel extends JPanel {
 		add(lblComments);
 		add(btnSubmitReview);
 		add(btnBack);
+		add(btnViewPaper);
 		add(cmbPaperSelectBox);
 		add(reviewRatingSpinner);
 		add(txtComments);
@@ -132,6 +139,8 @@ public class ReviewerPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Submit Review")) {
+				
+				}else if (btn.getText().equals("View Paper")){
 					
 				
 				} else {
