@@ -147,7 +147,7 @@ public class SubAssignPanel extends JPanel {
 	public void addPapers() {
 		int size = 0;
 		for (int i = 0; i < Controller.getAllPapers().size(); i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+			if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
 				size++;
 		}
 		String[] papers = new String[size];
