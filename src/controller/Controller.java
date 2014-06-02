@@ -114,8 +114,6 @@ public class Controller {
     			x = (i + 1)*4;
     		}
     	}
-    	System.out.println(x);
-    	System.out.println(maxPapers.size());
     	String old = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
  			(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
  			 + (",") + getMaxPapers().get(x - 1).getFileHeader();
@@ -127,6 +125,48 @@ public class Controller {
         } else if (getMaxPapers().get(x - 2).getFileHeader().equals("empty")) {
         	getMaxPapers().set(x - 2,p);
         } else {
+        	getMaxPapers().set(x - 1,p);
+        }
+ 		
+ 		String content = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
+ 	 		(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
+ 	 		 + (",") + getMaxPapers().get(x - 1).getFileHeader();
+ 		 try{
+ 			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
+ 			 BufferedReader reader = new BufferedReader(new FileReader(file));
+ 			 String line = "", oldtext = "";
+ 		 while((line = reader.readLine()) != null){
+ 			 oldtext += line + "\n";
+ 		 }
+ 		 reader.close();
+ 		 String newtext = oldtext.replaceAll(old, content);
+ 		  
+ 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
+ 		 writer.write(newtext);writer.close();
+ 			} catch (IOException e) {
+ 			  e.printStackTrace();
+ 		    }
+    }
+    public static void deAssignPaper (String fileName, String user) {
+    	User u = new User();
+    	int x = 0;
+    	for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
+    		if (myActiveConference.getUserList().get(i).getName().equals(user)) {
+    			u = myActiveConference.getUserList().get(i);
+    			x = (i + 1)*4;
+    		}
+    	}
+    	String old = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
+ 			(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
+ 			 + (",") + getMaxPapers().get(x - 1).getFileHeader();
+         Paper p = new Paper(new File("empty.txt"));
+        if(getMaxPapers().get(x - 4).getFileHeader().equals(fileName)) {
+        	getMaxPapers().set(x - 4,p);
+        } else if (getMaxPapers().get(x - 3).getFileHeader().equals(fileName)) {
+        	getMaxPapers().set(x - 3,p);
+        } else if (getMaxPapers().get(x - 2).getFileHeader().equals(fileName)) {
+        	getMaxPapers().set(x - 2,p);
+        } else if (getMaxPapers().get(x - 1).getFileHeader().equals(fileName)){
         	getMaxPapers().set(x - 1,p);
         }
  		

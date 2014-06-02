@@ -159,9 +159,10 @@ public class ReviewerAssignPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
-					Controller.assignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());	
+					Controller.assignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
+					//STILL NEED TO CHECK IF THE REVIEWER HAS ROOM OR THE FILE IS ALREADY ASSIGNED
 				} else if (btn.getText().equals("Remove")) {
-					
+					Controller.deAssignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");
