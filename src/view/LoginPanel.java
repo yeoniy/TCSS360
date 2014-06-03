@@ -1,9 +1,9 @@
 package view;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import util.Loader;
 import model.Conference;
+import util.Loader;
 import controller.LoginController;
 
 /**
@@ -106,6 +106,35 @@ public class LoginPanel extends JPanel {
 		this.add(cmbConferences);
 		this.add(btnLogin);
 		this.add(btnExit);
+
+		txtPassword.addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+			}
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+			}
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if (arg0.getKeyChar() == KeyEvent.VK_ENTER) {
+					btnLogin.doClick();
+				}
+			}
+		});
+		txtUsername.addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+			}
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+			}
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				if (arg0.getKeyChar() == KeyEvent.VK_ENTER) {
+					btnLogin.doClick();
+				}
+			}
+		});
 	}
 	/**
 	 * gets the username.

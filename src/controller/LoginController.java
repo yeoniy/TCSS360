@@ -55,8 +55,6 @@ public class LoginController extends Controller implements ActionListener {
 			JButton btn = (JButton) e.getSource();
 			//Button Action for Login
 			if (btn.getText().equals("Login")) {
-				System.out.println(myPanel.getUsername());
-				System.out.println(myPanel.getPassword());
 
 				// Get the conference and attempt login
 				try {
