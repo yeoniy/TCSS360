@@ -115,7 +115,7 @@ public class FileController extends Controller {
 			file.close();
 		} catch (FileNotFoundException e) {
             Controller.writePaperForAll(myConf + ".txt");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}   
 	}
 	private void readRecommendations() { 
@@ -145,7 +145,7 @@ public class FileController extends Controller {
 			file.close();
 		} catch (FileNotFoundException e) {
             Controller.writePaperForAll(myConf + "Recs.txt");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 	/**
@@ -243,31 +243,32 @@ public class FileController extends Controller {
         try {
             Scanner file = new Scanner(new FileInputStream(myfile));
             String fullString = "";
-            //String split string to split between comment
-            String stringSplit = Controller.STRINGSPLIT;
             while (file.hasNext()) {
                 fullString += file.nextLine();
             }
             file.close();
-            String[] subline = fullString.split(stringSplit);
-            line = new Comment[subline.length];
-            String f;
-            if (System.getProperty("os.name").startsWith("Windows")) {
-            	f = "Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName;
-            } else {
-            	f = "Resources/" + myActiveConference.getName() +"REVIEW_" + fileName;
-            }
-            for(int i = 0; i < subline.length; i++) {
-                String[] sub1 = subline[i].split(Controller.IDSPLIT);
-                String[] sub2 = sub1[1].split(Controller.RATESPLIT);
-                String id = sub1[0];
-                String rate = sub2[0];
-                String comment = sub2[1];
-                line[i] = new Comment(f, id, rate, comment);
+            //Checking if file is empty or not
+            if(fullString.length() > 1) {
+                String[] subline = fullString.split(Controller.STRINGSPLIT);
+                line = new Comment[subline.length-1];
+                String f;
+                if (System.getProperty("os.name").startsWith("Windows")) {
+                    f = "Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName;
+                } else {
+                    f = "Resources/" + myActiveConference.getName() +"REVIEW_" + fileName;
+                }
+                for(int i = 1; i < subline.length; i++) {
+                    String[] sub1 = subline[i].split(Controller.IDSPLIT);
+                    String[] sub2 = sub1[1].split(Controller.RATESPLIT);
+                    String id = sub1[0];
+                    String rate = sub2[0];
+                    String comment = sub2[1];
+                    line[i-1] = new Comment(f, id, rate, comment);
+                }
             }
         } catch (FileNotFoundException e) {
             Controller.writePaperForAll(myActiveConference.getName() +"REVIEW_" + fileName);
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return line;
     }

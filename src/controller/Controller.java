@@ -27,9 +27,9 @@ public class Controller {
     /**
      * String that splits comments
      */
-    public static final String STRINGSPLIT = "\n!@#$REVIEWCOMMENTS!@#$\n";
-    public static final String IDSPLIT = "\n!@#$REVIEWID!@#$\n";
-    public static final String RATESPLIT = "\n!@#$REVIEWRATE!@#$\n";
+    public static final String STRINGSPLIT = "REVIEWCOMMENTS";
+    public static final String IDSPLIT = "REVIEWID";
+    public static final String RATESPLIT = "REVIEWRATE";
 
 	private static final String WIN_DIR = "\\";
 

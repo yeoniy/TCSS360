@@ -24,6 +24,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import controller.FileController;
+import model.Comment;
 import model.Paper;
 import model.Type;
 import controller.Controller;
@@ -182,6 +184,15 @@ public class ProChairReviewPanel extends JPanel {
 		add(cmbProPaperSelect);
 		add(txtComments);
 	}
+    private void loadComment(String file) {
+        FileController con = new FileController(Controller.myActiveConference);
+        Comment[] comment = con.getReviewPaper(file);
+        String s = "";
+        for(int i = 0; i < comment.length; i++) {
+            s += comment[i].getComment() + "\n";
+        }
+        txtComments.setText(s);
+    }
 	/**
 	 * loads authors into combo box.
 	 */
@@ -328,6 +339,7 @@ public class ProChairReviewPanel extends JPanel {
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
 		    	//if(Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
 		    		if(!cb.getSelectedItem().toString().equals("Select a Paper...")) {
+
 		    			x = Controller.getPCrec(cb.getSelectedItem().toString());
 		      			y = Controller.getSCrec(cb.getSelectedItem().toString());
 		      			if (x == 0) {
@@ -344,6 +356,7 @@ public class ProChairReviewPanel extends JPanel {
 		      			}else if (y == 2) {
 		      				lblRec.setText("ACCEPT");
 		      			}
+                       // loadComment(cb.getSelectedItem().toString());
 		    		} else {
 		    		
 		    		}

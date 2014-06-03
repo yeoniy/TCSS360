@@ -27,6 +27,11 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import controller.Controller;
+import controller.FileController;
+import model.Comment;
+import model.Conference;
+import model.Type;
+
 /**
  * Holds all the components to allow the user to interact with the stats of a paper.
  * @author Nick Ames
@@ -181,6 +186,35 @@ public class StatsPanel extends JPanel {
 		add(progressBar);
 		add(txtComments);
 	}
+
+    private void loadComment() {
+        FileController con = new FileController(Controller.myActiveConference);
+        Comment[] comment = con.getReviewPaper(cmbPaperBox.getSelectedItem().toString());
+        if(Controller.getUserType().equals(Type.AUTHOR)) {
+            int x = Controller.getPCrec(cmbPaperBox.getSelectedItem().toString());
+            if(x != 0) {
+                String s = "";
+                for(int i = 0; i < comment.length; i++) {
+                    s += comment[i].getComment() + "\n";
+                }
+                txtComments.setText(s);
+            }
+        } if(Controller.getUserType().equals(Type.REVIEWER)) {
+            String s = "";
+            for(int i = 0; i < comment.length; i++) {
+                if(comment[i].getId().equals(Controller.getCurrentUser().getId())){
+                    s += comment[i].getComment() + "\n";
+                }
+            }
+            txtComments.setText(s);
+        } else {
+            String s = "";
+            for(int i = 0; i < comment.length; i++) {
+                s += comment[i].getComment() + "\n";
+            }
+            txtComments.setText(s);
+        }
+    }
 	/**
 	 * adds papers to the comboBox.
 	 */
@@ -265,6 +299,7 @@ public class StatsPanel extends JPanel {
 		    int x = 0;
 		    int y = 0;
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
+                    loadComment();
 		      		x = Controller.getPCrec(cb.getSelectedItem().toString());
 		      		y = Controller.getSCrec(cb.getSelectedItem().toString());
 		      		if (x == 0) {
