@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -148,7 +149,8 @@ public class EntryPanel extends JPanel {
 		lblID.setText(lblID.getText() + " " + Controller.getCurrentUser().getId());
 		lblType.setText(lblType.getText() + " " + Controller.getCurrentUser().getMyType());
 		lblConference.setText(lblConference.getText() + " " + Controller.getCurrentConference().getName());
-		lblDeadline.setText(lblDeadline.getText() + " " + Controller.getCurrentConference().getDate().toString());
+        Date date = Controller.getCurrentConference().getDate();
+		lblDeadline.setText(lblDeadline.getText() + " " + date.getYear() + "-" + date.getMonth() + "-" + date.getDate());
 		setButtonAuthority();
 	}
 	/**
