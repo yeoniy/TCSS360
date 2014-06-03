@@ -170,7 +170,9 @@ public class ReviewerAssignPanel extends JPanel {
 		for (int i = 0; i < Controller.getAllReviewers().size(); i++) {
 			reviewers[i] = Controller.getAllReviewers().get(i).getName();
 			if(!ran) {
-				cmbReviewerBox.addItem(reviewers[i]);
+                if(!Controller.getCurrentUser().getId().equals(Controller.getAllReviewers().get(i).getId())){
+				    cmbReviewerBox.addItem(reviewers[i]);
+                }
 			}
 		}
 		ran = true;

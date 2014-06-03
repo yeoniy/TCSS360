@@ -1,10 +1,8 @@
 package controller;
 
-import model.Conference;
-import model.Paper;
-import model.Type;
-import model.User;
+import model.*;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -101,7 +99,7 @@ public class FileController extends Controller {
 			}
 			file.close();
 		} catch (FileNotFoundException e) {
-			System.out.print("unable to find file");
+            Controller.writePaperForAll(myConf + ".txt");
 			e.printStackTrace();
 		}   
 	}
@@ -119,7 +117,6 @@ public class FileController extends Controller {
 							allPapers.get(i).setAccepted(pcrec);
 							allPapers.get(i).setSCrec(screc);
 						} catch (InvalidInputException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -127,7 +124,7 @@ public class FileController extends Controller {
 			}
 			file.close();
 		} catch (FileNotFoundException e) {
-			System.out.print("unable to find rec file");
+            Controller.writePaperForAll(myConf + "Recs.txt");
 			e.printStackTrace();
 		}
 	}
@@ -219,4 +216,34 @@ public class FileController extends Controller {
 		}
 		return temp;
 	}
+
+    public Comment[] getReviewPaper(String fileName){
+        File myfile = new File("Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName);
+        Comment[] line = null;
+        try {
+            Scanner file = new Scanner(new FileInputStream(myfile));
+            String fullString = "";
+            //String split string to split between comment
+            String stringSplit = Controller.STRINGSPLIT;
+            while (file.hasNext()) {
+                fullString += file.nextLine();
+            }
+            file.close();
+            String[] subline = fullString.split(stringSplit);
+            line = new Comment[subline.length];
+            String f = "Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName;
+            for(int i = 0; i < subline.length; i++) {
+                String[] sub1 = subline[i].split(Controller.IDSPLIT);
+                String[] sub2 = sub1[1].split(Controller.RATESPLIT);
+                String id = sub1[0];
+                String rate = sub2[0];
+                String comment = sub2[1];
+                line[i] = new Comment(f, id, rate, comment);
+            }
+        } catch (FileNotFoundException e) {
+            Controller.writePaperForAll(myActiveConference.getName() +"REVIEW_" + fileName);
+            e.printStackTrace();
+        }
+        return line;
+    }
 }

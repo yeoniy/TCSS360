@@ -1,12 +1,7 @@
 package controller;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JPanel;
 
@@ -26,6 +21,12 @@ import model.User;
  * @author Nick Ames, Tim Loverin
  */
 public class Controller {
+    /**
+     * String that splits comments
+     */
+    public static final String STRINGSPLIT = "\n!@#$REVIEWCOMMENTS!@#$\n";
+    public static final String IDSPLIT = "\n!@#$REVIEWID!@#$\n";
+    public static final String RATESPLIT = "\n!@#$REVIEWRATE!@#$\n";
 	/**
 	 * all non empty author papers in the system.
 	 */
@@ -102,6 +103,7 @@ public class Controller {
 		 String newtext = oldtext.replaceAll(old, content);
 		  
 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
+         //"Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName
 		 writer.write(newtext);writer.close();
 			} catch (IOException e) {
 			  e.printStackTrace();
@@ -492,6 +494,30 @@ public class Controller {
 			  e.printStackTrace();
 		    }
 		}
+
+
+    public static void writeReviewPaper (String fileName, String id, String rate, String comment) {
+        try {
+            String content = STRINGSPLIT+ id + IDSPLIT + rate + RATESPLIT + comment;
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName, true)));
+            out.println(content);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void writePaperForAll(String fileName) {
+        try {
+            String content = "";
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Resources\\" + fileName, true)));
+            out.println(content);
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 	/**
 	 * sets the list of all the papers.
 	 * 

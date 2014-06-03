@@ -181,7 +181,10 @@ public class ReviewerPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Submit Review")) {
-				
+				    Controller.writeReviewPaper(cmbPaperSelectBox.getSelectedItem().toString(), Controller.getCurrentUser().getId(),
+                            reviewRatingSpinner.getValue().toString(),txtComments.getText());
+                    //TODO get spinner info
+                    //TODO remove paper from reviewers list and update
 				}else if (btn.getText().equals("View Paper")){
 					JFrame frame = new JFrame(cmbPaperSelectBox.getSelectedItem().toString());
 							frame.setVisible(true);
