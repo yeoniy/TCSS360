@@ -78,7 +78,6 @@ public class ConferenceGui extends JFrame {
 		//menuBar = new MenuBar(new Controller(), new Author(loginPanel.getUser()));
 		//Testing purpose
 		menuBar = new MenuBar(new Controller(), new Author("", loginPanel.getUsername(), ""));
-		setJMenuBar(menuBar);
 
 		//TODO menuBar creates before User logs in.
 		//menuBar = new MenuBar(new Controller(), new Author(loginPanel.getUser()));
@@ -99,8 +98,8 @@ public class ConferenceGui extends JFrame {
 		CardLayout c = (CardLayout) mainPanel.getLayout();
 		c.show(mainPanel, "entry");
 
-        menuBar.setBounds(0, 0, 444, 21);
         setJMenuBar(menuBar);
+        System.out.println();
 		this.getContentPane().add(mainPanel);
 		
 		//JMenuBar menuBar = new JMenuBar();

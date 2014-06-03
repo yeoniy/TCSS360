@@ -29,7 +29,7 @@ public class MainPanel extends JPanel implements Observer {
      */
     public MainPanel(Conference c, String user) {
     	super(new CardLayout());
-		setBounds(0, 21, 444, 390);
+		setBounds(0, 5, 444, 390);
         this.c = c;
         this.user = user;
     }

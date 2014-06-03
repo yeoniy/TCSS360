@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import exception.InvalidInputException;
-
 import model.Paper;
 import model.Type;
 import model.Author;
@@ -26,6 +25,11 @@ import model.User;
  * @author Nick Ames, Tim Loverin
  */
 public class Controller {
+
+	private static final String WIN_DIR = "\\";
+
+	private static final String UNIX_DIR = "/";
+
 	/**
 	 * all non empty author papers in the system.
 	 */
@@ -62,326 +66,394 @@ public class Controller {
 	 * The current active conference.
 	 */
 	public static Conference myActiveConference;
-	
+
 	/**
 	 * List for the observers.
 	 */
 	public static ArrayList<JPanel> observers = new ArrayList<JPanel>();
-	
+
 	/**
 	 * Creates a new Controller. This is a generic controller that will only
 	 * supply basic control. For more specific applications use inherited controllers.
 	 * @param aConferenceList The list of conferences.
 	 */
-    public Controller() {
-    	super();
-    }
-    
-    /**
-     * Adds a new paper to the current user within the current active conference.
-     * @param x the index to add to.
-     * @param fileName name of the file.
-     */
-    public static void addPaper (String fileName, int x) {
-        String old = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
+	public Controller() {
+		super();
+	}
+
+	/**
+	 * Adds a new paper to the current user within the current active conference.
+	 * @param x the index to add to.
+	 * @param fileName name of the file.
+	 */
+	public static void addPaper (String fileName, int x) {
+		String old = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
 				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
-				 + (",") + getMyPapers().get(3).getFileHeader();
-        Paper p = new Paper(new File(fileName));
+				+ (",") + getMyPapers().get(3).getFileHeader();
+		Paper p = new Paper(new File(fileName));
 		getMyPapers().set(x,p);
 		String content = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
 				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
-				 + (",") + getMyPapers().get(3).getFileHeader();
-		 try{
-			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
-			 BufferedReader reader = new BufferedReader(new FileReader(file));
-			 String line = "", oldtext = "";
-		 while((line = reader.readLine()) != null){
-			 oldtext += line + "\n";
-		 }
-		 reader.close();
-		 String newtext = oldtext.replaceAll(old, content);
-		  
-		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
-		 writer.write(newtext);writer.close();
-			} catch (IOException e) {
-			  e.printStackTrace();
-		    }
-    }
-    /**
-     * adds new loaded file to the recfile.
-     * @param s name of file
-     */
-    public static void addtoRecs(String s) {
-    	try {
+				+ (",") + getMyPapers().get(3).getFileHeader();
+		try{
+			File file = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				file = new File("Resources"+ UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null){
+				oldtext += line + "\n";
+			}
+			reader.close();
+			String newtext = oldtext.replaceAll(old, content);
+
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			
+			writer.write(newtext);writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * adds new loaded file to the recfile.
+	 * @param s name of file
+	 */
+	public static void addtoRecs(String s) {
+		try {
 			String content = s + " " + 0 + " " + 0;
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt", true)));
-		    out.println(content);
-		    out.close();
-		    } catch (IOException e) {
-			  e.printStackTrace();
-		    }
-    }
-    /**
-     * removes loaded file from the recfile.
-     * @param s name of file
-     */
-    public static void removefromRecs(String s) {
-    	String old = "";
-    	String content = "";
-    	for(int i = 0; i < allPapers.size(); i++) {
-    		if (s.equals(allPapers.get(i).getFileName())) {
-    			 old = s + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
-    			 content = "";
-    		}
-    	}
-    	 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
- 			 BufferedReader reader = new BufferedReader(new FileReader(file));
- 			 String line = "", oldtext = "";
- 		 while((line = reader.readLine()) != null){
- 			 oldtext += line + "\n";
- 		 }
- 		 reader.close();
- 		 String newtext = oldtext.replaceAll(old, content);
- 		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
- 		 writer.write(newtext);writer.close();
- 			} catch (IOException e) {
- 			  e.printStackTrace();
- 		    }
-    }
-    /**
-     * assigns a paper to a user
-     * 
-     * @param fileName
-     * @param user
-     */
-    public static void assignPaper (String fileName, String user) {
-    	User u = new User();
-    	int x = 0;
-    	for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
-    		if (myActiveConference.getUserList().get(i).getName().equals(user)) {
-    			u = myActiveConference.getUserList().get(i);
-    			x = (i + 1)*4;
-    		}
-    	}
-    	String old = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
- 			(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
- 			 + (",") + getMaxPapers().get(x - 1).getFileHeader();
-         Paper p = new Paper(new File(fileName));
-        if(getMaxPapers().get(x - 4).getFileHeader().equals("empty")) {
-        	getMaxPapers().set(x - 4,p);
-        } else if (getMaxPapers().get(x - 3).getFileHeader().equals("empty")) {
-        	getMaxPapers().set(x - 3,p);
-        } else if (getMaxPapers().get(x - 2).getFileHeader().equals("empty")) {
-        	getMaxPapers().set(x - 2,p);
-        } else {
-        	getMaxPapers().set(x - 1,p);
-        }
- 		
- 		String content = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
- 	 		(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
- 	 		 + (",") + getMaxPapers().get(x - 1).getFileHeader();
- 		 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
- 			 BufferedReader reader = new BufferedReader(new FileReader(file));
- 			 String line = "", oldtext = "";
- 		 while((line = reader.readLine()) != null){
- 			 oldtext += line + "\n";
- 		 }
- 		 reader.close();
- 		 String newtext = oldtext.replaceAll(old, content);
- 		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
- 		 writer.write(newtext);writer.close();
- 			} catch (IOException e) {
- 			  e.printStackTrace();
- 		    }
-    }
-    public static void setPCrec(String paper, int x) {
-    	String old = "";
-    	String content = "";
-    	for(int i = 0; i < allPapers.size(); i++) {
-    		if (paper.equals(allPapers.get(i).getFileName())) {
-    			 old = paper + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
-    			 content = paper + " " + allPapers.get(i).isScrec() + " " + x;
-    			 try {
-    				if(x == 1) {
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +"Recs.txt", true);
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +"Recs.txt", true);
+			}
+			PrintWriter out = new PrintWriter(new BufferedWriter(writer));
+			out.println(content);
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * removes loaded file from the recfile.
+	 * @param s name of file
+	 */
+	public static void removefromRecs(String s) {
+		String old = "";
+		String content = "";
+		for(int i = 0; i < allPapers.size(); i++) {
+			if (s.equals(allPapers.get(i).getFileName())) {
+				old = s + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
+				content = "";
+			}
+		}
+		try{
+			File file = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +"Recs.txt");
+			} else {
+				file = new File("Resources" + UNIX_DIR + myActiveConference.getName() +"Recs.txt");
+			}
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null){
+				oldtext += line + "\n";
+			}
+			reader.close();
+			String newtext = oldtext.replaceAll(old, content);
+
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +"Recs.txt");
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +"Recs.txt");
+			}
+			writer.write(newtext);writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * assigns a paper to a user
+	 * 
+	 * @param fileName
+	 * @param user
+	 */
+	public static void assignPaper (String fileName, String user) {
+		User u = new User();
+		int x = 0;
+		for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
+			if (myActiveConference.getUserList().get(i).getName().equals(user)) {
+				u = myActiveConference.getUserList().get(i);
+				x = (i + 1)*4;
+			}
+		}
+		String old = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
+				(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
+				+ (",") + getMaxPapers().get(x - 1).getFileHeader();
+		Paper p = new Paper(new File(fileName));
+		if(getMaxPapers().get(x - 4).getFileHeader().equals("empty")) {
+			getMaxPapers().set(x - 4,p);
+		} else if (getMaxPapers().get(x - 3).getFileHeader().equals("empty")) {
+			getMaxPapers().set(x - 3,p);
+		} else if (getMaxPapers().get(x - 2).getFileHeader().equals("empty")) {
+			getMaxPapers().set(x - 2,p);
+		} else {
+			getMaxPapers().set(x - 1,p);
+		}
+
+		String content = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
+				(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
+				+ (",") + getMaxPapers().get(x - 1).getFileHeader();
+		try{
+			File file = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				file = new File("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null){
+				oldtext += line + "\n";
+			}
+			reader.close();
+			String newtext = oldtext.replaceAll(old, content);
+
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}			
+			writer.write(newtext);writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void setPCrec(String paper, int x) {
+		String old = "";
+		String content = "";
+		for(int i = 0; i < allPapers.size(); i++) {
+			if (paper.equals(allPapers.get(i).getFileName())) {
+				old = paper + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
+				content = paper + " " + allPapers.get(i).isScrec() + " " + x;
+				try {
+					if(x == 1) {
 						allPapers.get(i).setAccepted(1);
 					} else if (x == 2) {
 						allPapers.get(i).setAccepted(2);
 					}
-    			 } catch (InvalidInputException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-			     }
-    		}
-    	}
-    	 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
- 			 BufferedReader reader = new BufferedReader(new FileReader(file));
- 			 String line = "", oldtext = "";
- 		 while((line = reader.readLine()) != null){
- 			 oldtext += line + "\n";
- 		 }
- 		 reader.close();
- 		 String newtext = oldtext.replaceAll(old, content);
- 		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
- 		 writer.write(newtext);writer.close();
- 			} catch (IOException e) {
- 			  e.printStackTrace();
- 		    }
-    	
-    }
-    public static void setSCrec(String paper, int x) {
-    	String old = "";
-    	String content = "";
-    	for(int i = 0; i < allPapers.size(); i++) {
-    		if (paper.equals(allPapers.get(i).getFileName())) {
-    			 old = paper + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
-    			 content = paper + " " + x + " " + allPapers.get(i).isAccepted();
-    			 try {
-    				if(x == 1) {
+				} catch (InvalidInputException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		try{
+			File file = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +"Recs.txt");
+			} else {
+				file = new File("Resources" + UNIX_DIR + myActiveConference.getName() +"Recs.txt");
+			}			
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null){
+				oldtext += line + "\n";
+			}
+			reader.close();
+			String newtext = oldtext.replaceAll(old, content);
+
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}	
+			writer.write(newtext);
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public static void setSCrec(String paper, int x) {
+		String old = "";
+		String content = "";
+		for(int i = 0; i < allPapers.size(); i++) {
+			if (paper.equals(allPapers.get(i).getFileName())) {
+				old = paper + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
+				content = paper + " " + x + " " + allPapers.get(i).isAccepted();
+				try {
+					if(x == 1) {
 						allPapers.get(i).setSCrec(1);
 					} else if (x == 2) {
 						allPapers.get(i).setSCrec(2);
 					}
-    			 } catch (InvalidInputException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-			     }
-    		}
-    	}
-    	 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
- 			 BufferedReader reader = new BufferedReader(new FileReader(file));
- 			 String line = "", oldtext = "";
- 		 while((line = reader.readLine()) != null){
- 			 oldtext += line + "\n";
- 		 }
- 		 reader.close();
- 		 String newtext = oldtext.replaceAll(old, content);
- 		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
- 		 writer.write(newtext);writer.close();
- 			} catch (IOException e) {
- 			  e.printStackTrace();
- 		    }
-    	
-    }
-    public static int getPCrec(String paper) {
-    	int x = 0;
-    	for(int i = 0; i < allPapers.size(); i++) {
-    		if (paper.equals(allPapers.get(i).getFileName())) {
-    			x = allPapers.get(i).isAccepted();
-    		}
-    	}
-    	return x;
-    }
-    public static int getSCrec(String paper) {
-    	int x = 0;
-    	for(int i = 0; i < allPapers.size(); i++) {
-    		if (paper.equals(allPapers.get(i).getFileName())) {
-    			x = allPapers.get(i).isScrec();
-    		}
-    	}
-    	return x;
-    }
-    /**
-     * gets a list of papers a user has.
-     * 
-     * @param user the user
-     * @return list of papers for the user
-     */
-    public static ArrayList<Paper> getUserPapers(String user) {
-    	ArrayList<Paper> temp = new ArrayList<Paper>();
-    	int x = 0;
-    	for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
-    		if (myActiveConference.getUserList().get(i).getName().equals(user)) {
-    			x = (i + 1)*4;
-    		}
-    	}
-    	temp.add(getMaxPapers().get(x - 4));
-    	temp.add(getMaxPapers().get(x - 3));
-    	temp.add(getMaxPapers().get(x - 2));
-    	temp.add(getMaxPapers().get(x - 1));
-    	return temp;
-    }
-    /**
-     * primarily used for the removing an assignment.
-     * 
-     * @param fileName
-     * @param user
-     */
-    public static void deAssignPaper (String fileName, String user) {
-    	User u = new User();
-    	int x = 0;
-    	for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
-    		if (myActiveConference.getUserList().get(i).getName().equals(user)) {
-    			u = myActiveConference.getUserList().get(i);
-    			x = (i + 1)*4;
-    		}
-    	}
-    	String old = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
- 			(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
- 			 + (",") + getMaxPapers().get(x - 1).getFileHeader();
-         Paper p = new Paper(new File("empty.txt"));
-        if(getMaxPapers().get(x - 4).getFileHeader().equals(fileName)) {
-        	getMaxPapers().set(x - 4,p);
-        } else if (getMaxPapers().get(x - 3).getFileHeader().equals(fileName)) {
-        	getMaxPapers().set(x - 3,p);
-        } else if (getMaxPapers().get(x - 2).getFileHeader().equals(fileName)) {
-        	getMaxPapers().set(x - 2,p);
-        } else if (getMaxPapers().get(x - 1).getFileHeader().equals(fileName)){
-        	getMaxPapers().set(x - 1,p);
-        }
- 		
- 		String content = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
- 	 		(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
- 	 		 + (",") + getMaxPapers().get(x - 1).getFileHeader();
- 		 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
- 			 BufferedReader reader = new BufferedReader(new FileReader(file));
- 			 String line = "", oldtext = "";
- 		 while((line = reader.readLine()) != null){
- 			 oldtext += line + "\n";
- 		 }
- 		 reader.close();
- 		 String newtext = oldtext.replaceAll(old, content);
- 		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
- 		 writer.write(newtext);writer.close();
- 			} catch (IOException e) {
- 			  e.printStackTrace();
- 		    }
-    }
-    
-    public void update() {
-    	
+				} catch (InvalidInputException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		try{
+			File file = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +"Recs.txt");
+			} else {
+				file = new File("Resources" + UNIX_DIR + myActiveConference.getName() +"Recs.txt");
+			}
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null){
+				oldtext += line + "\n";
+			}
+			reader.close();
+			String newtext = oldtext.replaceAll(old, content);
 
-    }
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			writer.write(newtext);writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-    /**
-     * Returns the conference based on the given ID.
-     * @param conferenceId The ID of the conference to get.
-     * @return the conference, otherwise null.
-     */
-    public Conference getConference(String conferenceId) {
-    	Conference toReturn = null;
-    	for (Conference c : myConferenceList) {
-    		if (c.getId().equals(conferenceId)) {
-    			toReturn = c;
-    			break;
-    		}
-    	}
-    	return toReturn;
-    }
+	}
+	public static int getPCrec(String paper) {
+		int x = 0;
+		for(int i = 0; i < allPapers.size(); i++) {
+			if (paper.equals(allPapers.get(i).getFileName())) {
+				x = allPapers.get(i).isAccepted();
+			}
+		}
+		return x;
+	}
+	public static int getSCrec(String paper) {
+		int x = 0;
+		for(int i = 0; i < allPapers.size(); i++) {
+			if (paper.equals(allPapers.get(i).getFileName())) {
+				x = allPapers.get(i).isScrec();
+			}
+		}
+		return x;
+	}
+	/**
+	 * gets a list of papers a user has.
+	 * 
+	 * @param user the user
+	 * @return list of papers for the user
+	 */
+	public static ArrayList<Paper> getUserPapers(String user) {
+		ArrayList<Paper> temp = new ArrayList<Paper>();
+		int x = 0;
+		for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
+			if (myActiveConference.getUserList().get(i).getName().equals(user)) {
+				x = (i + 1)*4;
+			}
+		}
+		temp.add(getMaxPapers().get(x - 4));
+		temp.add(getMaxPapers().get(x - 3));
+		temp.add(getMaxPapers().get(x - 2));
+		temp.add(getMaxPapers().get(x - 1));
+		return temp;
+	}
+	/**
+	 * primarily used for the removing an assignment.
+	 * 
+	 * @param fileName
+	 * @param user
+	 */
+	public static void deAssignPaper (String fileName, String user) {
+		User u = new User();
+		int x = 0;
+		for (int i = 0; i < myActiveConference.getUserList().size(); i++) {
+			if (myActiveConference.getUserList().get(i).getName().equals(user)) {
+				u = myActiveConference.getUserList().get(i);
+				x = (i + 1)*4;
+			}
+		}
+		String old = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
+				(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
+				+ (",") + getMaxPapers().get(x - 1).getFileHeader();
+		Paper p = new Paper(new File("empty.txt"));
+		if(getMaxPapers().get(x - 4).getFileHeader().equals(fileName)) {
+			getMaxPapers().set(x - 4,p);
+		} else if (getMaxPapers().get(x - 3).getFileHeader().equals(fileName)) {
+			getMaxPapers().set(x - 3,p);
+		} else if (getMaxPapers().get(x - 2).getFileHeader().equals(fileName)) {
+			getMaxPapers().set(x - 2,p);
+		} else if (getMaxPapers().get(x - 1).getFileHeader().equals(fileName)){
+			getMaxPapers().set(x - 1,p);
+		}
 
-    /**
-     * Returns the current active conference.
-     * @return the currently active conference.
-     */
+		String content = u.getName() + (",") + u.getId() + (",") + u.getPassword() + (",") + u.typeToString() +
+				(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
+				+ (",") + getMaxPapers().get(x - 1).getFileHeader();
+		try{
+			File file = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				file = new File("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null){
+				oldtext += line + "\n";
+			}
+			reader.close();
+			String newtext = oldtext.replaceAll(old, content);
+
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			writer.write(newtext);writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void update() {
+
+
+	}
+
+	/**
+	 * Returns the conference based on the given ID.
+	 * @param conferenceId The ID of the conference to get.
+	 * @return the conference, otherwise null.
+	 */
+	public Conference getConference(String conferenceId) {
+		Conference toReturn = null;
+		for (Conference c : myConferenceList) {
+			if (c.getId().equals(conferenceId)) {
+				toReturn = c;
+				break;
+			}
+		}
+		return toReturn;
+	}
+
+	/**
+	 * Returns the current active conference.
+	 * @return the currently active conference.
+	 */
 	public Conference getMyActiveConference() {
 		return myActiveConference;
 	}
@@ -470,28 +542,38 @@ public class Controller {
 	public static void removePaper(int x) {
 		String old = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
 				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
-				 + (",") + getMyPapers().get(3).getFileHeader();
+				+ (",") + getMyPapers().get(3).getFileHeader();
 		Paper p = new Paper(new File("empty.txt"));
 		getMyPapers().set(x,p);
 		String content = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
 				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
-				 + (",") + getMyPapers().get(3).getFileHeader();
-		 try{
-			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
-			 BufferedReader reader = new BufferedReader(new FileReader(file));
-			 String line = "", oldtext = "";
-		 while((line = reader.readLine()) != null){
-			 oldtext += line + "\n";
-		 }
-		 reader.close();
-		 String newtext = oldtext.replaceAll(old, content);
-		  
-		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
-		 writer.write(newtext);writer.close();
-			} catch (IOException e) {
-			  e.printStackTrace();
-		    }
+				+ (",") + getMyPapers().get(3).getFileHeader();
+		try{
+			File file = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				file = new File("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null){
+				oldtext += line + "\n";
+			}
+			reader.close();
+			String newtext = oldtext.replaceAll(old, content);
+
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			writer.write(newtext);writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+	}
 	/**
 	 * sets the list of all the papers.
 	 * 
@@ -548,5 +630,5 @@ public class Controller {
 	public static void setActiveConference(Conference c) {
 		myActiveConference = c;
 	}
-	
+
 }
