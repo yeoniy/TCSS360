@@ -83,9 +83,10 @@ public class ConferenceGui extends JFrame {
 		//TODO menuBar creates before User logs in.
 		//menuBar = new MenuBar(new Controller(), new Author(loginPanel.getUser()));
 		//Testing purpose
+/*
 		menuBar = new MenuBar(new Controller(), new Author("", loginPanel.getUsername(), ""));
 		setJMenuBar(menuBar);
-		
+*/
 		
 		mainPanel.add(new EntryPanel(mainPanel), "entry");
 		mainPanel.add(new PaperPanel(mainPanel), "paper");
@@ -97,13 +98,13 @@ public class ConferenceGui extends JFrame {
 		
 		CardLayout c = (CardLayout) mainPanel.getLayout();
 		c.show(mainPanel, "entry");
-		
+
+        menuBar.setBounds(0, 0, 444, 21);
+        setJMenuBar(menuBar);
 		this.getContentPane().add(mainPanel);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 444, 21);
-		this.getContentPane().add(menuBar);
-		
+		//JMenuBar menuBar = new JMenuBar();
+/*
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 		
@@ -112,7 +113,7 @@ public class ConferenceGui extends JFrame {
 		
 		JMenu mnAbout = new JMenu("About");
 		menuBar.add(mnAbout);
-
+*/
 	}
     /**
      * Starts the conference.

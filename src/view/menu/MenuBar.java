@@ -28,8 +28,11 @@ public class MenuBar extends JMenuBar {
         this.ctrl = ctrl;
         this.author = author;
 
-       // add(fileMenu);
-       // add(helpMenu);
+        fileSetup();
+        helpSetup();
+
+       add(fileMenu);
+       add(helpMenu);
     }
 
     private void fileSetup() {

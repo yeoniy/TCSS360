@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * @author Tim Yeonil
+ * @author Tim, Yeonil
  * @version 1.0
  */
 public final class Loader {
