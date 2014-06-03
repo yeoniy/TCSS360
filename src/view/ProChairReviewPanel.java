@@ -48,6 +48,7 @@ public class ProChairReviewPanel extends JPanel {
 	 * boolean to assist with loading authors.
 	 */
 	private boolean ran;
+	private boolean test;
 	
 	private JButton btnAccept;
 	private JButton btnReject;
@@ -68,6 +69,7 @@ public class ProChairReviewPanel extends JPanel {
 	public ProChairReviewPanel(final MainPanel m) {
 		super(null);
 		ran = false;
+		test = false;
 		myMainPanel = m;
 		myListener = new ProChairListener();
 		initialize();
@@ -181,7 +183,29 @@ public class ProChairReviewPanel extends JPanel {
 				cmbProAuthorSelectBox.addItem(authors[i]);
 			}
 		}
+		cmbProAuthorSelectBox.setVisible(true);
 		ran = true;
+		if(Controller.getUserType() == Type.SUBCHAIR) {
+			cmbProAuthorSelectBox.setVisible(false);
+		}
+	}
+	public void initPapers() {
+		if (Controller.getUserType() == Type.SUBCHAIR) {
+			int size = 0;
+			for (int i = 0; i < Controller.getMyPapers().size(); i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					size++;
+			}
+			String[] papers = new String[size];
+			for (int i = 0; i < papers.length; i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					papers[i] = Controller.getMyPapers().get(i).getFileName();	
+					if(!test) {
+						cmbProPaperSelect.addItem(Controller.getMyPapers().get(i).getFileName());
+					}
+			}
+			test = true;
+		}
 	}
 	/**
 	 * helps load papers into combobox
@@ -213,7 +237,7 @@ public class ProChairReviewPanel extends JPanel {
 						lblStatus.setText("ACCEPTED");
 					} else {
 						Controller.setSCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
-						lblRec.setText("ACCEPTED");
+						lblRec.setText("ACCEPT");
 					}
 				} else if (btn.getText().equals("REJECT")) {
 					if (Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
@@ -221,7 +245,7 @@ public class ProChairReviewPanel extends JPanel {
 						lblStatus.setText("REJECTED");
 					} else {
 						Controller.setSCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
-						lblRec.setText("REJECTED");
+						lblRec.setText("REJECT");
 					}
 				} else if (btn.getText().equals("View")) {
 					JFrame frame = new JFrame(cmbProPaperSelect.getSelectedItem().toString());
@@ -286,26 +310,28 @@ public class ProChairReviewPanel extends JPanel {
 		    int x = 0;
 		    int y = 0;
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
-		    	if(!cb.getSelectedItem().toString().equals("Select a Paper...")) {
-		    		x = Controller.getPCrec(cb.getSelectedItem().toString());
-		      		y = Controller.getSCrec(cb.getSelectedItem().toString());
-		      		if (x == 0) {
-		      			lblStatus.setText("Pending");
-		      		} else if (x == 1) {
-		      			lblStatus.setText("REJECTED");
-		      		} else if (x == 2) {
-		      			lblStatus.setText("ACCEPTED");
-		      		}
-		      		if (y == 0) {
-		      			lblRec.setText("Pending");
-		      		}else if (y == 1) {
-		      			lblRec.setText("REJECT");
-		      		}else if (y == 2) {
-		      			lblRec.setText("ACCEPT");
-		      		}
-		    	} else {
+		    	//if(Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
+		    		if(!cb.getSelectedItem().toString().equals("Select a Paper...")) {
+		    			x = Controller.getPCrec(cb.getSelectedItem().toString());
+		      			y = Controller.getSCrec(cb.getSelectedItem().toString());
+		      			if (x == 0) {
+		      				lblStatus.setText("Pending");
+		      			} else if (x == 1) {
+		      				lblStatus.setText("REJECTED");
+		      			} else if (x == 2) {
+		      				lblStatus.setText("ACCEPTED");
+		      			}
+		      			if (y == 0) {
+		      				lblRec.setText("Pending");
+		      			}else if (y == 1) {
+		      				lblRec.setText("REJECT");
+		      			}else if (y == 2) {
+		      				lblRec.setText("ACCEPT");
+		      			}
+		    		} else {
 		    		
-		    	}
+		    		}
+		    	
 		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
 		      // Item is no longer selected
 		    }

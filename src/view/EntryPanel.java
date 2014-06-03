@@ -294,6 +294,7 @@ public class EntryPanel extends JPanel {
 			for (Component a : c) {
 				if (a instanceof ProChairReviewPanel) {
 					((ProChairReviewPanel) a).assignAuthors();
+					((ProChairReviewPanel) a).initPapers();
 					break;	
 				}
 			}
