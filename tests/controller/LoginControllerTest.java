@@ -1,3 +1,4 @@
+package controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import model.Conference;
@@ -11,9 +12,13 @@ import controller.LoginController;
 import exception.InvalidLoginException;
 
 /**
- * Test for LoginController.java
+ * Test case for LoginController.
+ * 
  * @author Nick Ames
- *
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class LoginControllerTest {
 
@@ -43,5 +48,4 @@ public class LoginControllerTest {
 
 		}
 	}
-
 }

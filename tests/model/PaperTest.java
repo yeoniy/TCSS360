@@ -1,3 +1,4 @@
+package model;
 import exception.InvalidInputException;
 import model.Paper;
 import org.junit.AfterClass;
