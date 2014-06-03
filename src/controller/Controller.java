@@ -10,13 +10,11 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import exception.InvalidInputException;
-
+import model.Conference;
 import model.Paper;
 import model.Type;
-import model.Author;
-import model.Conference;
 import model.User;
+import exception.InvalidInputException;
 
 /**
  * Main controller class for controlling actions between view and controller. Should not be
@@ -103,13 +101,7 @@ public class Controller {
 				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
 				+ (",") + getMyPapers().get(3).getFileHeader();
 		try{
-			File file = null;
-			if (System.getProperty("os.name").startsWith("Windows")) {
-				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
-			} else {
-				file = new File("Resources"+ UNIX_DIR + myActiveConference.getName() +".txt");
-			}
-			BufferedReader reader = new BufferedReader(new FileReader(file));
+			BufferedReader reader = new BufferedReader(new FileReader(getTheFile(myActiveConference.getName() +".txt")));
 			String line = "", oldtext = "";
 			while((line = reader.readLine()) != null){
 				oldtext += line + "\n";
@@ -117,13 +109,7 @@ public class Controller {
 			reader.close();
 			String newtext = oldtext.replaceAll(old, content);
 
-			FileWriter writer = null;
-			if (System.getProperty("os.name").startsWith("Windows")) {
-				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
-			} else {
-				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
-			}
-			
+			FileWriter writer = getTheWriter(myActiveConference.getName() +".txt");
 			writer.write(newtext);writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -136,7 +122,7 @@ public class Controller {
 	public static void addtoRecs(String s) {
 		try {
 			String content = s + " " + 0 + " " + 0;
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt", true)));
+			PrintWriter out = new PrintWriter(new BufferedWriter(getTheWriterWrite(myActiveConference.getName() +"Recs.txt")));
 		    out.println(content);
 		    out.close();
 		    } catch (IOException e) {
@@ -157,7 +143,7 @@ public class Controller {
     		}
     	}
     	 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 			 File file = getTheFile(myActiveConference.getName() +"Recs.txt");
  			 BufferedReader reader = new BufferedReader(new FileReader(file));
  			 String line = "", oldtext = "";
  		 while((line = reader.readLine()) != null){
@@ -166,7 +152,7 @@ public class Controller {
  		 reader.close();
  		 String newtext = oldtext.replaceAll(old, content);
  		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 		 FileWriter writer = getTheWriter(myActiveConference.getName() +"Recs.txt");
  		 writer.write(newtext);writer.close();
  			} catch (IOException e) {
  			  e.printStackTrace();
@@ -205,7 +191,7 @@ public class Controller {
  	 		(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
  	 		 + (",") + getMaxPapers().get(x - 1).getFileHeader();
  		 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
+ 			 File file = getTheFile(myActiveConference.getName() +".txt");
  			 BufferedReader reader = new BufferedReader(new FileReader(file));
  			 String line = "", oldtext = "";
  		 while((line = reader.readLine()) != null){
@@ -214,7 +200,7 @@ public class Controller {
  		 reader.close();
  		 String newtext = oldtext.replaceAll(old, content);
  		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
+ 		 FileWriter writer = getTheWriter(myActiveConference.getName() +".txt");
  		 writer.write(newtext);writer.close();
  			} catch (IOException e) {
  			  e.printStackTrace();
@@ -240,7 +226,7 @@ public class Controller {
     		}
     	}
     	 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 			 File file = getTheFile(myActiveConference.getName() +"Recs.txt");
  			 BufferedReader reader = new BufferedReader(new FileReader(file));
  			 String line = "", oldtext = "";
  		 while((line = reader.readLine()) != null){
@@ -249,7 +235,7 @@ public class Controller {
  		 reader.close();
  		 String newtext = oldtext.replaceAll(old, content);
  		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 		 FileWriter writer = getTheWriter(myActiveConference.getName() +"Recs.txt");
  		 writer.write(newtext);writer.close();
  			} catch (IOException e) {
  			  e.printStackTrace();
@@ -276,7 +262,7 @@ public class Controller {
     		}
     	}
     	 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 			 File file = getTheFile(myActiveConference.getName() +"Recs.txt");
  			 BufferedReader reader = new BufferedReader(new FileReader(file));
  			 String line = "", oldtext = "";
  		 while((line = reader.readLine()) != null){
@@ -285,7 +271,7 @@ public class Controller {
  		 reader.close();
  		 String newtext = oldtext.replaceAll(old, content);
  		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 		 FileWriter writer = getTheWriter(myActiveConference.getName() +"Recs.txt");
  		 writer.write(newtext);writer.close();
  			} catch (IOException e) {
  			  e.printStackTrace();
@@ -363,7 +349,7 @@ public class Controller {
  	 		(",") + getMaxPapers().get(x - 4).getFileHeader() + (",") + getMaxPapers().get(x-3).getFileHeader() + (",") + getMaxPapers().get(x - 2).getFileHeader()
  	 		 + (",") + getMaxPapers().get(x - 1).getFileHeader();
  		 try{
- 			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
+ 			 File file = getTheFile(myActiveConference.getName() +".txt");
  			 BufferedReader reader = new BufferedReader(new FileReader(file));
  			 String line = "", oldtext = "";
  		 while((line = reader.readLine()) != null){
@@ -372,7 +358,7 @@ public class Controller {
  		 reader.close();
  		 String newtext = oldtext.replaceAll(old, content);
  		  
- 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
+ 		 FileWriter writer = getTheWriter(myActiveConference.getName() +".txt");
  		 writer.write(newtext);writer.close();
  			} catch (IOException e) {
  			  e.printStackTrace();
@@ -499,7 +485,7 @@ public class Controller {
 				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
 				 + (",") + getMyPapers().get(3).getFileHeader();
 		 try{
-			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
+			 File file = getTheFile(myActiveConference.getName() +".txt");
 			 BufferedReader reader = new BufferedReader(new FileReader(file));
 			 String line = "", oldtext = "";
 		 while((line = reader.readLine()) != null){
@@ -508,7 +494,7 @@ public class Controller {
 		 reader.close();
 		 String newtext = oldtext.replaceAll(old, content);
 		  
-		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
+		 FileWriter writer = getTheWriter(myActiveConference.getName() +".txt");
 		 writer.write(newtext);writer.close();
 			} catch (IOException e) {
 			  e.printStackTrace();
@@ -519,7 +505,7 @@ public class Controller {
     public static void writeReviewPaper (String fileName, String id, String rate, String comment) {
         try {
             String content = STRINGSPLIT+ id + IDSPLIT + rate + RATESPLIT + comment;
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName, true)));
+            PrintWriter out = new PrintWriter(new BufferedWriter(getTheWriterWrite(myActiveConference.getName() +"REVIEW_" + fileName)));
             out.println(content);
             out.close();
         } catch (IOException e) {
@@ -531,7 +517,7 @@ public class Controller {
     public static void writePaperForAll(String fileName) {
         try {
             String content = "";
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Resources\\" + fileName, true)));
+            PrintWriter out = new PrintWriter(new BufferedWriter(getTheWriterWrite(fileName)));
             out.println(content);
             out.close();
         } catch (IOException e) {
@@ -595,4 +581,42 @@ public class Controller {
 		myActiveConference = c;
 	}
 	
+	public static File getTheFile(String s) {
+		File file = null;
+		String a = "Resources";
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			a += WIN_DIR + s;
+			file = new File(a);
+		} else {
+			a += UNIX_DIR + s;
+			file = new File(a);
+		}
+		return file;
+	}
+	
+	public static FileWriter getTheWriter(String s) throws IOException {
+		FileWriter writer = null;
+		String a = "Resources";
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			a += WIN_DIR + s;
+			writer = new FileWriter(a);
+		} else {
+			a += UNIX_DIR + s;
+			writer = new FileWriter(a);
+		}
+		return writer;
+	}
+	
+	public static FileWriter getTheWriterWrite(String s) throws IOException {
+		FileWriter writer = null;
+		String a = "Resources";
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			a += WIN_DIR + s;
+			writer = new FileWriter(a, true);
+		} else {
+			a += UNIX_DIR + s;
+			writer = new FileWriter(a, true);
+		}
+		return writer;
+	}
 }

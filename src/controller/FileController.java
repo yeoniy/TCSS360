@@ -238,7 +238,7 @@ public class FileController extends Controller {
 	}
 
     public Comment[] getReviewPaper(String fileName){
-        File myfile = new File("Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName);
+        File myfile = Controller.getTheFile(myActiveConference.getName() +"REVIEW_" + fileName);
         Comment[] line = null;
         try {
             Scanner file = new Scanner(new FileInputStream(myfile));
@@ -251,7 +251,12 @@ public class FileController extends Controller {
             file.close();
             String[] subline = fullString.split(stringSplit);
             line = new Comment[subline.length];
-            String f = "Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName;
+            String f;
+            if (System.getProperty("os.name").startsWith("Windows")) {
+            	f = "Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName;
+            } else {
+            	f = "Resources/" + myActiveConference.getName() +"REVIEW_" + fileName;
+            }
             for(int i = 0; i < subline.length; i++) {
                 String[] sub1 = subline[i].split(Controller.IDSPLIT);
                 String[] sub2 = sub1[1].split(Controller.RATESPLIT);

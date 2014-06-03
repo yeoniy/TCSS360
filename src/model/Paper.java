@@ -15,12 +15,24 @@ import exception.InvalidInputException;
  * @version 6/3/2014
  */
 public class Paper extends Observable {
-    private File file;
-    private ArrayList<String> comment;
-
+	
+	/**
+     * 
+     */
     private final int PROCESS_PAPER = 0;
     private final int REJECTED_PAPER = 1;
     private final int ACCEPTED_PAPER = 2;
+	
+	/**
+	 * The file for the paper.
+	 */
+    private File file;
+    
+    /**
+     * The list of comments for the paper.
+     */
+    private ArrayList<String> comment;
+    
     /**
      * int 0=process 1=rejected 2=accepted
      */
