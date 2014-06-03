@@ -1,7 +1,7 @@
 NAME1,ID1,PASS1,ADMIN,testpaper.txt,NewTextDocument.txt,empty,empty
-NAME2,ID2,PASS2,REVIEWER,testpaper.txt,empty,empty,empty
+NAME2,ID2,PASS2,REVIEWER,testpaper.txt,yo.txt,empty,empty
 NAME3,ID3,PASS3,PROCHAIR,empty,empty,empty,empty
-NAME4,ID4,PASS4,SUBCHAIR,testpaper.txt,yo.txt,empty,empty
+NAME4,ID4,PASS4,SUBCHAIR,empty,yo.txt,empty,empty
 NAME5,ID5,PASS5,AUTHOR,NewTextDocument.txt,empty,empty,empty
 NAME6,ID6,PASS6,AUTHOR,testpaper.txt,empty,empty,empty
 NAME7,ID4,PASS7,REVIEWER,empty,empty,empty,empty

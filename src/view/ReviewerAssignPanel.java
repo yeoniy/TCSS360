@@ -191,6 +191,14 @@ public class ReviewerAssignPanel extends JPanel {
 		}
 		ran = true;
 	}
+	private void updateText() {
+		ArrayList<String> temp = new ArrayList<String>();
+			temp = Controller.getUserAssignments(cmbReviewerBox.getSelectedItem().toString());
+			txtReviewers.setText("");
+			for (int i = 0; i < temp.size(); i++) {
+				txtReviewers.setText(txtReviewers.getText() + temp.get(i).toString() + "\n");
+  		}
+	}
 	/**
 	 * 
 	 * @author Tim Loverin, Nick Ames.
@@ -214,11 +222,13 @@ public class ReviewerAssignPanel extends JPanel {
 					}
 					if (p.size() < 4) {
 						Controller.assignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
+						updateText();
 					} else {
 						JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else if (btn.getText().equals("Remove")) {
 					Controller.deAssignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
+					updateText();
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");
@@ -242,12 +252,7 @@ public class ReviewerAssignPanel extends JPanel {
 
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
 		      		if(!cb.getSelectedItem().toString().equals("Select a Reviewer...")) {
-		      			ArrayList<String> temp = new ArrayList<String>();
-		      			temp = Controller.getUserAssignments(cb.getSelectedItem().toString());
-		      			txtReviewers.setText("");
-		      			for (int i = 0; i < temp.size(); i++) {
-		      				txtReviewers.setText(txtReviewers.getText() + temp.get(i).toString() + "\n");
-			      		}
+		      			updateText();
 		      		}
 		 
 		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {

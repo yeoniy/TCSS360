@@ -187,6 +187,14 @@ public class SubAssignPanel extends JPanel {
 		test = true;
 	//	paperList.setListData(papers);
 	} 
+	private void updateText() {
+		ArrayList<String> temp = new ArrayList<String>();
+			temp = Controller.getUserAssignments(cmbSubSelectBox.getSelectedItem().toString());
+			txtSubAssignedPapers.setText("");
+			for (int i = 0; i < temp.size(); i++) {
+				txtSubAssignedPapers.setText(txtSubAssignedPapers.getText() + temp.get(i).toString() + "\n");
+  		}
+	}
 	/**
 	 * 
 	 * @author Tim Loverin, Nick Names.
@@ -210,12 +218,14 @@ public class SubAssignPanel extends JPanel {
 					}
 					if (p.size() < 4) {
 						Controller.assignPaper(cmbSubAuthorSelectBox.getSelectedItem().toString(),cmbSubSelectBox.getSelectedItem().toString());
+						updateText();
 					} else {
 						JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				
 				} else if (btn.getText().equals("Remove")) {
 					Controller.deAssignPaper(cmbSubAuthorSelectBox.getSelectedItem().toString(),cmbSubSelectBox.getSelectedItem().toString());
+					updateText();
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");
@@ -239,12 +249,7 @@ public class SubAssignPanel extends JPanel {
 
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
 		      		if(!cb.getSelectedItem().toString().equals("Select a Sub-Chair...")) {
-		      			ArrayList<String> temp = new ArrayList<String>();
-		      			temp = Controller.getUserAssignments(cb.getSelectedItem().toString());
-		      			txtSubAssignedPapers.setText("");
-		      			for (int i = 0; i < temp.size(); i++) {
-		      				txtSubAssignedPapers.setText( txtSubAssignedPapers.getText() + temp.get(i).toString() + "\n");
-			      		}
+		      			updateText();
 		      		}
 		      		
 		 
