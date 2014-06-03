@@ -118,7 +118,6 @@ public class FileController extends Controller {
 						try {
 							allPapers.get(i).setAccepted(pcrec);
 							allPapers.get(i).setSCrec(screc);
-							System.out.println(screc);
 						} catch (InvalidInputException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

@@ -166,6 +166,7 @@ public class EntryPanel extends JPanel {
 		} else if (T == Type.SUBCHAIR) {
 			btnStats.setEnabled(true);
 			btnAssignReviewers.setEnabled(true);
+			btnProReview.setEnabled(true);
 		} else if(T == Type.PROCHAIR) {
 			btnReview.setEnabled(false);
 			btnAssignReviewers.setEnabled(false);
@@ -293,6 +294,7 @@ public class EntryPanel extends JPanel {
 			for (Component a : c) {
 				if (a instanceof ProChairReviewPanel) {
 					((ProChairReviewPanel) a).assignAuthors();
+					((ProChairReviewPanel) a).initPapers();
 					break;	
 				}
 			}

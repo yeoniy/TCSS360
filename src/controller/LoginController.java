@@ -112,7 +112,7 @@ public class LoginController extends Controller implements ActionListener {
 		InvalidLoginException ile = new InvalidLoginException(user, pass, c);
 		
 		for (User u : userList) {
-			System.out.println(u.getName());
+			//System.out.println(u.getName());
 		}
 		
 		if (user.equals("")) {
