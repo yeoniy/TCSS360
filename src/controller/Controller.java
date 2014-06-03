@@ -2,11 +2,14 @@ package controller;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JPanel;
 
@@ -314,6 +317,47 @@ public class Controller {
     	temp.add(getMaxPapers().get(x - 3));
     	temp.add(getMaxPapers().get(x - 2));
     	temp.add(getMaxPapers().get(x - 1));
+    	return temp;
+    }
+    public static ArrayList<String> getUserAssignments(String name) {
+    	ArrayList<String> temp = new ArrayList<String>();
+    	File myfile = null;
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			myfile = new File("Resources" + WIN_DIR + myActiveConference + ".txt");
+		} else {
+			myfile = new File("Resources" + UNIX_DIR + myActiveConference + ".txt");
+		}
+		
+		try {
+			Scanner file = new Scanner(new FileInputStream(myfile));
+			while (file.hasNext()) {
+				String lineString = file.nextLine();
+				String[] line = lineString.split(",");
+				String username = line[0];
+				String ID = line[1];
+				String password = line[2];
+				String t1 = line[3];
+				String p1 = line[4];
+				String p2 = line[5];
+				String p3 = line[6];
+				String p4 = line[7];
+				if (!p1.equals("empty") && username.equals(name)) {
+					temp.add(p1);
+				}
+				if (!p2.equals("empty") && username.equals(name)) {
+					temp.add(p2);
+				}
+				if (!p3.equals("empty") && username.equals(name)) {
+					temp.add(p3);
+				}
+				if (!p4.equals("empty") && username.equals(name)) {
+					temp.add(p4);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			Controller.writePaperForAll(myActiveConference + ".txt");
+			//e.printStackTrace();
+		}   
     	return temp;
     }
     /**

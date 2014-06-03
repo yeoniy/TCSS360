@@ -4,6 +4,8 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -16,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+
+import view.SubAssignPanel.MyItemListener;
 
 import model.Paper;
 
@@ -116,6 +120,8 @@ public class ReviewerAssignPanel extends JPanel {
 		cmbReviewerBox = new JComboBox<String>();
 		cmbReviewerBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a Reviewer..."}));
 		cmbReviewerBox.setBounds(10, 65, 172, 20);
+		MyItemListener actionListener = new MyItemListener();
+		cmbReviewerBox.addItemListener(actionListener);
 
 		cmbPaperSelectBox = new JComboBox<String>();
 		cmbPaperSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
@@ -222,4 +228,32 @@ public class ReviewerAssignPanel extends JPanel {
 		}
 
 	}
+	/**
+	 * 
+	 * @author Tim Loverin
+	 * @version 6/3/2014
+	 */
+	class MyItemListener implements ItemListener {
+		  // This method is called only if a new item has been selected.
+		  public void itemStateChanged(ItemEvent evt) {
+		    JComboBox cb = (JComboBox) evt.getSource();
+
+		    Object item = evt.getItem();
+
+		    if (evt.getStateChange() == ItemEvent.SELECTED) {
+		      		if(!cb.getSelectedItem().toString().equals("Select a Reviewer...")) {
+		      			ArrayList<String> temp = new ArrayList<String>();
+		      			temp = Controller.getUserAssignments(cb.getSelectedItem().toString());
+		      			txtReviewers.setText("");
+		      			for (int i = 0; i < temp.size(); i++) {
+		      				txtReviewers.setText(txtReviewers.getText() + temp.get(i).toString() + "\n");
+			      		}
+		      		}
+		 
+		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+		      // Item is no longer selected
+		    }
+		  }
+	}
+
 }

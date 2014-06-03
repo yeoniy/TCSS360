@@ -238,6 +238,14 @@ public class SubAssignPanel extends JPanel {
 		    Object item = evt.getItem();
 
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
+		      		if(!cb.getSelectedItem().toString().equals("Select a Sub-Chair...")) {
+		      			ArrayList<String> temp = new ArrayList<String>();
+		      			temp = Controller.getUserAssignments(cb.getSelectedItem().toString());
+		      			txtSubAssignedPapers.setText("");
+		      			for (int i = 0; i < temp.size(); i++) {
+		      				txtSubAssignedPapers.setText( txtSubAssignedPapers.getText() + temp.get(i).toString() + "\n");
+			      		}
+		      		}
 		      		
 		 
 		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
