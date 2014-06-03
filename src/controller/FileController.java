@@ -16,7 +16,11 @@ import exception.InvalidInputException;
 /**
  * Controller class for opening conference files and parsing them. This class is used
  * for gathering the conference data and allowing for easy data gathering.
- * @author Tim Loverin, Yeonil, Nick Ames, Rich
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class FileController extends Controller {
 	

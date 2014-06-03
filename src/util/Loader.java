@@ -1,7 +1,5 @@
 package util;
 
-import model.Conference;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,9 +8,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.Conference;
+
 /**
- * @author Tim, Yeonil
- * @version 1.0
+ * Load methods for gathering the conference information such as the deadline.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public final class Loader {
 	
@@ -60,6 +64,9 @@ public final class Loader {
      * Loads all Conference from CONFERENCE_LIST_PATH and creates array of Conference class.
      * This method is being called by LoginPanel to let user choose conference.
      * If file is not found, let it throws exception and it's not being catched here.
+     * <dt><b>Precondition:</b></dt><dd>
+	 * Conference file must exist in order to load.
+	 * </dd>
      * @return Array of conference
      * @throws FileNotFoundException
      * @throws IOException

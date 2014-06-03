@@ -7,10 +7,12 @@ import java.util.Observable;
 import exception.InvalidInputException;
 
 /**
- * Class for Paper, contains file, arraylist of comment(String), file name, and status of paper (accpeted, rejected, process)
- *
- * @version 5/20/2014
- * @author Yeonil
+ * Holds all the information for a paper within the conference. This includes acceptance status and comments.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class Paper extends Observable {
     private File file;

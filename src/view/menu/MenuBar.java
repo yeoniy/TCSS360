@@ -13,10 +13,19 @@ import model.Author;
 import controller.Controller;
 
 /**
- * Created by Yeonil on 5/29/14.
+ * Creates a menu bar to allow the user to interact with and manipulate certain properties.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class MenuBar extends JMenuBar {
    
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenu fileMenu;
     private JMenu helpMenu;
 

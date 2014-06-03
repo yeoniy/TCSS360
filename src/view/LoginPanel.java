@@ -20,8 +20,11 @@ import controller.LoginController;
  * An implementation of a login panel for the ConferenceGui class. This login panel will
  * allow a user to login to a specific conference with their unique id and password.
  * 
- * @version 6/2/2014
- * @author Nick Ames, Tim Loverin.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class LoginPanel extends JPanel {	
     /**

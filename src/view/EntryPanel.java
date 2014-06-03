@@ -15,12 +15,19 @@ import model.Type;
 
 import controller.Controller;
 /**
- * 
- * @author Tim Loverin, Nick Ames.
- * @version 1.0
+ * The main entry panel for the user. This panel contains navigation based on the user type.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class EntryPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lblUsername;
 	private JLabel lblID;
 	private JLabel lblType;

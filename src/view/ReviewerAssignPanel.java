@@ -21,11 +21,19 @@ import model.Paper;
 
 import controller.Controller;
 /**
- * 
- * @author Tim Loverin, Nick Ames.
- * @version 6/2/2014
+ * Holds all the components for assigning a paper to a reviewer.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class ReviewerAssignPanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JLabel lblTitle;
 

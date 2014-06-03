@@ -23,12 +23,19 @@ import javax.swing.text.StyleConstants;
 import model.Paper;
 import controller.Controller;
 /**
- * 
- * @author Tim Loverin, Nick Ames.
- * @version 6/2/2014
+ * Contains all the components to allow the user to submit/remove papers to the conference.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class PaperPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lblTitle;
 	private JLabel lblCurrentPapers;
 

@@ -5,7 +5,12 @@ import exception.InvalidInputException;
 import javax.swing.*;
 
 /**
- * Created by Yeonil on 4/22/14.
+ * Represents a program chair within the conference.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class ProChair extends SubChair {
     public ProChair(String name, String id, String password) {

@@ -15,9 +15,12 @@ import view.menu.MenuBar;
 import controller.Controller;
 
 /**
- * 
- * @author Tim Loverin, Nick Ames, Yeonil
- * @version 6/2/2014
+ * The main JFrame for the conference window. This will hold all the panels and components for the GUI.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class ConferenceGui extends JFrame {
 	/**

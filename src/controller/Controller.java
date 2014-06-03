@@ -21,8 +21,11 @@ import model.User;
  * Main controller class for controlling actions between view and controller. Should not be
  * used for specific control of small subtasks but as a general purpose class for easier model
  * access.
- * @version 6/2/2014
- * @author Nick Ames, Tim Loverin
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class Controller {
 

@@ -2,9 +2,18 @@ package exception;
 
 /**
  * Thrown when invalid input is encountered.
- * Created by Yeonil on 5/20/14.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class InvalidInputException extends Exception {
+
+	/**
+	 * Default Serial.
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Creates a new exception.

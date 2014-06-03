@@ -2,7 +2,12 @@ package model;
 import java.util.ArrayList;
 
 /**
- * Created by Yeonil on 4/22/14.
+ * Represents a reviewer within the conference.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class Reviewer extends Author {
 

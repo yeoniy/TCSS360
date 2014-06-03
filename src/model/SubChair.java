@@ -1,7 +1,12 @@
 package model;
 
 /**
- * Created by Yeonil on 4/22/14.
+ * Represents a subchair within the conference.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class SubChair extends Reviewer {
 

@@ -5,9 +5,11 @@ import model.Conference;
 /**
  * Runtime exception that will be thrown if the user inputs an invalid username/password combo.
  * 
- * @version 5/19/2014
  * @author Nick Ames
- *
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class InvalidLoginException extends RuntimeException {
 	

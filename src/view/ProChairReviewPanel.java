@@ -28,11 +28,19 @@ import model.Paper;
 import model.Type;
 import controller.Controller;
 /**
- * 
- * @author Tim Loverin, Nick Names
- * @version 6/2/2014
+ * Review panel for the program chair. This panel will allow the user to accept/reject, etc.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class ProChairReviewPanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Dimension of screen.
