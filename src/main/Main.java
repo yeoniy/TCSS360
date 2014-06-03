@@ -16,6 +16,7 @@ public class Main {
 			public void run() {
 				try {
 					ConferenceGui window = new ConferenceGui();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

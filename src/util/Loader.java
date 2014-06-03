@@ -15,6 +15,7 @@ import java.util.Date;
  * @version 1.0
  */
 public final class Loader {
+	
     /**
      * The index of array that indecates conference name String.
      */
@@ -46,6 +47,8 @@ public final class Loader {
 	
 	public static final String CONFERENCE_PATH = "Resources\\";
 
+	private static final String CONFERENCE_LIST_PATH_UNIX = "Resources/Conference.txt";
+
     /**
      * Private constructor that we expect to not used..
      */
@@ -62,7 +65,13 @@ public final class Loader {
      * @throws IOException
      */
 	public static Conference[] loadConferenceList() throws FileNotFoundException, IOException {
-		File conferenceFile = new File(CONFERENCE_LIST_PATH);
+		File conferenceFile = null;
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			conferenceFile = new File(CONFERENCE_LIST_PATH);
+		} else {
+			conferenceFile = new File(CONFERENCE_LIST_PATH_UNIX);
+		}
+		
 		FileReader fr = new FileReader(conferenceFile);
 		BufferedReader br = new BufferedReader(fr);
 		Conference[] toReturn;
