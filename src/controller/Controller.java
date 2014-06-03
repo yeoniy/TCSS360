@@ -1,9 +1,11 @@
 package controller;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -104,6 +106,49 @@ public class Controller {
 			} catch (IOException e) {
 			  e.printStackTrace();
 		    }
+    }
+    /**
+     * adds new loaded file to the recfile.
+     * @param s name of file
+     */
+    public static void addtoRecs(String s) {
+    	try {
+			String content = s + " " + 0 + " " + 0;
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt", true)));
+		    out.println(content);
+		    out.close();
+		    } catch (IOException e) {
+			  e.printStackTrace();
+		    }
+    }
+    /**
+     * removes loaded file from the recfile.
+     * @param s name of file
+     */
+    public static void removefromRecs(String s) {
+    	String old = "";
+    	String content = "";
+    	for(int i = 0; i < allPapers.size(); i++) {
+    		if (s.equals(allPapers.get(i).getFileName())) {
+    			 old = s + " " + allPapers.get(i).isScrec() + " " + allPapers.get(i).isAccepted(); 
+    			 content = "";
+    		}
+    	}
+    	 try{
+ 			 File file = new File("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 			 BufferedReader reader = new BufferedReader(new FileReader(file));
+ 			 String line = "", oldtext = "";
+ 		 while((line = reader.readLine()) != null){
+ 			 oldtext += line + "\n";
+ 		 }
+ 		 reader.close();
+ 		 String newtext = oldtext.replaceAll(old, content);
+ 		  
+ 		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt");
+ 		 writer.write(newtext);writer.close();
+ 			} catch (IOException e) {
+ 			  e.printStackTrace();
+ 		    }
     }
     /**
      * assigns a paper to a user

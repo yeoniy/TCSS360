@@ -162,6 +162,7 @@ public class PaperPanel extends JPanel {
 							// Add the paper to the users paper list
 							Paper p = new Paper(chooser.getSelectedFile());
 							Controller.getMyPapers().add(p);
+							Controller.addtoRecs(p.getFileName());
 							JOptionPane.showMessageDialog(null, p.getFileName() + " was uploaded successfully!");
 							addPaper(p.getFileName());
 							Controller.addPaper(p.getFileName(), paperList.getModel().getSize()-1);
@@ -172,7 +173,8 @@ public class PaperPanel extends JPanel {
 				} else if (btn.getText().equals("Remove Paper")) {
 					int i = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove the paper(s)?", "Remove Paper",  JOptionPane.INFORMATION_MESSAGE);
 					if (i == JOptionPane.YES_OPTION)
-						removePaper(paperList.getSelectedIndices());
+						Controller.removefromRecs(paperList.getSelectedValue());
+						removePaper(paperList.getSelectedIndices());	
 				} else if (btn.getText().equals("Check Status")) {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "stats");
@@ -216,7 +218,7 @@ public class PaperPanel extends JPanel {
 		}
 		s[i] = a;
 		paperList.setListData(s);
-		System.out.println(Arrays.toString(Controller.getMyPapers().toArray()));
+		//System.out.println(Arrays.toString(Controller.getMyPapers().toArray()));
 	}
 }
 
