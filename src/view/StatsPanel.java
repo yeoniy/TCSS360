@@ -1,10 +1,11 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.List;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -21,10 +22,9 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
-
-import view.SubAssignPanel.MyItemListener;
 
 import controller.Controller;
 /**
@@ -33,6 +33,11 @@ import controller.Controller;
  * @version 6/2/2014.
  */
 public class StatsPanel extends JPanel {
+	
+	/**
+	 * Dimension of screen.
+	 */
+	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	
 	private JLabel lbl0;
 	private JLabel lbl100;
@@ -206,17 +211,23 @@ public class StatsPanel extends JPanel {
 					frame.setVisible(true);
 					frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 					frame.setSize(500,500);
-					frame.setLayout(new FlowLayout());
-					List list = new List();
-					frame.add(list);
+					frame.setLayout(new BorderLayout());
+					JScrollPane pane = new JScrollPane();
+					JTextArea list = new JTextArea();
+					list.setEditable(false);
+					list.setPreferredSize(new Dimension(450, 442));
+					pane.setViewportView(list);
+					frame.add(pane, BorderLayout.CENTER);
+					frame.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
 					try {
 					File file = new File("Resources\\" + cmbPaperBox.getSelectedItem().toString());
 					FileReader fr = new FileReader(file);
 					BufferedReader br = new BufferedReader(fr);
-					String line = "";
-					    while((line = br.readLine()) != null)    {  
-					            list.add(line);
-					    }
+					String s = "";
+					while (br.ready()) {
+						s += br.readLine() + "\r\n";
+					}
+					list.setText(s);
 					br.close();
 					}
 					catch(IOException e1) {
