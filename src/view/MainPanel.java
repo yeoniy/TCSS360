@@ -8,11 +8,18 @@ import javax.swing.JPanel;
 
 import model.Conference;
 /**
- * 
- * @author Tim Loverni, Nick Ames, Yeonil
- * @version 6/2/2014
+ * The main panel contains all other panels and allows for easy switching through a card layout.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class MainPanel extends JPanel implements Observer {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * The Conference.
 	 */
@@ -29,7 +36,7 @@ public class MainPanel extends JPanel implements Observer {
      */
     public MainPanel(Conference c, String user) {
     	super(new CardLayout());
-		setBounds(0, 21, 444, 390);
+		setBounds(0, 5, 444, 390);
         this.c = c;
         this.user = user;
     }

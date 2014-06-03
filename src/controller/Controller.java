@@ -1,7 +1,12 @@
 package controller;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JPanel;
 
@@ -27,6 +32,11 @@ public class Controller {
     public static final String STRINGSPLIT = "\n!@#$REVIEWCOMMENTS!@#$\n";
     public static final String IDSPLIT = "\n!@#$REVIEWID!@#$\n";
     public static final String RATESPLIT = "\n!@#$REVIEWRATE!@#$\n";
+
+	private static final String WIN_DIR = "\\";
+
+	private static final String UNIX_DIR = "/";
+
 	/**
 	 * all non empty author papers in the system.
 	 */
@@ -91,30 +101,40 @@ public class Controller {
 		getMyPapers().set(x,p);
 		String content = myUser.getName() + (",") + myUser.getId() + (",") + myUser.getPassword() + (",") + myUser.typeToString()+
 				(",") + getMyPapers().get(0).getFileHeader() + (",") + getMyPapers().get(1).getFileHeader() + (",") + getMyPapers().get(2).getFileHeader()
-				 + (",") + getMyPapers().get(3).getFileHeader();
-		 try{
-			 File file = new File("Resources\\" + myActiveConference.getName() +".txt");
-			 BufferedReader reader = new BufferedReader(new FileReader(file));
-			 String line = "", oldtext = "";
-		 while((line = reader.readLine()) != null){
-			 oldtext += line + "\n";
-		 }
-		 reader.close();
-		 String newtext = oldtext.replaceAll(old, content);
-		  
-		 FileWriter writer = new FileWriter("Resources\\" + myActiveConference.getName() +".txt");
-         //"Resources\\" + myActiveConference.getName() +"REVIEW_" + fileName
-		 writer.write(newtext);writer.close();
-			} catch (IOException e) {
-			  e.printStackTrace();
-		    }
-    }
-    /**
-     * adds new loaded file to the recfile.
-     * @param s name of file
-     */
-    public static void addtoRecs(String s) {
-    	try {
+				+ (",") + getMyPapers().get(3).getFileHeader();
+		try{
+			File file = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				file = new File("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				file = new File("Resources"+ UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			String line = "", oldtext = "";
+			while((line = reader.readLine()) != null){
+				oldtext += line + "\n";
+			}
+			reader.close();
+			String newtext = oldtext.replaceAll(old, content);
+
+			FileWriter writer = null;
+			if (System.getProperty("os.name").startsWith("Windows")) {
+				writer = new FileWriter("Resources" + WIN_DIR + myActiveConference.getName() +".txt");
+			} else {
+				writer = new FileWriter("Resources" + UNIX_DIR + myActiveConference.getName() +".txt");
+			}
+			
+			writer.write(newtext);writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * adds new loaded file to the recfile.
+	 * @param s name of file
+	 */
+	public static void addtoRecs(String s) {
+		try {
 			String content = s + " " + 0 + " " + 0;
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Resources\\" + myActiveConference.getName() +"Recs.txt", true)));
 		    out.println(content);

@@ -7,6 +7,14 @@ import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
+/**
+ * The dialog window that will contain the login panel and components in order to allow the user to login.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
+ */
 public class LoginDialog extends JDialog {
 
 	/**

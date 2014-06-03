@@ -14,9 +14,18 @@ import exception.InvalidInputException;
 /**
  * Controller class for opening conference files and parsing them. This class is used
  * for gathering the conference data and allowing for easy data gathering.
- * @author Tim Loverin, Yeonil, Nick Ames, Rich
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class FileController extends Controller {
+	
+	private static final String WIN_DIR = "\\";
+	
+	private static final String UNIX_DIR = "/";
+	
 	/**
 	 * all author papers
 	 */
@@ -66,7 +75,13 @@ public class FileController extends Controller {
 	 * Reads the file and adds users to the conference.
 	 */
 	private void readFile() { 
-		File myfile = new File("Resources\\" + myConf + ".txt");
+		File myfile = null;
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			myfile = new File("Resources" + WIN_DIR + myConf + ".txt");
+		} else {
+			myfile = new File("Resources" + UNIX_DIR + myConf + ".txt");
+		}
+		
 		try {
 			Scanner file = new Scanner(new FileInputStream(myfile));
 			while (file.hasNext()) {
@@ -104,7 +119,12 @@ public class FileController extends Controller {
 		}   
 	}
 	private void readRecommendations() { 
-		File myfile = new File("Resources\\" + myConf + "Recs.txt");
+		File myfile = null;
+		if (System.getProperty("os.name").startsWith("Windows")) {
+			myfile = new File("Resources" + WIN_DIR + myConf + "Recs.txt");
+		} else {
+			myfile = new File("Resources" + UNIX_DIR + myConf + "Recs.txt");
+		}
 		try {
 			Scanner file = new Scanner(new FileInputStream(myfile));
 			while (file.hasNext()) {

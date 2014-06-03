@@ -28,12 +28,20 @@ import javax.swing.SwingConstants;
 
 import controller.Controller;
 /**
- * 
- * @author Tim Loverin, Nick Ames.
- * @version 6/2/2014
+ * Holds all the components to allow a reviewer to interact with and comment on a paper.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class ReviewerPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Dimension of screen.
 	 */

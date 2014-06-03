@@ -23,11 +23,19 @@ import model.Paper;
 
 import controller.Controller;
 /**
- * 
- * @author Tim Loverin, Nick Names
- * @version 6/2/2014
+ * Holds all components to allow the assigning of subchairs to papers.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class SubAssignPanel extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JLabel lblTitle;
 

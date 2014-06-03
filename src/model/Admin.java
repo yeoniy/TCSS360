@@ -6,7 +6,12 @@ package model;
 import java.util.ArrayList;
 //test
 /**
- * used for creating accounts and editting privledges,  assigning program chair.
+ * The admin is a user that is allowed to do all operation and initially create the confernece and Program Chair.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class Admin extends User {
     private ArrayList<Conference> conferences;

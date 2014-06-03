@@ -17,9 +17,11 @@ import exception.InvalidLoginException;
 
 /**
  * Controller for the login panel. Handles login and exit functions.
- * @version 5/18/2014
  * @author Nick Ames
- *
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class LoginController extends Controller implements ActionListener {
 	/**

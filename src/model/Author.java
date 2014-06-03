@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by Yeonil on 4/22/14.
+ * Represents an Author within the system.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
-
-// Test push Nick
 public class Author extends User {
     ArrayList<Paper> paper;
 

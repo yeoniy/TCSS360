@@ -8,7 +8,12 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 /**
- * Created by Yeonil on 4/22/14.
+ * The conference holds the information such as Users and the deadline of the conference.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class Conference extends Observable {
     private String name;

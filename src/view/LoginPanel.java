@@ -20,8 +20,11 @@ import controller.LoginController;
  * An implementation of a login panel for the ConferenceGui class. This login panel will
  * allow a user to login to a specific conference with their unique id and password.
  * 
- * @version 6/2/2014
- * @author Nick Ames, Tim Loverin.
+ * @author Nick Ames
+ * @author Richard Hemingway
+ * @author Tim Loverin
+ * @author Yeonil Yoo
+ * @version 6/3/2014
  */
 public class LoginPanel extends JPanel {	
     /**
@@ -65,10 +68,8 @@ public class LoginPanel extends JPanel {
         try {
 			initialize();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
@@ -107,6 +108,11 @@ public class LoginPanel extends JPanel {
 		this.add(btnLogin);
 		this.add(btnExit);
 
+		this.setFocusable(true);
+		this.requestFocusInWindow();
+		
+		txtUsername.setFocusable(true);
+		txtUsername.requestFocusInWindow();
 		txtPassword.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
