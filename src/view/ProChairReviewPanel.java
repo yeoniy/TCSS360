@@ -26,6 +26,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import model.Paper;
+import model.Type;
 import controller.Controller;
 /**
  * 
@@ -207,11 +208,21 @@ public class ProChairReviewPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("ACCEPT")) {
-					Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
-					lblStatus.setText("ACCEPTED");
+					if (Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
+						Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
+						lblStatus.setText("ACCEPTED");
+					} else {
+						Controller.setSCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
+						lblRec.setText("ACCEPTED");
+					}
 				} else if (btn.getText().equals("REJECT")) {
-					Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
-					lblStatus.setText("REJECTED");
+					if (Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
+						Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
+						lblStatus.setText("REJECTED");
+					} else {
+						Controller.setSCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
+						lblRec.setText("REJECTED");
+					}
 				} else if (btn.getText().equals("View")) {
 					JFrame frame = new JFrame(cmbProPaperSelect.getSelectedItem().toString());
 					frame.setVisible(true);
