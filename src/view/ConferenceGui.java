@@ -6,8 +6,6 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import model.Author;
@@ -97,6 +95,7 @@ public class ConferenceGui extends JFrame {
 		mainPanel.add(new ReviewerPanel(mainPanel), "reviewer");
 		mainPanel.add(new StatsPanel(mainPanel), "stats");
 		mainPanel.add(new SubAssignPanel(mainPanel), "subAssign");
+		mainPanel.add(new AdminPanel(mainPanel), "admin");
 		
 		CardLayout c = (CardLayout) mainPanel.getLayout();
 		c.show(mainPanel, "entry");
@@ -123,11 +122,15 @@ public class ConferenceGui extends JFrame {
 	public static void startConf() {
 		Component[] c = mainPanel.getComponents();
 		for (Component a : c) {
-			if (a instanceof EntryPanel) {
+			if (Controller.getCurrentUser().getMyType() != model.Type.ADMIN && a instanceof EntryPanel) {
 				((EntryPanel) a).updateUserInformation();
+				break;
+			} else if (Controller.getCurrentUser().getMyType() == model.Type.ADMIN && a instanceof AdminPanel) {
+				CardLayout cc = (CardLayout) mainPanel.getLayout();
+				cc.show(mainPanel, "admin");
+				((AdminPanel) a).updateUserInformation();
 				break;
 			}
 		}
 	}
-
 }
