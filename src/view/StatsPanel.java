@@ -166,6 +166,7 @@ public class StatsPanel extends JPanel {
 		
 		// Text Area
 		txtComments = new JTextArea();
+		txtComments.setEditable(false);
 		txtComments.setBounds(29, 177, 380, 160);
 		
 		// Add
@@ -201,12 +202,14 @@ public class StatsPanel extends JPanel {
             }
         } if(Controller.getUserType().equals(Type.REVIEWER)) {
             String s = "";
-            for(int i = 0; i < comment.length; i++) {
-                if(comment[i].getId().equals(Controller.getCurrentUser().getId())){
-                    s += comment[i].getComment() + "\n";
+            if (comment != null) {
+            	for(int i = 0; i < comment.length; i++) {
+                    if(comment[i].getId().equals(Controller.getCurrentUser().getId())){
+                        s += comment[i].getComment() + "\n";
+                    }
                 }
+                txtComments.setText(s);
             }
-            txtComments.setText(s);
         } else {
             String s = "";
             for(int i = 0; i < comment.length; i++) {

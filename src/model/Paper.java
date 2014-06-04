@@ -111,6 +111,17 @@ public class Paper extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+    
+    @Override
+    public boolean equals(Object o) {
+    	if (o instanceof Paper) {
+    		Paper p = (Paper) o;
+    		if (p.getFileName().equals(this.fileName)) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 
     public String toString() {
     	return fileName;

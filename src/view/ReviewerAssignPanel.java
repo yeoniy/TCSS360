@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -20,9 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import view.SubAssignPanel.MyItemListener;
-
 import model.Paper;
-
 import controller.Controller;
 /**
  * Holds all the components for assigning a paper to a reviewer.
@@ -54,14 +53,14 @@ public class ReviewerAssignPanel extends JPanel {
 	private boolean test;
 	
 	private JComboBox<String> cmbReviewerBox;
-	private JComboBox<String> cmbPaperSelectBox;
+	private JLabel lblPaperSelect;
 
 	private JScrollPane reviewerPane;
 	private JScrollPane authorSelectPane;
 
 	private JTextArea txtReviewers;
 
-	private JList authorSelectList;
+	private JList<String> paperList;
 	
 	private MainPanel myMainPanel;
 	private ReviewerAssignListener myListener;
@@ -123,15 +122,14 @@ public class ReviewerAssignPanel extends JPanel {
 		MyItemListener actionListener = new MyItemListener();
 		cmbReviewerBox.addItemListener(actionListener);
 
-		cmbPaperSelectBox = new JComboBox<String>();
-		cmbPaperSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
-		cmbPaperSelectBox.setBounds(192, 65, 157, 20);
+		lblPaperSelect = new JLabel("Please Select a Paper...");
+		lblPaperSelect.setBounds(192, 65, 157, 20);
 		// Text Area
 		txtReviewers = new JTextArea();
 		txtReviewers.setEditable(false);
 
 		// List
-		authorSelectList = new JList();
+		paperList = new JList<String>();
 
 		// Scroll Panes
 		reviewerPane = new JScrollPane();
@@ -140,7 +138,7 @@ public class ReviewerAssignPanel extends JPanel {
 		
 		authorSelectPane = new JScrollPane();
 		authorSelectPane.setBounds(192, 93, 157, 203);
-		authorSelectPane.setViewportView(authorSelectList);
+		authorSelectPane.setViewportView(paperList);
 
 
 
@@ -151,7 +149,7 @@ public class ReviewerAssignPanel extends JPanel {
 		add(btnRemove);
 		add(btnBack);
 		add(cmbReviewerBox);
-		add(cmbPaperSelectBox);
+		add(lblPaperSelect);
 		add(reviewerPane);
 		add(authorSelectPane);
 
@@ -167,12 +165,12 @@ public class ReviewerAssignPanel extends JPanel {
 		}
 		String[] papers = new String[size];
 		for (int i = 0; i < papers.length; i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
-				papers[i] = Controller.getMyPapers().get(i).getFileName();	
-				if(!test) {
-					cmbPaperSelectBox.addItem(Controller.getMyPapers().get(i).getFileName());
-				}
+			if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
+				papers[i] = Controller.getAllPapers().get(i).getFileName();
 		}
+		if(!test) {
+			paperList.setListData(papers);
+		}	
 		test = true;
 	}
 	/**
@@ -212,23 +210,27 @@ public class ReviewerAssignPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
-					ArrayList<Paper> p = new ArrayList<Paper>();
-					for (int i = 0; i < Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).size(); i++) {
-						if (!Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).get(i).getFileName().equals("empty.txt")) {
-							p.add(Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).get(i));
-						} else {
-							
+					if (cmbReviewerBox.getSelectedIndex() > 0) {
+						ArrayList<Paper> p = new ArrayList<Paper>();
+						for (int i = 0; i < Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).size(); i++) {
+							if (!Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).get(i).getFileName().equals("empty.txt")) {
+								p.add(Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).get(i));
+							}
 						}
-					}
-					if (p.size() < 4) {
-						Controller.assignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
-						updateText();
+						if (p.size() < 4 && !Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).contains(new Paper(new File(paperList.getSelectedValue())))) {
+							Controller.assignPaper(paperList.getSelectedValue(),cmbReviewerBox.getSelectedItem().toString());
+							updateText();
+						} else {
+							JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers or paper already assigned.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Please select a Sub-Chair before assigning.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else if (btn.getText().equals("Remove")) {
-					Controller.deAssignPaper(cmbPaperSelectBox.getSelectedItem().toString(),cmbReviewerBox.getSelectedItem().toString());
-					updateText();
+					if (cmbReviewerBox.getSelectedIndex() > 0) {
+						Controller.deAssignPaper(paperList.getSelectedValue(),cmbReviewerBox.getSelectedItem().toString());
+						updateText();
+					}
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");
@@ -253,6 +255,8 @@ public class ReviewerAssignPanel extends JPanel {
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
 		      		if(!cb.getSelectedItem().toString().equals("Select a Reviewer...")) {
 		      			updateText();
+		      		} else {
+		      			txtReviewers.setText("");
 		      		}
 		 
 		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {

@@ -19,6 +19,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -191,6 +192,7 @@ public class ReviewerPanel extends JPanel {
 				if (btn.getText().equals("Submit Review")) {
 				    Controller.writeReviewPaper(cmbPaperSelectBox.getSelectedItem().toString(), Controller.getCurrentUser().getId(),
                             reviewRatingSpinner.getValue().toString(),txtComments.getText());
+				    JOptionPane.showMessageDialog(null, "Review has been submitted!");
                     //TODO get spinner info
                     //TODO remove paper from reviewers list and update
 				}else if (btn.getText().equals("View Paper")){

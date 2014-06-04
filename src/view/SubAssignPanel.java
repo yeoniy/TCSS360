@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -20,7 +21,6 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import model.Paper;
-
 import controller.Controller;
 /**
  * Holds all components to allow the assigning of subchairs to papers.
@@ -52,10 +52,10 @@ public class SubAssignPanel extends JPanel {
 	private boolean ran;
 
 	private JComboBox<String> cmbSubSelectBox;
-	private JComboBox<String> cmbSubAuthorSelectBox;
+	private JLabel lblPaperSelect;
 
 	private JScrollPane reviewerPane;
-	private JScrollPane authorSelectPane;
+	private JScrollPane paperSelectPane;
 
 	private JTextArea txtSubAssignedPapers;
 
@@ -118,26 +118,25 @@ public class SubAssignPanel extends JPanel {
 		MyItemListener actionListener = new MyItemListener();
 		cmbSubSelectBox.addItemListener(actionListener);
 
-		cmbSubAuthorSelectBox = new JComboBox<String>();
-		cmbSubAuthorSelectBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Select a paper..."}));
-		cmbSubAuthorSelectBox.setBounds(192, 65, 157, 20);
+		lblPaperSelect = new JLabel("Please Select a Paper...");
+		lblPaperSelect.setBounds(192, 65, 157, 20);
 
 		// Text Area
 		txtSubAssignedPapers = new JTextArea();
 		txtSubAssignedPapers.setEditable(false);
 
 		// List
-		subAssignPaperList = new JList();
-		paperList = new JList();
+		subAssignPaperList = new JList<String>();
+		paperList = new JList<String>();
 
 		// Scroll Panes
 		reviewerPane = new JScrollPane();
 		reviewerPane.setBounds(10, 93, 172, 203);
 		reviewerPane.setViewportView(txtSubAssignedPapers);
 
-		authorSelectPane = new JScrollPane();
-		authorSelectPane.setBounds(192, 93, 157, 203);
-		authorSelectPane.setViewportView(subAssignPaperList);
+		paperSelectPane = new JScrollPane();
+		paperSelectPane.setBounds(192, 93, 157, 203);
+		paperSelectPane.setViewportView(paperList);
 
 
 		// Add
@@ -147,9 +146,9 @@ public class SubAssignPanel extends JPanel {
 		add(btnRemove);
 		add(btnBack);
 		add(cmbSubSelectBox);
-		add(cmbSubAuthorSelectBox);
+		add(lblPaperSelect);
 		add(reviewerPane);
-		add(authorSelectPane);
+		add(paperSelectPane);
 
 	}
 	/**
@@ -180,10 +179,10 @@ public class SubAssignPanel extends JPanel {
 		for (int i = 0; i < papers.length; i++) {
 			if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
 				papers[i] = Controller.getAllPapers().get(i).getFileName();
-				if(!test) {
-					cmbSubAuthorSelectBox.addItem(papers[i]);
-				}	
 		}
+		if(!test) {
+			paperList.setListData(papers);
+		}	
 		test = true;
 	//	paperList.setListData(papers);
 	} 
@@ -208,24 +207,27 @@ public class SubAssignPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
-					ArrayList<Paper> p = new ArrayList<Paper>();
-					for (int i = 0; i < Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).size(); i++) {
-						if (!Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).get(i).getFileName().equals("empty.txt")) {
-							p.add(Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).get(i));
-						} else {
-							
+					if (cmbSubSelectBox.getSelectedIndex() > 0) {
+						ArrayList<Paper> p = new ArrayList<Paper>();
+						for (int i = 0; i < Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).size(); i++) {
+							if (!Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).get(i).getFileName().equals("empty.txt")) {
+								p.add(Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).get(i));
+							}
 						}
-					}
-					if (p.size() < 4) {
-						Controller.assignPaper(cmbSubAuthorSelectBox.getSelectedItem().toString(),cmbSubSelectBox.getSelectedItem().toString());
-						updateText();
+						if (p.size() < 4 && !Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).contains(new Paper(new File(paperList.getSelectedValue())))) {
+							Controller.assignPaper(paperList.getSelectedValue(),cmbSubSelectBox.getSelectedItem().toString());
+							updateText();
+						} else {
+							JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers or paper already assigned.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Please select a Sub-Chair before assigning.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
-				
 				} else if (btn.getText().equals("Remove")) {
-					Controller.deAssignPaper(cmbSubAuthorSelectBox.getSelectedItem().toString(),cmbSubSelectBox.getSelectedItem().toString());
-					updateText();
+					if (cmbSubSelectBox.getSelectedIndex() > 0) {
+						Controller.deAssignPaper(paperList.getSelectedValue(),cmbSubSelectBox.getSelectedItem().toString());
+						updateText();
+					}
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");
@@ -250,6 +252,8 @@ public class SubAssignPanel extends JPanel {
 		    if (evt.getStateChange() == ItemEvent.SELECTED) {
 		      		if(!cb.getSelectedItem().toString().equals("Select a Sub-Chair...")) {
 		      			updateText();
+		      		} else {
+		      			txtSubAssignedPapers.setText("");
 		      		}
 		      		
 		 
