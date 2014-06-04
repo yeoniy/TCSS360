@@ -176,6 +176,7 @@ public class EntryPanel extends JPanel {
 			btnStats.setEnabled(true);
 			btnAssignReviewers.setEnabled(true);
 			btnProReview.setEnabled(true);
+			btnProReview.setText("Review Paper");
 		} else if(T == Type.PROCHAIR) {
 			btnReview.setEnabled(false);
 			btnAssignReviewers.setEnabled(false);

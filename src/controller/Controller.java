@@ -663,4 +663,98 @@ public class Controller {
 		}
 		return writer;
 	}
+	
+	public static void createNewConference(String name, String date, User user) throws IOException {
+		File f = getTheFile(name + ".txt");
+		if (f.createNewFile()) {
+			FileWriter fw = new FileWriter(f);
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+			// Create a new file for the conference and add the PC
+			bw.write(user.getName() + "," + user.getId() + "," + user.getPassword() + "," + user.getMyType());
+			for (int i = 0; i < 4; i++) {
+				bw.write(",empty");
+			}
+			bw.write("\n");
+			bw.close();
+			fw.close();
+			
+			// Append to conference list
+			File c = getTheFile("Conference.txt");
+			FileWriter cw = new FileWriter(c, true);
+			cw.append(name + "," + date + "," + name + " Sympo");
+			cw.close();
+		} else {
+			throw new IOException("The file already exists.");
+		}
+	}
+
+	public static String[] getConferences() throws IOException {
+		File f = getTheFile("Conference.txt");
+		FileReader fr = new FileReader(f);
+		BufferedReader br = new BufferedReader(fr);
+		ArrayList<String> list = new ArrayList<String>();
+		String[] s;
+		while (br.ready()) {
+			String t = br.readLine();
+			s = t.split(",");
+			list.add(s[0]);
+		}
+		br.close();
+		fr.close();
+		s = new String[list.size()];
+		for (int i = 0; i < s.length; i++) {
+			s[i] = list.get(i);
+		}
+		return s;
+	}
+
+	public static String getConferenceDeadline(String name) throws IOException {
+		File f = getTheFile("Conference.txt");
+		FileReader fr = new FileReader(f);
+		BufferedReader br = new BufferedReader(fr);
+		ArrayList<String> list = new ArrayList<String>();
+		String[] s;
+		while (br.ready()) {
+			String t = br.readLine();
+			s = t.split(",");
+			if (name != null && name.equals(s[0])) {
+				br.close();
+				fr.close();
+				return s[1];
+			}
+		}
+		br.close();
+		fr.close();
+		return "";
+	}
+
+	public static void removeConference(String name) throws IOException {
+		File f = getTheFile(name + ".txt");
+		f.delete();
+		
+		File c = getTheFile("Conference.txt");
+		FileReader fr = new FileReader(c);
+		BufferedReader br = new BufferedReader(fr);
+		ArrayList<String> list = new ArrayList<String>();
+		while (br.ready()) {
+			list.add(br.readLine());
+		}
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).startsWith(name)) {
+				list.remove(i);
+				break;
+			}
+		}
+		br.close();
+		fr.close();
+		
+		FileWriter fw = new FileWriter(c);
+		BufferedWriter bw = new BufferedWriter(fw);
+		for (String s : list) {
+			bw.write(s + "\n");
+		}
+		bw.close();
+		fw.close();
+	}
 }

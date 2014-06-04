@@ -1,5 +1,1 @@
 Seattle,2014/4/6,Seattle Sympo
-Tacoma,2014/7/6,Tacoma Sympo
-Tacoma2,2014/9/22,UW Tacoma Conf
-Federalway,2014/2/8,Federalway Sympo
-Gotham,2014/10/5,Gotham Sympo

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import model.Conference;
+import model.User;
 import controller.Controller;
 /**
  * The main entry panel for the user. This panel contains navigation based on the user type.
@@ -37,13 +39,13 @@ public class AdminPanel extends JPanel {
 	private JLabel lblConferences;
 
 	private Conference c;
-	
+
 	private JButton btnCreateConference;
 	private JButton btnRemoveConference;
 	private JButton btnExit;
-	
+
 	private JScrollPane listPane;
-	
+
 	private JList<String> conferenceList;
 
 	private MainPanel myMainPanel;
@@ -73,7 +75,7 @@ public class AdminPanel extends JPanel {
 		// Username Label
 		lblUsername = new JLabel("User:");
 		lblUsername.setBounds(60, 47, 424, 14);
-		
+
 		// Conferences
 		lblConferences = new JLabel("Conferences:");
 		lblConferences.setBounds(60, 180, 268, 14);
@@ -91,7 +93,7 @@ public class AdminPanel extends JPanel {
 		lblConference.setBounds(60, 130, 268, 14);
 
 		// Deadline Label
-		lblDeadline = new JLabel("Current Deadline:");
+		lblDeadline = new JLabel("Deadline:");
 		lblDeadline.setBounds(60, 156, 300, 14);
 
 		/*
@@ -117,19 +119,28 @@ public class AdminPanel extends JPanel {
 
 		listPane = new JScrollPane();
 		listPane.setBounds(60, 200, 310, 110);
-		
+
 		conferenceList = new JList<String>();
 		conferenceList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				String a = "Conference: " + conferenceList.getSelectedValue();
 				lblConference.setText(a);
 				
-				// TODO: Get the conference deadline here and update the lblDeadline
+				// Get the deadline
+				try {
+					lblDeadline.setText("Deadline: " + Controller.getConferenceDeadline(conferenceList.getSelectedValue()));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
-		
+		try {
+			conferenceList.setListData(Controller.getConferences());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		listPane.setViewportView(conferenceList);
-		
+
 		/*
 		 * Add Components to Panel
 		 */
@@ -147,6 +158,7 @@ public class AdminPanel extends JPanel {
 		add(listPane);
 	}
 
+	
 	/**
 	 * 
 	 * @author Tim Loverin, Nick Ames.
@@ -185,16 +197,47 @@ public class AdminPanel extends JPanel {
 
 		// TODO
 		private void removeAConference() {
-			// TODO Auto-generated method stub
+			int i = JOptionPane.showConfirmDialog(null, "Are you sure you wish to remove " + conferenceList.getSelectedValue() + "?");
 			
+			if (i == JOptionPane.OK_OPTION) {
+				try {
+					Controller.removeConference(conferenceList.getSelectedValue());
+					JOptionPane.showMessageDialog(null, conferenceList.getSelectedValue() + " has been removed.");
+					
+					conferenceList.setListData(Controller.getConferences());
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
-		// TODO
 		private void createAConference() {
-			
+			try {
+				String cName, cDate, uName, uPass;
+				cName = JOptionPane.showInputDialog("Please enter the name of the Conference:");
+
+				String[] s = Controller.getConferences();
+				for (int i = 0; i < s.length; i++) {
+					if (s[i].equals(cName)) {
+						JOptionPane.showMessageDialog(null, "A conference with that name already exists! Please remove it in order to create a new one.", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+				}
+				cDate = JOptionPane.showInputDialog("Please enter the deadline of the conference in the format yyyy/mm/dd");
+				uName = JOptionPane.showInputDialog("Please enter the username of the Program Chair:");
+				uPass = JOptionPane.showInputDialog("Please enter the password of the Program Chair:");
+				Controller.createNewConference(cName, cDate, new User(uName, "ID0", uPass, model.Type.PROCHAIR));
+				JOptionPane.showMessageDialog(null, "Conference created!");
+				
+				conferenceList.setListData(Controller.getConferences());
+				
+			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null, "Error creating the file. The file may already exists or another error has occurred.", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
-	
+
 	public void updateUserInformation() {
 		lblUsername.setText(lblUsername.getText() + " " + Controller.getCurrentUser().getName());
 		lblID.setText(lblID.getText() + " " + Controller.getCurrentUser().getId());

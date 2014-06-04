@@ -48,7 +48,7 @@ public class ProChairReviewPanel extends JPanel {
 	 * Dimension of screen.
 	 */
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-	
+
 	private JLabel lblTitle;
 	private JLabel lblViewReviewsFor;
 	private JLabel lblAverageRating;
@@ -63,7 +63,7 @@ public class ProChairReviewPanel extends JPanel {
 	 */
 	private boolean ran;
 	private boolean test;
-	
+
 	private JButton btnAccept;
 	private JButton btnReject;
 	private JButton btnView;
@@ -73,7 +73,7 @@ public class ProChairReviewPanel extends JPanel {
 	private JComboBox<String> cmbProPaperSelect;
 
 	private JTextArea txtComments;
-	
+
 	private MainPanel myMainPanel;
 	private ProChairListener myListener;
 	/**
@@ -184,15 +184,15 @@ public class ProChairReviewPanel extends JPanel {
 		add(cmbProPaperSelect);
 		add(txtComments);
 	}
-    private void loadComment(String file) {
-        FileController con = new FileController(Controller.myActiveConference);
-        Comment[] comment = con.getReviewPaper(file);
-        String s = "";
-        for(int i = 0; i < comment.length; i++) {
-            s += comment[i].getComment() + "\n";
-        }
-        txtComments.setText(s);
-    }
+	private void loadComment(String file) {
+		FileController con = new FileController(Controller.myActiveConference);
+		Comment[] comment = con.getReviewPaper(file);
+		String s = "";
+		for(int i = 0; i < comment.length; i++) {
+			s += comment[i].getComment() + "\n";
+		}
+		txtComments.setText(s);
+	}
 	/**
 	 * loads authors into combo box.
 	 */
@@ -222,9 +222,9 @@ public class ProChairReviewPanel extends JPanel {
 			for (int i = 0; i < papers.length; i++) {
 				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
 					papers[i] = Controller.getMyPapers().get(i).getFileName();	
-					if(!test) {
-						cmbProPaperSelect.addItem(Controller.getMyPapers().get(i).getFileName());
-					}
+				if(!test) {
+					cmbProPaperSelect.addItem(Controller.getMyPapers().get(i).getFileName());
+				}
 			}
 			test = true;
 		}
@@ -283,19 +283,19 @@ public class ProChairReviewPanel extends JPanel {
 					frame.add(pane, BorderLayout.CENTER);
 					frame.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
 					try {
-					File file = new File("Resources\\" + cmbProPaperSelect.getSelectedItem().toString());
-					FileReader fr = new FileReader(file);
-					BufferedReader br = new BufferedReader(fr);
-					String line = "";
-					    while(br.ready())    {  
-					         line += br.readLine() + "\r\n";   
-					    }
-					    list.setText(line);
+						File file = new File("Resources\\" + cmbProPaperSelect.getSelectedItem().toString());
+						FileReader fr = new FileReader(file);
+						BufferedReader br = new BufferedReader(fr);
+						String line = "";
+						while(br.ready())    {  
+							line += br.readLine() + "\r\n";   
+						}
+						list.setText(line);
 					}
 					catch(IOException e1) {
-					    System.out.println("Error opening file");
+						System.out.println("Error opening file");
 					}
-		
+
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");
@@ -311,59 +311,59 @@ public class ProChairReviewPanel extends JPanel {
 	 * @version 6/2/2014
 	 */
 	class MyItemListener implements ItemListener {
-		  // This method is called only if a new item has been selected.
-		  public void itemStateChanged(ItemEvent evt) {
-		    JComboBox cb = (JComboBox) evt.getSource();
+		// This method is called only if a new item has been selected.
+		public void itemStateChanged(ItemEvent evt) {
+			JComboBox cb = (JComboBox) evt.getSource();
 
-		    Object item = evt.getItem();
+			Object item = evt.getItem();
 
-		    if (evt.getStateChange() == ItemEvent.SELECTED) {
-		    	if(!cb.getSelectedItem().toString().equals("Select an Author...")) {
-		    		assignPapers(cb.getSelectedItem().toString());
-		    	} else {
-		    		
-		    	}
-		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
-		      // Item is no longer selected
-		    }
-		  }
+			if (evt.getStateChange() == ItemEvent.SELECTED) {
+				if(!cb.getSelectedItem().toString().equals("Select an Author...")) {
+					assignPapers(cb.getSelectedItem().toString());
+				} else {
+
+				}
+			} else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+				// Item is no longer selected
+			}
+		}
 	}
 	class MyItemListener2 implements ItemListener {
-		  // This method is called only if a new item has been selected.
-		  public void itemStateChanged(ItemEvent evt) {
-		    JComboBox cb = (JComboBox) evt.getSource();
+		// This method is called only if a new item has been selected.
+		public void itemStateChanged(ItemEvent evt) {
+			JComboBox cb = (JComboBox) evt.getSource();
 
-		    Object item = evt.getItem();
-		    int x = 0;
-		    int y = 0;
-		    if (evt.getStateChange() == ItemEvent.SELECTED) {
-		    	//if(Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
-		    		if(!cb.getSelectedItem().toString().equals("Select a Paper...")) {
+			Object item = evt.getItem();
+			int x = 0;
+			int y = 0;
+			if (evt.getStateChange() == ItemEvent.SELECTED) {
+				//if(Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
+				if(!cb.getSelectedItem().toString().equals("Select a Paper...")) {
 
-		    			x = Controller.getPCrec(cb.getSelectedItem().toString());
-		      			y = Controller.getSCrec(cb.getSelectedItem().toString());
-		      			if (x == 0) {
-		      				lblStatus.setText("Pending");
-		      			} else if (x == 1) {
-		      				lblStatus.setText("REJECTED");
-		      			} else if (x == 2) {
-		      				lblStatus.setText("ACCEPTED");
-		      			}
-		      			if (y == 0) {
-		      				lblRec.setText("Pending");
-		      			}else if (y == 1) {
-		      				lblRec.setText("REJECT");
-		      			}else if (y == 2) {
-		      				lblRec.setText("ACCEPT");
-		      			}
-                       // loadComment(cb.getSelectedItem().toString());
-		    		} else {
-		    		
-		    		}
-		    	
-		    } else if (evt.getStateChange() == ItemEvent.DESELECTED) {
-		      // Item is no longer selected
-		    }
-		  }
+					x = Controller.getPCrec(cb.getSelectedItem().toString());
+					y = Controller.getSCrec(cb.getSelectedItem().toString());
+					if (x == 0) {
+						lblStatus.setText("Pending");
+					} else if (x == 1) {
+						lblStatus.setText("REJECTED");
+					} else if (x == 2) {
+						lblStatus.setText("ACCEPTED");
+					}
+					if (y == 0) {
+						lblRec.setText("Pending");
+					}else if (y == 1) {
+						lblRec.setText("REJECT");
+					}else if (y == 2) {
+						lblRec.setText("ACCEPT");
+					}
+					// loadComment(cb.getSelectedItem().toString());
+				} else {
+
+				}
+
+			} else if (evt.getStateChange() == ItemEvent.DESELECTED) {
+				// Item is no longer selected
+			}
+		}
 	}
 }
