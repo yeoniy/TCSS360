@@ -79,6 +79,16 @@ public class LoginController extends Controller implements ActionListener {
 				}
 				// Update everything
 				update();
+			} else if (btn.getText().equals("Sign Up")) {
+				String uName, uPass;
+				uName = JOptionPane.showInputDialog("Please enter a Username:");
+				uPass = JOptionPane.showInputDialog("Please enter a Password:");
+				
+				if (uName != null && uPass != null) {
+					Controller.addUserToConference(new User(uName, uName + "0", uPass, Type.AUTHOR), myPanel.getConference());
+					JOptionPane.showMessageDialog(null, uName + " was added to the conference!");
+				}
+				
 			} else {    //Action for Exit button
 				// Exit the program
 				System.exit(0);

@@ -5,7 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -156,12 +157,22 @@ public class PaperPanel extends JPanel {
 	 * @version 6/2/2014
 	 */
 	private class PaperPanelListener implements ActionListener{
+		@SuppressWarnings("deprecation")
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() instanceof JButton) {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Submit")) {
+					Date d = Controller.getCurrentConference().getDate();
+					Date today = new Date();
+					today.setYear(today.getYear() + 1900);
+					
+					// DONT TOUCH
+					if (today.after(d)) {
+						JOptionPane.showMessageDialog(null, "Cannot submit a paper. The conference is closed.", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 					if (paperList.getModel().getSize() < 4) {
 						JFileChooser chooser = new JFileChooser();
 						int i = chooser.showOpenDialog(null);

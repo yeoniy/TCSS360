@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 
 import view.SubAssignPanel.MyItemListener;
 import model.Paper;
+import model.User;
 import controller.Controller;
 /**
  * Holds all the components for assigning a paper to a reviewer.
@@ -211,6 +212,12 @@ public class ReviewerAssignPanel extends JPanel {
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
 					if (cmbReviewerBox.getSelectedIndex() > 0) {
+						String uID = Controller.getUserID(cmbReviewerBox.getSelectedItem().toString());
+						String paperID = Controller.getPaperID(paperList.getSelectedValue());
+						if (uID.equals(paperID)) {
+							JOptionPane.showMessageDialog(null, "Cannot assign a reviewer their own paper.", "Error", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
 						ArrayList<Paper> p = new ArrayList<Paper>();
 						for (int i = 0; i < Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).size(); i++) {
 							if (!Controller.getUserPapers(cmbReviewerBox.getSelectedItem().toString()).get(i).getFileName().equals("empty.txt")) {

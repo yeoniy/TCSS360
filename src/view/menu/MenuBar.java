@@ -47,15 +47,16 @@ public class MenuBar extends JMenuBar {
     private void fileSetup() {
         fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
-        final JMenuItem submitFile = new JMenuItem("Submit Paper");
+        final JMenuItem submitFile = new JMenuItem("Exit");
         fileMenu.add(submitFile);
-        submitFile.setMnemonic(KeyEvent.VK_S);
+        submitFile.setMnemonic(KeyEvent.VK_X);
         submitFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //SubmitDialog s = new SubmitDialog();
-                //String path = s.getFilePath();
-                //ctrl.addPaper(author, path);
+            	int a = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
+            	if (a == JOptionPane.OK_OPTION) {
+                    System.exit(0);
+            	}
             }
         });
     }

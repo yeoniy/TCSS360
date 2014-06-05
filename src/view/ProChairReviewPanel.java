@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -24,11 +25,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-import controller.FileController;
 import model.Comment;
 import model.Paper;
 import model.Type;
 import controller.Controller;
+import controller.FileController;
 /**
  * Review panel for the program chair. This panel will allow the user to accept/reject, etc.
  * @author Nick Ames
@@ -189,12 +190,19 @@ public class ProChairReviewPanel extends JPanel {
 		Comment[] comment = con.getReviewPaper(file);
 		String s = "";
         int rating = 0;
-		for(int i = 0; i < comment.length; i++) {
-			s += comment[i].getComment() + "\n";
-            rating += Integer.parseInt(comment[i].getRate());
-		}
-		txtComments.setText(s);
-        lblRating.setText(Integer.toString(rating/comment.length));
+        txtComments.setText("");
+        if (comment != null) {
+        	for(int i = 0; i < comment.length; i++) {
+    			s += comment[i].getComment() + "\r\n";
+                rating += Integer.parseInt(comment[i].getRate());
+    		}
+        	txtComments.setText(s);
+            lblRating.setText(Integer.toString(rating/comment.length));
+        } else {
+        	txtComments.setText(s);
+            lblRating.setText("");
+        }
+		
 	}
 	/**
 	 * loads authors into combo box.
@@ -238,8 +246,9 @@ public class ProChairReviewPanel extends JPanel {
 	 */
 	private void assignPapers(String s) {
 		cmbProPaperSelect.removeAllItems();
-		for (int i = 0; i < Controller.getUserPapers(s).size(); i++) {
-			if(!Controller.getUserPapers(s).get(i).getFileName().equals("empty.txt")) {
+		ArrayList<Paper> papers = Controller.getUserPapers(s);
+		for (int i = 0; i < papers.size(); i++) {
+			if(!papers.get(i).getFileName().equals("empty.txt")) {
 				cmbProPaperSelect.addItem(Controller.getUserPapers(s).get(i).getFileName());
 			}
 		}

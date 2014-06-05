@@ -109,7 +109,7 @@ public class FileController extends Controller {
 					type = Type.ADMIN;
 				}
 				addUser(username, ID, password, type);
-				addPapers(p1,p2,p3,p4, type);
+				addPapers(p1,p2,p3,p4, type, line[1]);
 				addToConference(myUser);
 			}
 			file.close();
@@ -177,8 +177,9 @@ public class FileController extends Controller {
 	 * @param s2 second paper file string name.
 	 * @param s3 third paper file string name.
 	 * @param s4 fourth paper file string name
+	 * @param id 
 	 */
-	private void addPapers(String s1, String s2, String s3, String s4, Type type) {
+	private void addPapers(String s1, String s2, String s3, String s4, Type type, String id) {
 		ArrayList<String> temp = new ArrayList<String>();
 		temp.add(s1);
 		temp.add(s2);
@@ -186,12 +187,12 @@ public class FileController extends Controller {
 		temp.add(s4);
 		for (int i = 0; i < temp.size(); i++) {
 			if(temp.get(i).toLowerCase().equals("empty")) {
-				Paper epaper = new Paper(new File("empty.txt")); //blank text document
+				Paper epaper = new Paper(new File("empty.txt"), id); //blank text document
 				myPapers.add(epaper);
 				maxPapers.add(epaper);
 			} else {
 				File tempfile = new File(temp.get(i));
-				Paper paper = new Paper(tempfile);
+				Paper paper = new Paper(tempfile, id);
 				myPapers.add(paper);
 				if(type == Type.AUTHOR) {
 					allPapers.add(paper);
@@ -244,7 +245,7 @@ public class FileController extends Controller {
             Scanner file = new Scanner(new FileInputStream(myfile));
             String fullString = "";
             while (file.hasNext()) {
-                fullString += file.nextLine();
+                fullString += file.nextLine() + "\n";
             }
             file.close();
             //Checking if file is empty or not

@@ -26,7 +26,7 @@ public class LoginDialog extends JDialog {
 	public LoginDialog(ConferenceGui parentFrame) {
 		super(parentFrame, "Login");
 		add(new LoginPanel(this));
-		this.setPreferredSize(new Dimension(200, 150));
+		this.setPreferredSize(new Dimension(250, 150));
 		setLocation(SCREEN_SIZE.width/2 - 150, SCREEN_SIZE.height/2 - 150);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		

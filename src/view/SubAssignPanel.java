@@ -208,6 +208,12 @@ public class SubAssignPanel extends JPanel {
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
 					if (cmbSubSelectBox.getSelectedIndex() > 0) {
+						String uID = Controller.getUserID(cmbSubSelectBox.getSelectedItem().toString());
+						String paperID = Controller.getPaperID(paperList.getSelectedValue());
+						if (uID.equals(paperID)) {
+							JOptionPane.showMessageDialog(null, "Cannot assign a sub-chair their own paper.", "Error", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
 						ArrayList<Paper> p = new ArrayList<Paper>();
 						for (int i = 0; i < Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).size(); i++) {
 							if (!Controller.getUserPapers(cmbSubSelectBox.getSelectedItem().toString()).get(i).getFileName().equals("empty.txt")) {

@@ -39,6 +39,7 @@ public class Paper extends Observable {
     private int accepted;
     private int screc;
     private String fileName;
+    private String id;
 
     public Paper(File file) {
         this.file  = file;
@@ -46,6 +47,16 @@ public class Paper extends Observable {
         accepted = PROCESS_PAPER;
         comment = new ArrayList<String>();
         fileName = file.getName();
+        id = "";
+    }
+    
+    public Paper(File file, String id) {
+        this.file  = file;
+        screc = PROCESS_PAPER;
+        accepted = PROCESS_PAPER;
+        comment = new ArrayList<String>();
+        fileName = file.getName();
+        this.id = id;
     }
 
 
@@ -126,4 +137,14 @@ public class Paper extends Observable {
     public String toString() {
     	return fileName;
     }
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }

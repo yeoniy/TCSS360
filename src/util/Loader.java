@@ -90,7 +90,8 @@ public final class Loader {
 			current = br.readLine();
             String[] list = current.split(",");
             String[] tempDate = list[DATE_INDEX].split("/");
-            Date date = new Date(Integer.parseInt(tempDate[YEAR_INDEX]), Integer.parseInt(tempDate[MONTH_INDEX]), Integer.parseInt(tempDate[DAY_INDEX]));
+            @SuppressWarnings("deprecation")
+			Date date = new Date(Integer.parseInt(tempDate[YEAR_INDEX]), Integer.parseInt(tempDate[MONTH_INDEX]), Integer.parseInt(tempDate[DAY_INDEX]));
             Conference tempConference = new Conference(list[NAME_INDEX], date, list[ID_INDEX]);
 			conferenceList.add(tempConference);
 		}

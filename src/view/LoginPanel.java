@@ -35,6 +35,8 @@ public class LoginPanel extends JPanel {
 	 * Login Button.
 	 */
 	private JButton btnLogin;
+	
+	private JButton btnSignUp;
 	/**
 	 * Logout Button.
 	 */
@@ -87,6 +89,8 @@ public class LoginPanel extends JPanel {
 		btnLogin.addActionListener(ctrlLogin);
 		btnExit = new JButton("Exit");
 		btnExit.addActionListener(ctrlLogin);
+		btnSignUp = new JButton("Sign Up");
+		btnSignUp.addActionListener(ctrlLogin);
 		txtUsername = new JTextField();
 		txtUsername.setPreferredSize(new Dimension(100, 20));
 		txtPassword = new JPasswordField();
@@ -106,6 +110,7 @@ public class LoginPanel extends JPanel {
 		this.add(txtPassword);
 		this.add(cmbConferences);
 		this.add(btnLogin);
+		this.add(btnSignUp);
 		this.add(btnExit);
 
 		this.setFocusable(true);
