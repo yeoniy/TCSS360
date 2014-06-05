@@ -188,10 +188,13 @@ public class ProChairReviewPanel extends JPanel {
 		FileController con = new FileController(Controller.myActiveConference);
 		Comment[] comment = con.getReviewPaper(file);
 		String s = "";
+        int rating = 0;
 		for(int i = 0; i < comment.length; i++) {
 			s += comment[i].getComment() + "\n";
+            rating += Integer.parseInt(comment[i].getRate());
 		}
 		txtComments.setText(s);
+        lblRating.setText(Integer.toString(rating/comment.length));
 	}
 	/**
 	 * loads authors into combo box.
@@ -356,7 +359,7 @@ public class ProChairReviewPanel extends JPanel {
 					}else if (y == 2) {
 						lblRec.setText("ACCEPT");
 					}
-					// loadComment(cb.getSelectedItem().toString());
+					loadComment(cb.getSelectedItem().toString());
 				} else {
 
 				}

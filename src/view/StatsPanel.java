@@ -191,6 +191,8 @@ public class StatsPanel extends JPanel {
 	private void loadComment() {
 		FileController con = new FileController(Controller.myActiveConference);
 		Comment[] comment = con.getReviewPaper(cmbPaperBox.getSelectedItem().toString());
+        int rating = 0;
+        int count = 0;
 		if (comment != null) {
 			if(Controller.getUserType().equals(Type.AUTHOR)) {
 				int x = Controller.getPCrec(cmbPaperBox.getSelectedItem().toString());
@@ -198,8 +200,12 @@ public class StatsPanel extends JPanel {
 					String s = "";
 					for(int i = 0; i < comment.length; i++) {
 						s += comment[i].getComment() + "\n";
+                        rating += Integer.parseInt(comment[i].getRate());
+                        count++;
 					}
 					txtComments.setText(s);
+                    lblRating.setText(Integer.toString(rating/count));
+
 				}
 			} if(Controller.getUserType().equals(Type.REVIEWER)) {
 				String s = "";
@@ -207,16 +213,22 @@ public class StatsPanel extends JPanel {
 					for(int i = 0; i < comment.length; i++) {
 						if(comment[i].getId().equals(Controller.getCurrentUser().getId())){
 							s += comment[i].getComment() + "\n";
+                            rating += Integer.parseInt(comment[i].getRate());
+                            count++;
 						}
 					}
 					txtComments.setText(s);
+                    lblRating.setText(Integer.toString(rating/count));
 				}
 			} else {
 				String s = "";
 				for(int i = 0; i < comment.length; i++) {
 					s += comment[i].getComment() + "\n";
+                    rating += Integer.parseInt(comment[i].getRate());
+                    count++;
 				}
 				txtComments.setText(s);
+                lblRating.setText(Integer.toString(rating/count));
 			}
 		}
 	}
