@@ -211,7 +211,7 @@ public class ReviewerAssignPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
-					if (cmbReviewerBox.getSelectedIndex() > 0) {
+					if (paperList.getSelectedIndex() >= 0 && cmbReviewerBox.getSelectedIndex() > 0) {
 						String uID = Controller.getUserID(cmbReviewerBox.getSelectedItem().toString());
 						String paperID = Controller.getPaperID(paperList.getSelectedValue());
 						if (uID.equals(paperID)) {

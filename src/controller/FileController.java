@@ -34,7 +34,7 @@ public class FileController extends Controller {
 	 * The name of the conference to load.
 	 */
 	private String myConf;
-
+	
 	/**
 	 * The list of users for the conference to be loaded.
 	 */
