@@ -24,7 +24,7 @@ import controller.Controller;
 public class MenuBar extends JMenuBar {
    
 	/**
-	 * 
+	 * Serial ID
 	 */
 	private static final long serialVersionUID = 1L;
 	private JMenu fileMenu;
@@ -34,6 +34,11 @@ public class MenuBar extends JMenuBar {
     private Controller ctrl;
 
     //private final String ABOUT
+    /**
+     * Constructor
+     * @param ctrl
+     * @param conferenceGui
+     */
     public MenuBar(Controller ctrl, ConferenceGui conferenceGui) {
         this.ctrl = ctrl;
         this.gui = conferenceGui;
@@ -45,6 +50,9 @@ public class MenuBar extends JMenuBar {
        add(helpMenu);
     }
 
+    /**
+     * Sets up the file within the menubar.
+     */
     private void fileSetup() {
         fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
@@ -70,6 +78,9 @@ public class MenuBar extends JMenuBar {
         });
     }
 
+    /**
+     * sets up help within the menu bar.
+     */
     private void helpSetup() {
         helpMenu = new JMenu("Help");
         helpMenu.setMnemonic(KeyEvent.VK_H);
