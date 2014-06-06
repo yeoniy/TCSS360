@@ -21,9 +21,14 @@ import exception.InvalidInputException;
  * @version 6/3/2014
  */
 public class FileController extends Controller {
-	
+	/**
+	 * Windows specific file separator 
+	 */
 	private static final String WIN_DIR = "\\";
 	
+	/**
+	 * Unix specific file separator
+	 */
 	private static final String UNIX_DIR = "/";
 	
 	/**
@@ -73,6 +78,12 @@ public class FileController extends Controller {
 
 	/**
 	 * Reads the file and adds users to the conference.
+	 * <dt><b>Precondition:</b></dt><dd>
+	 *  User has an assigned paper
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * 	Recommendation is set for paper.		
+	 * </dd>
 	 */
 	private void readFile() { 
 		File myfile = null;
@@ -118,6 +129,10 @@ public class FileController extends Controller {
 			//e.printStackTrace();
 		}   
 	}
+	/**
+	 * gets papers which have recommendation or acceptances
+	 
+	 */
 	private void readRecommendations() { 
 		File myfile = null;
 		if (System.getProperty("os.name").startsWith("Windows")) {
@@ -213,6 +228,9 @@ public class FileController extends Controller {
 	}
 	/**
 	 * gets all the files for the given user.
+	 * <dt><b>Precondition:</b></dt><dd>
+	 *  User has an assigned paper
+	 * </dd>
 	 * @param u user
 	 * @return array list of papers
 	 */
@@ -238,6 +256,14 @@ public class FileController extends Controller {
 		return temp;
 	}
 
+	/**
+	 * Gets the review for a specific paper
+	 * <dt><b>Precondition:</b></dt><dd>
+	 *  The paper exists in the conference
+	 * </dd>
+	 * @param fileName the name of the paper
+	 * @return the reviews associated with that paper
+	 */
     public Comment[] getReviewPaper(String fileName){
         File myfile = Controller.getTheFile(myActiveConference.getName() +"REVIEW_" + fileName);
         Comment[] line = null;
