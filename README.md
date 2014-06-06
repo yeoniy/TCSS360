@@ -28,21 +28,7 @@ I also fixed various bugs I found along the way.
 Sorry for no comments. I will go through tomorrow and comment things more.
 
 
-Update 6/2 - Tim
+Update 6/6 - Tim
 ================
 
-We currently have 7 of the 12 User Stories active and working. The 5 User stories we need to get working are...
-
-Program Chair can Accept or Reject papers and Author is informed.
-
-Reviewer can submit a review.
-
-Author can obtain a review for a paper they submitted.
-
-Subchair can submit recommendations to the Program chair for acceptance or rejection.
-
-Program Chair can see papers assigned to each SubChair.
-
-In addition to this last one we should also probably allow the SubChairs to see the papers they assigned to each reviewer, which once we figure out that last user story
-should not be difficult. I'm thinking we're going to need at least one more text file per conference to store review data and paper status information.
-We also might want another panel at the entry screen so subchairs can submit recommendations to the program chair. 
+Ive been working on testing cant seem to get anything to work though. If someone wants to set up the test case for the controller Ill do a couple methods.
