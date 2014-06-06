@@ -43,7 +43,7 @@ import model.Type;
 public class StatsPanel extends JPanel {
 
 	/**
-	 * 
+	 * User ID
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -52,6 +52,9 @@ public class StatsPanel extends JPanel {
 	 */
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 
+	/**
+	 * labels and buttons
+	 */
 	private JLabel lbl0;
 	private JLabel lbl100;
 	private JLabel lblTitle;
@@ -188,6 +191,9 @@ public class StatsPanel extends JPanel {
 		add(txtComments);
 	}
 
+	/**
+	 * Loads the comments
+	 */
 	private void loadComment() {
 		FileController con = new FileController(Controller.myActiveConference);
 		Comment[] comment = con.getReviewPaper(cmbPaperBox.getSelectedItem().toString());
@@ -269,6 +275,14 @@ public class StatsPanel extends JPanel {
 	 */
 	private class StatsListener implements ActionListener {
 
+		/**
+		 *  <dt><b>Precondition:</b></dt><dd>
+		 *  An action has been performed.
+		 * </dd>
+		 * <dt><b>Postcondition:</b></dt><dd>
+		 *   Specific action is performed.
+		 * </dd>
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() instanceof JButton) {
@@ -312,7 +326,7 @@ public class StatsPanel extends JPanel {
 
 	}
 	/**
-	 * 
+	 * Inner class for item listener.
 	 * @author Tim Loverin
 	 * @version 6/2/2014
 	 */

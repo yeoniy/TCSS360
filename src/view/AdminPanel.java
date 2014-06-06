@@ -28,16 +28,43 @@ import controller.Controller;
 public class AdminPanel extends JPanel {
 
 	/**
-	 * 
+	 * Constant 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * User name 
+	 */
 	private JLabel lblUsername;
+	
+	/**
+	 * ID
+	 */
 	private JLabel lblID;
+	
+	/**
+	 * Type
+	 */
 	private JLabel lblType;
+	
+	/**
+	 * Conference
+	 */
 	private JLabel lblConference;
+	
+	/**
+	 * Deadline
+	 */
 	private JLabel lblDeadline;
+	
+	/**
+	 * Conferences
+	 */
 	private JLabel lblConferences;
 
+	/**
+	 * Conference
+	 */
 	private Conference c;
 
 	private JButton btnCreateConference;
@@ -160,11 +187,14 @@ public class AdminPanel extends JPanel {
 
 	
 	/**
-	 * 
+	 * Action listener for the Admin panel
 	 * @author Tim Loverin, Nick Ames.
 	 * @version 6/2/2014
 	 */
 	private class AdminListener implements ActionListener {
+		/**
+		 * Create or remove a conference depending on action performed.
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() instanceof JButton) {
@@ -181,6 +211,15 @@ public class AdminPanel extends JPanel {
 			}
 		}
 
+		/**
+		 * Removes a conference 
+		 * <dt><b>Precondition:</b></dt><dd>
+		 *  There are conferences in the list.
+		 * </dd>
+		 * <dt><b>Postcondition:</b></dt><dd>
+		 *   Requested conference is removed.
+		 * </dd>
+		 */
 		private void removeAConference() {
 			if (conferenceList.getSelectedIndex() < 0)
 				return;
@@ -199,6 +238,15 @@ public class AdminPanel extends JPanel {
 			}
 		}
 
+		/**
+		 * Creates a conference
+		 *  <dt><b>Precondition:</b></dt><dd>
+		 *  All required prompts are filled out
+		 * </dd>
+		 * <dt><b>Postcondition:</b></dt><dd>
+		 *   Conference is created
+		 * </dd>
+		 */
 		private void createAConference() {
 			try {
 				String cName, cDate, uName, uPass;
@@ -248,6 +296,9 @@ public class AdminPanel extends JPanel {
 		}
 	}
 
+	/**
+	 * Refreshes the user information.
+	 */
 	public void updateUserInformation() {
 		lblUsername.setText(lblUsername.getText() + " " + Controller.getCurrentUser().getName());
 		lblID.setText(lblID.getText() + " " + Controller.getCurrentUser().getId());

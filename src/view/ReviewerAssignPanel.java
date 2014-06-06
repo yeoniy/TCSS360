@@ -35,10 +35,13 @@ import controller.Controller;
 public class ReviewerAssignPanel extends JPanel {
 
 	/**
-	 * 
+	 * Serial ID
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Labels and buttons.
+	 */
 	private JLabel lblTitle;
 
 	private JButton btnAssign;
@@ -65,6 +68,7 @@ public class ReviewerAssignPanel extends JPanel {
 	
 	private MainPanel myMainPanel;
 	private ReviewerAssignListener myListener;
+	
 	/**
 	 * Constructor.
 	 * @param m main panel.
@@ -205,12 +209,20 @@ public class ReviewerAssignPanel extends JPanel {
   		}
 	}
 	/**
-	 * 
+	 * Private Inner class for reviewer action listener.
 	 * @author Tim Loverin, Nick Ames.
 	 * @version 6/2/2014
 	 */
 	private class ReviewerAssignListener implements ActionListener {
 
+		/**
+		 *  <dt><b>Precondition:</b></dt><dd>
+		 *  An action has been performed.
+		 * </dd>
+		 * <dt><b>Postcondition:</b></dt><dd>
+		 *   Specific action is performed.
+		 * </dd>
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() instanceof JButton) {
@@ -254,7 +266,7 @@ public class ReviewerAssignPanel extends JPanel {
 
 	}
 	/**
-	 * 
+	 * Inner class for item listener.
 	 * @author Tim Loverin
 	 * @version 6/3/2014
 	 */

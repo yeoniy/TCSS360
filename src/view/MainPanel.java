@@ -17,7 +17,7 @@ import model.Conference;
  */
 public class MainPanel extends JPanel implements Observer {
 	/**
-	 * 
+	 * Standard serial ID
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
@@ -41,6 +41,9 @@ public class MainPanel extends JPanel implements Observer {
         this.user = user;
     }
 	
+    /**
+     * Updates the main panel.
+     */
     @Override
     public void update (Observable o, Object arg) {
     	System.out.println("I WAS NOTIFIED");

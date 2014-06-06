@@ -132,6 +132,9 @@ public class ConferenceGui extends JFrame {
 		}
 	}
 	
+	/**
+	 * Reset the conference gui.
+	 */
 	public void reset() {
 		mainPanel = new MainPanel(null, null);
 		mainPanel.add(new EntryPanel(mainPanel), "entry");

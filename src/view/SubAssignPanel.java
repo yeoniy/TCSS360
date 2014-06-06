@@ -33,10 +33,13 @@ import controller.Controller;
 public class SubAssignPanel extends JPanel {
 
 	/**
-	 * 
+	 * Serial ID
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * labels and buttons.
+	 */
 	private JLabel lblTitle;
 
 	private JButton btnAssign;
@@ -66,6 +69,10 @@ public class SubAssignPanel extends JPanel {
 	
 	private SubAssignListener myListener;
 
+	/**
+	 * Constructor
+	 * @param mmain panel
+	 */
 	public SubAssignPanel(final MainPanel m) {
 		super(null);
 		test = false;
@@ -76,6 +83,9 @@ public class SubAssignPanel extends JPanel {
 		setName("subAssign");
 	}
 
+	/**
+	 * Initialize the panel.
+	 */
 	private void initialize() {
 
 		/*
@@ -203,12 +213,20 @@ public class SubAssignPanel extends JPanel {
   		}
 	}
 	/**
-	 * 
+	 * Private inner class for Action listener for the subassign panel.
 	 * @author Tim Loverin, Nick Names.
 	 * @version 6/2/2014
 	 */
 	private class SubAssignListener implements ActionListener {
 
+		/**
+		 *  <dt><b>Precondition:</b></dt><dd>
+		 *  An action has been performed.
+		 * </dd>
+		 * <dt><b>Postcondition:</b></dt><dd>
+		 *   Specific action is performed.
+		 * </dd>
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() instanceof JButton) {
@@ -252,7 +270,7 @@ public class SubAssignPanel extends JPanel {
 
 	}
 	/**
-	 * 
+	 * Inner class for ItemListener.
 	 * @author Tim Loverin
 	 * @version 6/2/2014
 	 */

@@ -41,7 +41,7 @@ import controller.FileController;
 public class ProChairReviewPanel extends JPanel {
 
 	/**
-	 * 
+	 * Serial ID
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -50,6 +50,9 @@ public class ProChairReviewPanel extends JPanel {
 	 */
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 
+	/**
+	 * Lables and buttons
+	 */
 	private JLabel lblTitle;
 	private JLabel lblViewReviewsFor;
 	private JLabel lblAverageRating;
@@ -185,6 +188,11 @@ public class ProChairReviewPanel extends JPanel {
 		add(cmbProPaperSelect);
 		add(txtComments);
 	}
+	
+	/**
+	 * Loads the comments
+	 * @param file The paper to load the comments for.
+	 */
 	private void loadComment(String file) {
 		FileController con = new FileController(Controller.myActiveConference);
 		Comment[] comment = con.getReviewPaper(file);
@@ -225,6 +233,10 @@ public class ProChairReviewPanel extends JPanel {
 		}
 		
 	}
+	
+	/**
+	 * Initializes the papers in the review panel.
+	 */
 	public void initPapers() {
 		if (Controller.getUserType() == Type.SUBCHAIR) {
 			int size = 0;
@@ -257,7 +269,7 @@ public class ProChairReviewPanel extends JPanel {
 		}
 	}
 	/**
-	 * 
+	 * Private inner class for the action listener associated with pro-chair
 	 * @author Tim Loverin, Nick Names
 	 * @version 6/2/2014
 	 */
@@ -321,7 +333,7 @@ public class ProChairReviewPanel extends JPanel {
 
 	}
 	/**
-	 * 
+	 * Inner class for myitem listener.
 	 * @author Tim Loverin
 	 * @version 6/2/2014
 	 */
@@ -343,6 +355,11 @@ public class ProChairReviewPanel extends JPanel {
 			}
 		}
 	}
+	/**
+	 * Inner class item listener.
+	 * @author Tim Loverin
+	 * @version 6/2/2014
+	 */
 	class MyItemListener2 implements ItemListener {
 		// This method is called only if a new item has been selected.
 		public void itemStateChanged(ItemEvent evt) {

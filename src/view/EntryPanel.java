@@ -25,7 +25,7 @@ import controller.Controller;
 public class EntryPanel extends JPanel {
 
 	/**
-	 * 
+	 * Labels and buttons for Entry panel
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel lblUsername;
@@ -199,12 +199,20 @@ public class EntryPanel extends JPanel {
 		}
 	}
 	/**
-	 * 
+	 * private inner class for listener.
 	 * @author Tim Loverin, Nick Ames.
 	 * @version 6/2/2014
 	 */
 	private class EntryListener implements ActionListener {
-
+		/**
+		 * Performs actions based on specific action events
+		 *  <dt><b>Precondition:</b></dt><dd>
+		 *  An action was performed
+		 * </dd>
+		 * <dt><b>Postcondition:</b></dt><dd>
+		 *   Specific action is carried out.
+		 * </dd>
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() instanceof JButton) {

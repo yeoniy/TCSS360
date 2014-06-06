@@ -39,7 +39,7 @@ import controller.Controller;
 public class ReviewerPanel extends JPanel {
 
 	/**
-	 * 
+	 * Serial ID
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -48,6 +48,9 @@ public class ReviewerPanel extends JPanel {
 	 */
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 
+	/**
+	 * labels and buttons.
+	 */
 	private JLabel lblTitle;
 	private JLabel lblSelectPaper;
 	private JLabel lblPaperRating;
@@ -72,6 +75,7 @@ public class ReviewerPanel extends JPanel {
 	private MainPanel myMainPanel;
 
 	private ReviewerListener myListener;
+	
 	/**
 	 * Constructor.
 	 * @param m main panel
@@ -188,6 +192,14 @@ public class ReviewerPanel extends JPanel {
 	 */
 	private class ReviewerListener implements ActionListener {
 
+		/**
+		 *  <dt><b>Precondition:</b></dt><dd>
+		 *  An action has been performed.
+		 * </dd>
+		 * <dt><b>Postcondition:</b></dt><dd>
+		 *   Specific action is performed.
+		 * </dd>
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() instanceof JButton) {

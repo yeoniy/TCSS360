@@ -36,6 +36,9 @@ public class LoginPanel extends JPanel {
 	 */
 	private JButton btnLogin;
 	
+	/**
+	 * sign up button
+	 */
 	private JButton btnSignUp;
 	/**
 	 * Logout Button.
@@ -186,6 +189,9 @@ public class LoginPanel extends JPanel {
 		txtPassword.setText("");
 	}
 	
+	/**
+	 * starts the login panel.
+	 */
 	public void start() {
 		d.start();
 	}

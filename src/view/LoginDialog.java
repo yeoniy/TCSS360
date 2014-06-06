@@ -22,9 +22,21 @@ public class LoginDialog extends JDialog {
 	 * Default serial ID.
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Constant for screen dimensions
+	 */
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+	
+	/**
+	 * The conference gui.
+	 */
 	private ConferenceGui g;
 	
+	/**
+	 * Creates the login dialog
+	 * @param parentFrame
+	 */
 	public LoginDialog(ConferenceGui parentFrame) {
 		super(parentFrame, "Login");
 		add(new LoginPanel(this));
@@ -37,6 +49,9 @@ public class LoginDialog extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Enable the login dialog.
+	 */
 	public void start() {
 		g.setEnabled(true);
 	}

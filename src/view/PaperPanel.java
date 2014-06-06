@@ -34,7 +34,7 @@ import controller.Controller;
 public class PaperPanel extends JPanel {
 
 	/**
-	 * 
+	 * Labels and buttons for paper panel
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel lblTitle;
@@ -155,7 +155,7 @@ public class PaperPanel extends JPanel {
 		
 	} 
 	/**
-	 * 
+	 * Private inner class for paper panel listener
 	 * @author Tim Loverin, Nick Ames.
 	 * @version 6/2/2014
 	 */
@@ -204,9 +204,10 @@ public class PaperPanel extends JPanel {
 			}
 		}
 	}
+	
 	/**
-	 * removes a paper
-	 * @param p
+	 * removes a papers.
+	 * @param p.
 	 */
 	private void removePaper(int[] p) {
 		String[] s = new String[paperList.getModel().getSize() - p.length];
@@ -226,8 +227,8 @@ public class PaperPanel extends JPanel {
 		paperList.setListData(s);
 	}
 	/**
-	 * adds a paper
-	 * @param a
+	 * adds a paper.
+	 * @param a.
 	 */
 	private void addPaper(String a) {
 		String[] s = new String[paperList.getModel().getSize() + 1];
