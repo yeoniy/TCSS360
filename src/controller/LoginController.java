@@ -34,6 +34,9 @@ public class LoginController extends Controller implements ActionListener {
 	 */
 	private FileController ctrlFile;
 
+	/**
+	 * The loginDialog for the parent panel
+	 */
 	private LoginDialog myParent;
 
 	/**
@@ -48,6 +51,12 @@ public class LoginController extends Controller implements ActionListener {
 
 	/**
 	 * Performs Login
+	 * <dt><b>Precondition:</b></dt><dd>
+	 *  There is an actionEvent that has been performed
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * 	Makes specific updates depending on the action performed.	
+	 * </dd>
 	 * @param e the ActionEvent that triggered this method.
 	 */
 	@Override
@@ -122,8 +131,6 @@ public class LoginController extends Controller implements ActionListener {
 	 * @throws InvalidLoginException
 	 */
 	private Type validateCredentials(String user, String pass, Conference c) throws InvalidLoginException {
-		
-		
 		if (user.equals("admin")) {
 			if (pass.equals("admin")) {
 				Controller.setActiveUser(new User("admin", "0", "admin", Type.ADMIN));
