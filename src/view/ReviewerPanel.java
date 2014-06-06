@@ -160,21 +160,25 @@ public class ReviewerPanel extends JPanel {
 	 * Adds papers to the combobox
 	 */
 	public void addPapers() {
-		int size = 0;
-		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
-				size++;
+		if (Controller.getMyPapers() != null) {
+			int size = 0;
+			for (int i = 0; i < Controller.getMyPapers().size(); i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					size++;
+			}
+			String[] papers = new String[size];
+			for (int i = 0; i < papers.length; i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					papers[i] = Controller.getMyPapers().get(i).getFileName();
+				//if(!test) {
+					cmbPaperSelectBox.addItem(papers[i]);
+				//}	
+			}
+			paperList.setListData(papers);
 		}
-		String[] papers = new String[size];
-		for (int i = 0; i < papers.length; i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
-				papers[i] = Controller.getMyPapers().get(i).getFileName();
-			if(!test) {
-				cmbPaperSelectBox.addItem(papers[i]);
-			}	
-		}
+		
 		test = true;
-		paperList.setListData(papers);
+		
 	} 
 	/**
 	 * Action Listener for the Reviewer Panel.
@@ -220,7 +224,7 @@ public class ReviewerPanel extends JPanel {
 						br.close();
 					}
 					catch(IOException e1) {
-						System.out.println("Error opening file");
+						JOptionPane.showMessageDialog(null, "Could not find the file.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 
 				} else {

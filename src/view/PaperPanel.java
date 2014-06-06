@@ -130,7 +130,6 @@ public class PaperPanel extends JPanel {
 		
 		add(lblTitle);
 		add(btnBack);
-		add(btnCheckStatus);
 		add(btnSubmit);
 		add(btnRemove);
 		add(paperScrollPane);
@@ -140,16 +139,20 @@ public class PaperPanel extends JPanel {
 	 */
 	public void addPapers() {
 		int size = 0;
-		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
-				size++;
+		if (Controller.getMyPapers() != null) {
+			for (int i = 0; i < Controller.getMyPapers().size(); i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					size++;
+			}
+			String[] papers = new String[size];
+			for (int i = 0; i < papers.length; i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					papers[i] = Controller.getMyPapers().get(i).getFileName();
+			}
+			paperList.setListData(papers);
 		}
-		String[] papers = new String[size];
-		for (int i = 0; i < papers.length; i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
-				papers[i] = Controller.getMyPapers().get(i).getFileName();
-		}
-		paperList.setListData(papers);
+		
+		
 	} 
 	/**
 	 * 
@@ -194,9 +197,6 @@ public class PaperPanel extends JPanel {
 					if (i == JOptionPane.YES_OPTION)
 						Controller.removefromRecs(paperList.getSelectedValue());
 						removePaper(paperList.getSelectedIndices());	
-				} else if (btn.getText().equals("Check Status")) {
-					CardLayout c = (CardLayout) myMainPanel.getLayout();
-					c.show(myMainPanel, "stats");
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");

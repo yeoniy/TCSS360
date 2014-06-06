@@ -208,19 +208,22 @@ public class ProChairReviewPanel extends JPanel {
 	 * loads authors into combo box.
 	 */
 	public void assignAuthors() {
-		int size = Controller.getAllAuthors().size();
-		String[] authors = new String[size];
-		for (int i = 0; i < Controller.getAllAuthors().size(); i++) {
-			authors[i] = Controller.getAllAuthors().get(i).getName();
-			if(!ran) {
-				cmbProAuthorSelectBox.addItem(authors[i]);
+		if (Controller.getAllAuthors() != null) {
+			int size = Controller.getAllAuthors().size();
+			String[] authors = new String[size];
+			for (int i = 0; i < Controller.getAllAuthors().size(); i++) {
+				authors[i] = Controller.getAllAuthors().get(i).getName();
+				//if(!ran) {
+					cmbProAuthorSelectBox.addItem(authors[i]);
+				//}
+			}
+			cmbProAuthorSelectBox.setVisible(true);
+			ran = true;
+			if(Controller.getUserType() == Type.SUBCHAIR) {
+				cmbProAuthorSelectBox.setVisible(false);
 			}
 		}
-		cmbProAuthorSelectBox.setVisible(true);
-		ran = true;
-		if(Controller.getUserType() == Type.SUBCHAIR) {
-			cmbProAuthorSelectBox.setVisible(false);
-		}
+		
 	}
 	public void initPapers() {
 		if (Controller.getUserType() == Type.SUBCHAIR) {

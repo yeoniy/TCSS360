@@ -9,6 +9,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import view.ConferenceGui;
 import model.Author;
 import controller.Controller;
 
@@ -29,13 +30,13 @@ public class MenuBar extends JMenuBar {
 	private JMenu fileMenu;
     private JMenu helpMenu;
 
-    private Author author;
+    private ConferenceGui gui;
     private Controller ctrl;
 
     //private final String ABOUT
-    public MenuBar(Controller ctrl, Author author) {
+    public MenuBar(Controller ctrl, ConferenceGui conferenceGui) {
         this.ctrl = ctrl;
-        this.author = author;
+        this.gui = conferenceGui;
 
         fileSetup();
         helpSetup();
@@ -47,9 +48,17 @@ public class MenuBar extends JMenuBar {
     private void fileSetup() {
         fileMenu = new JMenu("File");
         fileMenu.setMnemonic(KeyEvent.VK_F);
+        final JMenuItem logout = new JMenuItem("Logout");
         final JMenuItem submitFile = new JMenuItem("Exit");
+        fileMenu.add(logout);
         fileMenu.add(submitFile);
         submitFile.setMnemonic(KeyEvent.VK_X);
+        logout.setMnemonic(KeyEvent.VK_L);
+        logout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gui.reset();
+			}
+        });
         submitFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

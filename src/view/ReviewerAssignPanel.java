@@ -160,34 +160,40 @@ public class ReviewerAssignPanel extends JPanel {
 	 */
 	public void addPapers() {
 		int size = 0;
-		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
-				size++;
+		if (Controller.getMyPapers() != null) {
+			for (int i = 0; i < Controller.getMyPapers().size(); i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					size++;
+			}
+			String[] papers = new String[size];
+			for (int i = 0; i < papers.length; i++) {
+				if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
+					papers[i] = Controller.getAllPapers().get(i).getFileName();
+			}
+			if(!test) {
+				paperList.setListData(papers);
+			}	
 		}
-		String[] papers = new String[size];
-		for (int i = 0; i < papers.length; i++) {
-			if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
-				papers[i] = Controller.getAllPapers().get(i).getFileName();
-		}
-		if(!test) {
-			paperList.setListData(papers);
-		}	
+		
 		test = true;
 	}
 	/**
 	 * assigns reviewers to the combobox.
 	 */
 	public void assignReviewers() {
-		int size = Controller.getAllReviewers().size();
-		String[] reviewers = new String[size];
-		for (int i = 0; i < Controller.getAllReviewers().size(); i++) {
-			reviewers[i] = Controller.getAllReviewers().get(i).getName();
-			if(!ran) {
-                if(!Controller.getCurrentUser().getId().equals(Controller.getAllReviewers().get(i).getId())){
-				    cmbReviewerBox.addItem(reviewers[i]);
-                }
+		if (Controller.getAllReviewers() != null) {
+			int size = Controller.getAllReviewers().size();
+			String[] reviewers = new String[size];
+			for (int i = 0; i < Controller.getAllReviewers().size(); i++) {
+				reviewers[i] = Controller.getAllReviewers().get(i).getName();
+				//if(!ran) {
+	                if(!Controller.getCurrentUser().getId().equals(Controller.getAllReviewers().get(i).getId())){
+					    cmbReviewerBox.addItem(reviewers[i]);
+	                }
+				//}
 			}
 		}
+		
 		ran = true;
 	}
 	private void updateText() {

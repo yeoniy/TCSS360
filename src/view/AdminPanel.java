@@ -165,20 +165,6 @@ public class AdminPanel extends JPanel {
 	 * @version 6/2/2014
 	 */
 	private class AdminListener implements ActionListener {
-
-		// TODO
-		/**
-		 * How this works::::
-		 * 
-		 * The admin logs in, he is shown this panel. The conferenceList will contain all the conferences
-		 * that are currently created.
-		 * 
-		 * The admin can create a conference, which opens series of dialogs gathering information then creating a file for
-		 * the conference.
-		 * 
-		 * The admin can remove a conference which just deletes that conferences file.
-		 */
-		//TODO
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() instanceof JButton) {
@@ -195,8 +181,9 @@ public class AdminPanel extends JPanel {
 			}
 		}
 
-		// TODO
 		private void removeAConference() {
+			if (conferenceList.getSelectedIndex() < 0)
+				return;
 			int i = JOptionPane.showConfirmDialog(null, "Are you sure you wish to remove " + conferenceList.getSelectedValue() + "?");
 			
 			if (i == JOptionPane.OK_OPTION) {
@@ -216,7 +203,12 @@ public class AdminPanel extends JPanel {
 			try {
 				String cName, cDate, uName, uPass;
 				cName = JOptionPane.showInputDialog("Please enter the name of the Conference:");
-
+				if (cName == null) {
+					return;
+				} else if (cName.length() < 1) {
+					JOptionPane.showMessageDialog(null, "No input. Aborting creation of a conference.");
+					return;
+				}
 				String[] s = Controller.getConferences();
 				for (int i = 0; i < s.length; i++) {
 					if (s[i].equals(cName)) {
@@ -225,8 +217,26 @@ public class AdminPanel extends JPanel {
 					}
 				}
 				cDate = JOptionPane.showInputDialog("Please enter the deadline of the conference in the format yyyy/mm/dd");
+				if (cDate == null) {
+					return;
+				} else if (cName.length() < 1) {
+					JOptionPane.showMessageDialog(null, "No input. Aborting creation of a conference.");
+					return;
+				}
 				uName = JOptionPane.showInputDialog("Please enter the username of the Program Chair:");
+				if (uName == null) {
+					return;
+				} else if (cName.length() < 1) {
+					JOptionPane.showMessageDialog(null, "No input. Aborting creation of a conference.");
+					return;
+				}
 				uPass = JOptionPane.showInputDialog("Please enter the password of the Program Chair:");
+				if (uPass == null) {
+					return;
+				} else if (cName.length() < 1) {
+					JOptionPane.showMessageDialog(null, "No input. Aborting creation of a conference.");
+					return;
+				}
 				Controller.createNewConference(cName, cDate, new User(uName, "ID0", uPass, model.Type.PROCHAIR));
 				JOptionPane.showMessageDialog(null, "Conference created!");
 				

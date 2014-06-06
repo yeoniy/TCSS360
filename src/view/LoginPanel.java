@@ -61,12 +61,16 @@ public class LoginPanel extends JPanel {
 	 * array of conferences.
 	 */
     private Conference[] conference;
+    
+    private LoginDialog d;
+    
     /**
      * Constructor.
      * @param l login Dialog
      */
     public LoginPanel(final LoginDialog l) {
         ctrlLogin = new LoginController(this, l);
+        d = l;
         try {
 			initialize();
 		} catch (FileNotFoundException e) {
@@ -97,10 +101,14 @@ public class LoginPanel extends JPanel {
 		txtPassword.setPreferredSize(new Dimension(100, 20));
 
         conference = Loader.loadConferenceList();
-        String[] conferenceName = new String[conference.length];
-        for (int i = 0; i < conferenceName.length; i++) {
-            conferenceName[i] = conference[i].getName();
+        String[] conferenceName = new String[conference.length + 1];
+        conferenceName[0] = "Select a conference...";
+        if (!(conference.length < 1)) {
+        	for (int i = 1; i < conferenceName.length; i++) {
+                conferenceName[i] = conference[i - 1].getName();
+            }
         }
+        
 		cmbConferences = new JComboBox<String>(conferenceName);
 		cmbConferences.setPreferredSize(new Dimension(170, 20));
 		// Add the components
@@ -166,12 +174,19 @@ public class LoginPanel extends JPanel {
 	 * @return Conference.
 	 */
 	public Conference getConference() {
-		return conference[cmbConferences.getSelectedIndex()];
+		if (cmbConferences.getSelectedIndex() == 0) {
+			return null;
+		}
+		return conference[cmbConferences.getSelectedIndex()-1];
 	}
 	/**
 	 * resets the password data field.
 	 */
 	public void resetPassField() {
 		txtPassword.setText("");
+	}
+	
+	public void start() {
+		d.start();
 	}
 }

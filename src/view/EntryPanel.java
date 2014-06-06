@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Type;
-
+import model.User;
 import controller.Controller;
 /**
  * The main entry panel for the user. This panel contains navigation based on the user type.
@@ -169,18 +169,26 @@ public class EntryPanel extends JPanel {
 		if (T == Type.AUTHOR) {
 			btnSubmit.setEnabled(true);
 			btnStats.setEnabled(true);
+			btnReview.setText("Review Paper");
+			btnAssignReviewers.setText("Assign Reviewers");
 		} else if (T == Type.REVIEWER) {
 			btnStats.setEnabled(true);
 			btnReview.setEnabled(true);
+			btnReview.setText("Review Paper");
+			btnAssignReviewers.setText("Assign Reviewers");
 		} else if (T == Type.SUBCHAIR) {
 			btnStats.setEnabled(true);
 			btnAssignReviewers.setEnabled(true);
 			btnProReview.setEnabled(true);
+			btnAssignReviewers.setText("Assign Reviewers");
+			btnReview.setText("Review Paper");
 		} else if(T == Type.PROCHAIR) {
-			btnReview.setEnabled(false);
-			btnAssignReviewers.setEnabled(false);
+			btnReview.setEnabled(true);
+			btnAssignReviewers.setEnabled(true);
 			btnProReview.setEnabled(true);
 			btnAssignSubChair.setEnabled(true);
+			btnAssignReviewers.setText("Create Sub-Chair");
+			btnReview.setText("Create Reviewer");
 		} else if(T == Type.ADMIN) {
 			btnSubmit.setEnabled(true);
 			btnStats.setEnabled(true);
@@ -226,6 +234,20 @@ public class EntryPanel extends JPanel {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "pro");
 					prochairrevpanel();
+				} else if (btn.getText().equals("Create Reviewer")) {
+					String uName, uPass, uID;
+					uName = JOptionPane.showInputDialog("Enter the username of the Reviewer:");
+					uPass = JOptionPane.showInputDialog("Enter the Reviewer password:");
+					uID = JOptionPane.showInputDialog("Enter the ID. Must be the same user ID as Author being promoted:");
+					if (uName != null && uPass != null && uID != null)
+						Controller.addUserToConference(new User(uName, uID, uPass, Type.REVIEWER), Controller.getCurrentConference());
+				} else if (btn.getText().equals("Create Sub-Chair")) {
+					String uName, uPass, uID;
+					uName = JOptionPane.showInputDialog("Enter the username of the Sub-Chair:");
+					uPass = JOptionPane.showInputDialog("Enter the Sub-Chair password:");
+					uID = JOptionPane.showInputDialog("Enter the ID. Must be the same user ID as Reviewer being promoted:");
+					if (uName != null && uPass != null && uID != null)
+						Controller.addUserToConference(new User(uName, uID, uPass, Type.SUBCHAIR), Controller.getCurrentConference());
 				} else {
 					int i = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?");
 					if (i == JOptionPane.OK_OPTION)

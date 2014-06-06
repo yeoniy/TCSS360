@@ -155,14 +155,17 @@ public class SubAssignPanel extends JPanel {
 	 * Loads subchairs into combobox.
 	 */
 	public void SubChairs() {
-		int size = Controller.getAllSubChairs().size();
-		String[] subchairs = new String[size];
-		for (int i = 0; i < Controller.getAllSubChairs().size(); i++) {
-			subchairs[i] = Controller.getAllSubChairs().get(i).getName();
-			if(!ran) {
-				cmbSubSelectBox.addItem(subchairs[i]);
+		if (Controller.getAllSubChairs() != null) {
+			int size = Controller.getAllSubChairs().size();
+			String[] subchairs = new String[size];
+			for (int i = 0; i < Controller.getAllSubChairs().size(); i++) {
+				subchairs[i] = Controller.getAllSubChairs().get(i).getName();
+				if(!ran) {
+					cmbSubSelectBox.addItem(subchairs[i]);
+				}
 			}
 		}
+		
 		ran = true;
 		//subAssignPaperList.setListData(subchairs);
 	}
@@ -171,18 +174,23 @@ public class SubAssignPanel extends JPanel {
 	 */
 	public void addPapers() {
 		int size = 0;
-		for (int i = 0; i < Controller.getAllPapers().size(); i++) {
-			if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
-				size++;
+		if (Controller.getAllPapers() != null) {
+			for (int i = 0; i < Controller.getAllPapers().size(); i++) {
+				if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
+					size++;
+			}
+			String[] papers = new String[size];
+			for (int i = 0; i < papers.length; i++) {
+				if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
+					papers[i] = Controller.getAllPapers().get(i).getFileName();
+			}
+			//if(!test) {
+				paperList.setListData(papers);
+			//}
+		} else {
+			paperList.setListData(new String[0]);
 		}
-		String[] papers = new String[size];
-		for (int i = 0; i < papers.length; i++) {
-			if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
-				papers[i] = Controller.getAllPapers().get(i).getFileName();
-		}
-		if(!test) {
-			paperList.setListData(papers);
-		}	
+			
 		test = true;
 	//	paperList.setListData(papers);
 	} 

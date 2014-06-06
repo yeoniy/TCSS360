@@ -57,7 +57,6 @@ public class LoginController extends Controller implements ActionListener {
 			JButton btn = (JButton) e.getSource();
 			//Button Action for Login
 			if (btn.getText().equals("Login")) {
-
 				// Get the conference and attempt login
 				try {
 					// Try grabbing the conference
@@ -66,26 +65,28 @@ public class LoginController extends Controller implements ActionListener {
 					String pass = String.valueOf(myPanel.getPassword());
 
 					Type t = validateCredentials(user, pass, c);
-
+					if (t == null) {
+						return;
+					}
 					Controller.myActiveConference = c;
 					// Set the mainPanel view for the given type of the user
+					myParent.start();
 					myParent.dispose();
 				} catch (InvalidLoginException le) {
 					JOptionPane.showMessageDialog(null, "Username/Password combo not found. Please ensure "
 							+ "your username and password are correct and that you have selected the correct conference.", "Error", JOptionPane.ERROR_MESSAGE);
-					
 				} finally {
 					myPanel.resetPassField();
 				}
 				// Update everything
 				update();
 			} else if (btn.getText().equals("Sign Up")) {
-				String uName, uPass;
+				String uName, uPass, uID;
 				uName = JOptionPane.showInputDialog("Please enter a Username:");
 				uPass = JOptionPane.showInputDialog("Please enter a Password:");
-				
-				if (uName != null && uPass != null) {
-					Controller.addUserToConference(new User(uName, uName + "0", uPass, Type.AUTHOR), myPanel.getConference());
+				uID = JOptionPane.showInputDialog(("Please enter a unique ID:"));
+				if (uName != null && uPass != null && uID != null) {
+					Controller.addUserToConference(new User(uName, uID, uPass, Type.AUTHOR), myPanel.getConference());
 					JOptionPane.showMessageDialog(null, uName + " was added to the conference!");
 				}
 				
@@ -116,6 +117,21 @@ public class LoginController extends Controller implements ActionListener {
 	 * @throws InvalidLoginException
 	 */
 	private Type validateCredentials(String user, String pass, Conference c) throws InvalidLoginException {
+		
+		
+		if (user.equals("admin")) {
+			if (pass.equals("admin")) {
+				Controller.setActiveUser(new User("admin", "0", "admin", Type.ADMIN));
+				Controller.setActiveConference(c);
+				ConferenceGui.startConf();
+				return Type.ADMIN;
+			}
+		}
+		
+		if (myPanel.getConference() == null) {
+			JOptionPane.showMessageDialog(null, "No conference selected. Please select a conference.");
+			return null;
+		}
 		this.ctrlFile = new FileController(c);
 		c = ctrlFile.getMyConference();
 		ArrayList<User> userList = c.getUserList();
@@ -128,7 +144,8 @@ public class LoginController extends Controller implements ActionListener {
 		if (user.equals("")) {
 			throw ile;
 		}
-
+		
+		
 		for (User u : userList) {
 			if (u.getName().equals(user)) {
 				if (u.getPassword().equals(pass)) {

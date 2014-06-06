@@ -242,20 +242,24 @@ public class StatsPanel extends JPanel {
 	 */
 	public void addPapers() {
 		int size = 0;
-		for (int i = 0; i < Controller.getMyPapers().size(); i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
-				size++;
-		}
-		String[] papers = new String[size];
-		for (int i = 0; i < papers.length; i++) {
-			if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
-				papers[i] = Controller.getMyPapers().get(i).getFileName();	
-			if(!test) {
-				cmbPaperBox.addItem(Controller.getMyPapers().get(i).getFileName());
+		if (Controller.getMyPapers() != null) {
+			for (int i = 0; i < Controller.getMyPapers().size(); i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					size++;
 			}
+			String[] papers = new String[size];
+			for (int i = 0; i < papers.length; i++) {
+				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
+					papers[i] = Controller.getMyPapers().get(i).getFileName();	
+				//if(!test) {
+					cmbPaperBox.addItem(Controller.getMyPapers().get(i).getFileName());
+				//}
+			}
+			paperList.setListData(papers);
+			
 		}
 		test = true;
-		paperList.setListData(papers);
+		
 	} 
 	/**
 	 * ActionListener for the statspanel.

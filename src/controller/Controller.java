@@ -644,10 +644,10 @@ public class Controller {
 		String a = "Resources";
 		if (System.getProperty("os.name").startsWith("Windows")) {
 			a += WIN_DIR + s;
-			writer = new FileWriter(a);
+			writer = new FileWriter(new File(a));
 		} else {
 			a += UNIX_DIR + s;
-			writer = new FileWriter(a);
+			writer = new FileWriter(new File(a));
 		}
 		return writer;
 	}
@@ -657,10 +657,10 @@ public class Controller {
 		String a = "Resources";
 		if (System.getProperty("os.name").startsWith("Windows")) {
 			a += WIN_DIR + s;
-			writer = new FileWriter(a, true);
+			writer = new FileWriter(new File(a), true);
 		} else {
 			a += UNIX_DIR + s;
-			writer = new FileWriter(a, true);
+			writer = new FileWriter(new File(a), true);
 		}
 		return writer;
 	}

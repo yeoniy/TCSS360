@@ -63,7 +63,6 @@ public class ConferenceGui extends JFrame {
 	private void initialize() {
 		this.setTitle("Conference");
 		this.setResizable(false);
-		
 		this.setBounds(100, 100, 450, 442);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
@@ -78,7 +77,7 @@ public class ConferenceGui extends JFrame {
 		//TODO menuBar creates before User logs in.
 		//menuBar = new MenuBar(new Controller(), new Author(loginPanel.getUser()));
 		//Testing purpose
-		menuBar = new MenuBar(new Controller(), new Author("", loginPanel.getUsername(), ""));
+		menuBar = new MenuBar(new Controller(), this);
 
 		//TODO menuBar creates before User logs in.
 		//menuBar = new MenuBar(new Controller(), new Author(loginPanel.getUser()));
@@ -101,7 +100,6 @@ public class ConferenceGui extends JFrame {
 		c.show(mainPanel, "entry");
 
         setJMenuBar(menuBar);
-        System.out.println();
 		this.getContentPane().add(mainPanel);
 		
 		//JMenuBar menuBar = new JMenuBar();
@@ -132,5 +130,22 @@ public class ConferenceGui extends JFrame {
 				break;
 			}
 		}
+	}
+	
+	public void reset() {
+		mainPanel = new MainPanel(null, null);
+		mainPanel.add(new EntryPanel(mainPanel), "entry");
+		mainPanel.add(new PaperPanel(mainPanel), "paper");
+		mainPanel.add(new ProChairReviewPanel(mainPanel), "pro");
+		mainPanel.add(new ReviewerAssignPanel(mainPanel), "reviewerAssign");
+		mainPanel.add(new ReviewerPanel(mainPanel), "reviewer");
+		mainPanel.add(new StatsPanel(mainPanel), "stats");
+		mainPanel.add(new SubAssignPanel(mainPanel), "subAssign");
+		mainPanel.add(new AdminPanel(mainPanel), "admin");
+		
+		CardLayout c = (CardLayout) mainPanel.getLayout();
+		c.show(mainPanel, "entry");
+		this.getContentPane().add(mainPanel);
+		LoginDialog d = new LoginDialog(this);
 	}
 }
