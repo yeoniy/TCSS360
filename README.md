@@ -32,3 +32,10 @@ Update 6/6 - Tim
 ================
 
 Ive been working on testing cant seem to get anything to work though. If someone wants to set up the test case for the controller Ill do a couple methods.
+
+Update 6/6 - Rich
+================
+
+I've had the same problem, can't seem to get it to work.
+
+Did a bunch of commenting earlier.
