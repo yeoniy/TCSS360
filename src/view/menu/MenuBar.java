@@ -31,7 +31,7 @@ public class MenuBar extends JMenuBar {
     private JMenu helpMenu;
 
     private ConferenceGui gui;
-    private Controller ctrl;
+    private Controller ctrl; 
 
     //private final String ABOUT
     /**
