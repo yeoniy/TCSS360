@@ -91,6 +91,14 @@ public class Controller {
 
 	/**
 	 * Adds a new paper to the current user within the current active conference.
+	 * 
+	 * <dt><b>Precondition:</b></dt><dd>
+	 * User has an account with addPaper privilege, and knows which conference to submit
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * Paper added to specific conference under specific user name
+	 * </dd>
+	 *
 	 * @param x the index to add to.
 	 * @param fileName name of the file.
 	 */
@@ -120,6 +128,14 @@ public class Controller {
 	}
 	/**
 	 * adds new loaded file to the recfile.
+	 * 
+	 * * <dt><b>Precondition:</b></dt><dd>
+	 *  Have a loaded file.
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * file is added to the recfile.
+	 * </dd>
+	 * 
 	 * @param s name of file
 	 */
 	public static void addtoRecs(String s) {
@@ -134,6 +150,14 @@ public class Controller {
 	}
 	/**
 	 * removes loaded file from the recfile.
+	 * 
+	 * * <dt><b>Precondition:</b></dt><dd>
+	 * 	Know which file to remove from recfile
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 *   File is removed from recfile
+	 * </dd>
+	 * 
 	 * @param s name of file
 	 */
 	public static void removefromRecs(String s) {
@@ -163,6 +187,14 @@ public class Controller {
 	}
 	/**
 	 * assigns a paper to a user
+	 * 
+	 *  <dt><b>Precondition:</b></dt><dd>
+	 *  Submitted paper and registered user.
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * 	Paper is assigned to one and only one user.		
+	 * </dd>
+	 * 
 	 * 
 	 * @param fileName
 	 * @param user
@@ -209,6 +241,12 @@ public class Controller {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Creates a recommendation for the program chair.
+	 * 
+	 * @param paper paper to be recommended
+	 * @param x the recommendation
+	 */
 	public static void setPCrec(String paper, int x) {
 		String old = "";
 		String content = "";
@@ -245,6 +283,11 @@ public class Controller {
 		}
 
 	}
+	/**
+	 * Sets the sub-chairs paper recommendation
+	 * @param paper the paper assigned to the recommendation
+	 * @param x the recommendation
+	 */
 	public static void setSCrec(String paper, int x) {
 		String old = "";
 		String content = "";
@@ -281,6 +324,11 @@ public class Controller {
 		}
 
 	}
+	/**
+	 * Gets the program chairs recommendations
+	 * @param paper The paper assigned to the recommendation
+	 * @return recommendation status
+	 */
 	public static int getPCrec(String paper) {
 		int x = 0;
 		for(int i = 0; i < allPapers.size(); i++) {
@@ -290,6 +338,11 @@ public class Controller {
 		}
 		return x;
 	}
+	/**
+	 * Gets the sub-program chairs recommendations
+	 * @param paper The paper assigned to the recommendation
+	 * @return recommendation status
+	 */
 	public static int getSCrec(String paper) {
 		int x = 0;
 		for(int i = 0; i < allPapers.size(); i++) {
@@ -690,6 +743,12 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Returns the conference based on the given ID.
+	 * 
+	 * @param conferenceId The ID of the conference to get.
+	 * @return the conference, otherwise null.
+	 */
 	public static String[] getConferences() throws IOException {
 		File f = getTheFile("Conference.txt");
 		FileReader fr = new FileReader(f);

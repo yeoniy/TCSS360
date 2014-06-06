@@ -110,10 +110,15 @@ public class LoginController extends Controller implements ActionListener {
 
 	/**
 	 * Validates a user based on their name and password.
+	 * 
+	 * <dt><b>Precondition:</b></dt><dd>
+	 * User name and password typed into text field
+	 * </dd>
+
 	 * @param user the username from the user textfield
-	 * @param pass the password form the password
-	 * @param c
-	 * @return
+	 * @param pass the password from the password
+	 * @param c the associated conference
+	 * @return the type of account for user
 	 * @throws InvalidLoginException
 	 */
 	private Type validateCredentials(String user, String pass, Conference c) throws InvalidLoginException {
