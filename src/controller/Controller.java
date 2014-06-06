@@ -90,13 +90,13 @@ public class Controller {
 	}
 
 	/**
-	 * Adds a new paper to the current user within the current active conference.
+	 * Grabs current users list of papers, and adds the new paper to the end of the list.
 	 * 
 	 * <dt><b>Precondition:</b></dt><dd>
-	 * User has an account with addPaper privilege, and knows which conference to submit
+	 * User has an account with addPaper privilege
 	 * </dd>
 	 * <dt><b>Postcondition:</b></dt><dd>
-	 * Paper added to specific conference under specific user name
+	 *  Paper is added to the users list of submitted papers.
 	 * </dd>
 	 *
 	 * @param x the index to add to.
@@ -243,6 +243,12 @@ public class Controller {
 	}
 	/**
 	 * Creates a recommendation for the program chair.
+	 * <dt><b>Precondition:</b></dt><dd>
+	 *  Program chair has an assigned paper
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * 	Recommendation is set for paper.		
+	 * </dd>
 	 * 
 	 * @param paper paper to be recommended
 	 * @param x the recommendation
@@ -285,6 +291,12 @@ public class Controller {
 	}
 	/**
 	 * Sets the sub-chairs paper recommendation
+	 * <dt><b>Precondition:</b></dt><dd>
+	 *  SubChair has an assigned paper
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * 	Recommendation is set for paper.		
+	 * </dd>
 	 * @param paper the paper assigned to the recommendation
 	 * @param x the recommendation
 	 */
@@ -373,6 +385,11 @@ public class Controller {
 		temp.add(getMaxPapers().get(x - 1));
 		return temp;
 	}
+	/**
+	 * Returns an ArrayList of user assignments.
+	 * @param name - name of user
+	 * @return ArrayList of user assignments.
+	 */
 	public static ArrayList<String> getUserAssignments(String name) {
 		ArrayList<String> temp = new ArrayList<String>();
 		File myfile = null;
@@ -416,7 +433,12 @@ public class Controller {
 	}
 	/**
 	 * primarily used for the removing an assignment.
-	 * 
+	 * <dt><b>Precondition:</b></dt><dd>
+	 *  User has an assigned paper
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * 	Recommendation is set for paper.		
+	 * </dd>
 	 * @param fileName
 	 * @param user
 	 */
@@ -463,6 +485,9 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * update
+	 */
 	public void update() {
 
 
@@ -571,6 +596,12 @@ public class Controller {
 	/**
 	 * removes a paper based on location and updates the text file for the active conference.
 	 * 
+	 * <dt><b>Precondition:</b></dt><dd>
+	 *  File of papers exist
+	 * </dd>
+	 * <dt><b>Postcondition:</b></dt><dd>
+	 * 	specificed paper is removed from the file.		
+	 * </dd>
 	 * @param x the location of the paper to remove.
 	 */
 	public static void removePaper(int x) {
@@ -600,6 +631,13 @@ public class Controller {
 	}
 
 
+	/**
+	 * 	Submits reviewers comments to a paper.
+	 * @param fileName - The name of the file.
+	 * @param id - user id
+	 * @param rate - rating given to paper
+	 * @param comment - comments from reviewer
+	 */
 	public static void writeReviewPaper (String fileName, String id, String rate, String comment) {
 		try {
 			String content = STRINGSPLIT+ id + IDSPLIT + rate + RATESPLIT + comment;
@@ -679,6 +717,11 @@ public class Controller {
 		myActiveConference = c;
 	}
 
+	/**
+	 *  Gets the file using the appropriate OS directory.
+	 * @param s The file to return
+	 * @return the file
+	 */
 	public static File getTheFile(String s) {
 		File file = null;
 		String a = "Resources";
@@ -692,6 +735,12 @@ public class Controller {
 		return file;
 	}
 
+	/**
+	 * 
+	 * @param s
+	 * @return
+	 * @throws IOException
+	 */
 	public static FileWriter getTheWriter(String s) throws IOException {
 		FileWriter writer = null;
 		String a = "Resources";
