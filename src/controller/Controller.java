@@ -736,9 +736,9 @@ public class Controller {
 	}
 
 	/**
-	 * 
-	 * @param s
-	 * @return
+	 * Gets the appropriate file writer depending on OS
+	 * @param s the current file directory
+	 * @return the file writer
 	 * @throws IOException
 	 */
 	public static FileWriter getTheWriter(String s) throws IOException {
@@ -754,6 +754,12 @@ public class Controller {
 		return writer;
 	}
 
+	/**
+	 *  Gets the appropriate file writer depending on OS
+	 * @param s the current file directory
+	 * @return the file writer
+	 * @throws IOException
+	 */
 	public static FileWriter getTheWriterWrite(String s) throws IOException {
 		FileWriter writer = null;
 		String a = "Resources";
@@ -767,6 +773,13 @@ public class Controller {
 		return writer;
 	}
 
+	/**
+	 *  Creates a new conference
+	 * @param name the name of the conference
+	 * @param date The date of the conference
+	 * @param user the user creating the conference.
+	 * @throws IOException if the given conference already exists
+	 */
 	public static void createNewConference(String name, String date, User user) throws IOException {
 		File f = getTheFile(name + ".txt");
 		if (f.createNewFile()) {
@@ -818,6 +831,12 @@ public class Controller {
 		return s;
 	}
 
+	/**
+	 * Returns the deadline for paper submissions
+	 * @param name the name of the conference
+	 * @return the deadline for paper submissions
+	 * @throws IOException
+	 */
 	public static String getConferenceDeadline(String name) throws IOException {
 		File f = getTheFile("Conference.txt");
 		FileReader fr = new FileReader(f);
@@ -838,6 +857,11 @@ public class Controller {
 		return "";
 	}
 
+	/**
+	 * Removes a conference from the conference system.
+	 * @param name the name of the conference to remove.
+	 * @throws IOException
+	 */
 	public static void removeConference(String name) throws IOException {
 		File f = getTheFile(name + ".txt");
 		f.delete();
@@ -867,6 +891,11 @@ public class Controller {
 		fw.close();
 	}
 
+	/**
+	 * Returns a user id
+	 * @param user the user whose id will be returned
+	 * @return the user id string.
+	 */
 	public static String getUserID(String user) {
 
 		ArrayList<User> rev = getAllReviewers();
@@ -888,6 +917,11 @@ public class Controller {
 		return toReturn;
 	}
 
+	/**
+	 * Get the paper ID of a given paper.
+	 * @param paper The paper whose id will be returned.
+	 * @return the paper id string
+	 */
 	public static String getPaperID(String paper) {
 		String id = "";
 		for (Paper p : getAllPapers()) {
@@ -898,6 +932,11 @@ public class Controller {
 		return id;
 	}
 
+	/**
+	 * Adds a user to a conference.
+	 * @param user The user to add to the conference
+	 * @param conference the conference to add the user to.
+	 */
 	public static void addUserToConference(User user, Conference conference) {
 		try {
 			File f = getTheFile(conference.getName() + ".txt");
