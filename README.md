@@ -31,7 +31,7 @@ Sorry for no comments. I will go through tomorrow and comment things more.
 Update 6/6 - Tim
 ================
 
-Ive been working on testing cant seem to get anything to work though. If someone wants to set up the test case for the controller Ill do a couple methods.
+I tested the getMyType(), getConferenceDeadline(), and getTheFile() methods in the Controller class.
 
 Update 6/6 - Rich
 ================
