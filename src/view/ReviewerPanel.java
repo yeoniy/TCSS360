@@ -206,39 +206,46 @@ public class ReviewerPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Submit Review")) {
-					Controller.writeReviewPaper(cmbPaperSelectBox.getSelectedItem().toString(), Controller.getCurrentUser().getId(),
-							reviewRatingSpinner.getValue().toString(),txtComments.getText());
-					JOptionPane.showMessageDialog(null, "Review has been submitted!");
-					//TODO get spinner info
-					//TODO remove paper from reviewers list and update
+					if (cmbPaperSelectBox.getSelectedIndex() >= 0) {
+						Controller.writeReviewPaper(cmbPaperSelectBox.getSelectedItem().toString(), Controller.getCurrentUser().getId(),
+								reviewRatingSpinner.getValue().toString(),txtComments.getText());
+						JOptionPane.showMessageDialog(null, "Review has been submitted!");
+						//TODO get spinner info
+						//TODO remove paper from reviewers list and update
+					} else {
+						JOptionPane.showMessageDialog(null, "Please select a Paper before Reviewing.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
 				}else if (btn.getText().equals("View Paper")){
-					JFrame frame = new JFrame(cmbPaperSelectBox.getSelectedItem().toString());
-					frame.setVisible(true);
-					frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-					frame.setSize(500,500);
-					frame.setLayout(new BorderLayout());
-					JScrollPane pane = new JScrollPane();
-					JTextArea list = new JTextArea();
-					list.setEditable(false);
-					list.setPreferredSize(new Dimension(450, 442));
-					pane.setViewportView(list);
-					frame.add(pane, BorderLayout.CENTER);
-					frame.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
-					try {
-						File file = new File("Resources\\" + cmbPaperSelectBox.getSelectedItem().toString());
-						FileReader fr = new FileReader(file);
-						BufferedReader br = new BufferedReader(fr);
-						String line = "";
-						while(br.ready())    {  
-							line += br.readLine() + "\r\n";   
+					if (cmbPaperSelectBox.getSelectedIndex() >= 0) {
+						JFrame frame = new JFrame(cmbPaperSelectBox.getSelectedItem().toString());
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+						frame.setSize(500,500);
+						frame.setLayout(new BorderLayout());
+						JScrollPane pane = new JScrollPane();
+						JTextArea list = new JTextArea();
+						list.setEditable(false);
+						list.setPreferredSize(new Dimension(450, 442));
+						pane.setViewportView(list);
+						frame.add(pane, BorderLayout.CENTER);
+						frame.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
+						try {
+							File file = new File("Resources\\" + cmbPaperSelectBox.getSelectedItem().toString());
+							FileReader fr = new FileReader(file);
+							BufferedReader br = new BufferedReader(fr);
+							String line = "";
+							while(br.ready())    {  
+								line += br.readLine() + "\r\n";   
+							}
+							list.setText(line);
+							br.close();
 						}
-						list.setText(line);
-						br.close();
+						catch(IOException e1) {
+							JOptionPane.showMessageDialog(null, "Could not find the file.", "Error", JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Please select a Paper before viewing.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
-					catch(IOException e1) {
-						JOptionPane.showMessageDialog(null, "Could not find the file.", "Error", JOptionPane.ERROR_MESSAGE);
-					}
-
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");

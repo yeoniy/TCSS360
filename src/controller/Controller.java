@@ -135,6 +135,9 @@ public class Controller {
 	public static void updateStats(String s) {
 		StatsPanel.addNewPaper(s);
 	}
+	public static void updateStatsRemove(String s) {
+		StatsPanel.removePaper(s);
+	}
 	/**
 	 * adds new loaded file to the recfile.
 	 * 
@@ -352,9 +355,11 @@ public class Controller {
 	 */
 	public static int getPCrec(String paper) {
 		int x = 0;
-		for(int i = 0; i < allPapers.size(); i++) {
-			if (paper.equals(allPapers.get(i).getFileName())) {
-				x = allPapers.get(i).isAccepted();
+		if (allPapers != null) {
+			for(int i = 0; i < allPapers.size(); i++) {
+				if (paper.equals(allPapers.get(i).getFileName())) {
+					x = allPapers.get(i).isAccepted();
+				}
 			}
 		}
 		return x;
@@ -366,9 +371,11 @@ public class Controller {
 	 */
 	public static int getSCrec(String paper) {
 		int x = 0;
-		for(int i = 0; i < allPapers.size(); i++) {
-			if (paper.equals(allPapers.get(i).getFileName())) {
-				x = allPapers.get(i).isScrec();
+		if (allPapers != null) {
+			for(int i = 0; i < allPapers.size(); i++) {
+				if (paper.equals(allPapers.get(i).getFileName())) {
+					x = allPapers.get(i).isScrec();
+				}
 			}
 		}
 		return x;

@@ -197,6 +197,7 @@ public class PaperPanel extends JPanel {
 					int i = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove the paper(s)?", "Remove Paper",  JOptionPane.INFORMATION_MESSAGE);
 					if (i == JOptionPane.YES_OPTION)
 						Controller.removefromRecs(paperList.getSelectedValue());
+						Controller.updateStatsRemove(paperList.getSelectedValue());
 						removePaper(paperList.getSelectedIndices());	
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();

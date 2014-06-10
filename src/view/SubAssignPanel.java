@@ -233,7 +233,7 @@ public class SubAssignPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("Assign")) {
-					if (cmbSubSelectBox.getSelectedIndex() > 0) {
+					if (cmbSubSelectBox.getSelectedIndex() >= 0 && !txtSubAssignedPapers.getText().equals(null)) {
 						String uID = Controller.getUserID(cmbSubSelectBox.getSelectedItem().toString());
 						String paperID = Controller.getPaperID(paperList.getSelectedValue());
 						if (uID.equals(paperID)) {
@@ -253,10 +253,10 @@ public class SubAssignPanel extends JPanel {
 							JOptionPane.showMessageDialog(null, "Cannot assign more than 4 papers or paper already assigned.", "Error", JOptionPane.ERROR_MESSAGE);
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Please select a Sub-Chair before assigning.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Please select a Sub-Chair and paper before assigning.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else if (btn.getText().equals("Remove")) {
-					if (cmbSubSelectBox.getSelectedIndex() > 0) {
+					if (cmbSubSelectBox.getSelectedIndex() >= 0) {
 						Controller.deAssignPaper(paperList.getSelectedValue(),cmbSubSelectBox.getSelectedItem().toString());
 						updateText();
 					}

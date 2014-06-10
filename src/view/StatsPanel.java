@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
@@ -203,7 +204,7 @@ public class StatsPanel extends JPanel {
 		if (comment != null) {
 			if(Controller.getUserType().equals(Type.AUTHOR)) {
 				int x = Controller.getPCrec(cmbPaperBox.getSelectedItem().toString());
-				if(x != 0) {
+				if(x == 2) {
 					String s = "";
 					for(int i = 0; i < comment.length; i++) {
 						s += comment[i].getComment() + "\n";
@@ -214,7 +215,7 @@ public class StatsPanel extends JPanel {
 					if (count != 0)
 						lblRating.setText(Integer.toString(rating/count));
 				} else {
-					txtComments.setText("");
+					txtComments.setText(" ");
 				}
 			} else if(Controller.getUserType().equals(Type.REVIEWER)) {
 				String s = "";
@@ -269,11 +270,18 @@ public class StatsPanel extends JPanel {
 		
 	} 
 	/**
-	 * updates combo box when a new paper is added
+	 * updates combo box when a new paper is added.
 	 * @param s new paper name.
 	 */
 	public static void addNewPaper(String s) {
 		cmbPaperBox.addItem(s);
+	}
+	/**
+	 * updates combo box when a new paper is removed.
+	 * @param s new paper name.
+	 */
+	public static void removePaper(String s) {
+		cmbPaperBox.removeItem(s);
 	}
 	/**
 	 * ActionListener for the statspanel.
@@ -297,33 +305,36 @@ public class StatsPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("View")) {
-					JFrame frame = new JFrame(cmbPaperBox.getSelectedItem().toString());
-					frame.setVisible(true);
-					frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-					frame.setSize(500,500);
-					frame.setLayout(new BorderLayout());
-					JScrollPane pane = new JScrollPane();
-					JTextArea list = new JTextArea();
-					list.setEditable(false);
-					list.setPreferredSize(new Dimension(450, 442));
-					pane.setViewportView(list);
-					frame.add(pane, BorderLayout.CENTER);
-					frame.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
-					try {
-						File file = new File("Resources\\" + cmbPaperBox.getSelectedItem().toString());
-						FileReader fr = new FileReader(file);
-						BufferedReader br = new BufferedReader(fr);
-						String s = "";
-						while (br.ready()) {
-							s += br.readLine() + "\r\n";
+					if (cmbPaperBox.getSelectedIndex() >= 0) {
+						JFrame frame = new JFrame(cmbPaperBox.getSelectedItem().toString());
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+						frame.setSize(500,500);
+						frame.setLayout(new BorderLayout());
+						JScrollPane pane = new JScrollPane();
+						JTextArea list = new JTextArea();
+						list.setEditable(false);
+						list.setPreferredSize(new Dimension(450, 442));
+						pane.setViewportView(list);
+						frame.add(pane, BorderLayout.CENTER);
+						frame.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
+						try {
+							File file = new File("Resources\\" + cmbPaperBox.getSelectedItem().toString());
+							FileReader fr = new FileReader(file);
+							BufferedReader br = new BufferedReader(fr);
+							String s = "";
+							while (br.ready()) {
+								s += br.readLine() + "\r\n";
+							}
+							list.setText(s);
+							br.close();
 						}
-						list.setText(s);
-						br.close();
-					}
-					catch(IOException e1) {
-						System.out.println("Error opening file");
-					}
-
+						catch(IOException e1) {
+							System.out.println("Error opening file");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Please select a Paper before viewing.", "Error", JOptionPane.ERROR_MESSAGE);
+					}	
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");

@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -281,52 +282,64 @@ public class ProChairReviewPanel extends JPanel {
 				JButton btn = (JButton) e.getSource();
 				//Button Action for Submit
 				if (btn.getText().equals("ACCEPT")) {
-					if (Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
-						Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
-						lblStatus.setText("ACCEPTED");
+					if (cmbProPaperSelect.getSelectedIndex() >= 0 && cmbProAuthorSelectBox.getSelectedIndex() >= 0) {
+						if (Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
+							Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
+							lblStatus.setText("ACCEPTED");
+						} else {
+							Controller.setSCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
+							lblRec.setText("ACCEPT");
+						}
 					} else {
-						Controller.setSCrec(cmbProPaperSelect.getSelectedItem().toString() , 2);
-						lblRec.setText("ACCEPT");
-					}
+						JOptionPane.showMessageDialog(null, "Please select an Author before assigning.", "Error", JOptionPane.ERROR_MESSAGE);
+					}	
 				} else if (btn.getText().equals("REJECT")) {
-					if (Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
-						Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
-						lblStatus.setText("REJECTED");
+					if (cmbProPaperSelect.getSelectedIndex() >= 0 && cmbProAuthorSelectBox.getSelectedIndex() >= 0) {
+						if (Controller.getUserType() == Type.PROCHAIR || Controller.getUserType() == Type.ADMIN) {
+							Controller.setPCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
+							lblStatus.setText("REJECTED");
+						} else {
+							Controller.setSCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
+							lblRec.setText("REJECT");
+						}
 					} else {
-						Controller.setSCrec(cmbProPaperSelect.getSelectedItem().toString() , 1);
-						lblRec.setText("REJECT");
+						JOptionPane.showMessageDialog(null, "Please select an Author before assigning.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} else if (btn.getText().equals("View")) {
-					JFrame frame = new JFrame(cmbProPaperSelect.getSelectedItem().toString());
-					frame.setVisible(true);
-					frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-					frame.setSize(500,500);
-					frame.setLayout(new BorderLayout());
-					JScrollPane pane = new JScrollPane();
-					JTextArea list = new JTextArea();
-					list.setEditable(false);
-					list.setPreferredSize(new Dimension(450, 442));
-					pane.setViewportView(list);
-					frame.add(pane, BorderLayout.CENTER);
-					frame.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
-					try {
-						File file = new File("Resources\\" + cmbProPaperSelect.getSelectedItem().toString());
-						FileReader fr = new FileReader(file);
-						BufferedReader br = new BufferedReader(fr);
-						String line = "";
-						while(br.ready())    {  
-							line += br.readLine() + "\r\n";   
+					if (cmbProPaperSelect.getSelectedIndex() >= 0 && cmbProAuthorSelectBox.getSelectedIndex() >= 0) {
+						JFrame frame = new JFrame(cmbProPaperSelect.getSelectedItem().toString());
+						frame.setVisible(true);
+						frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+						frame.setSize(500,500);
+						frame.setLayout(new BorderLayout());
+						JScrollPane pane = new JScrollPane();
+						JTextArea list = new JTextArea();
+						list.setEditable(false);
+						list.setPreferredSize(new Dimension(450, 442));
+						pane.setViewportView(list);
+						frame.add(pane, BorderLayout.CENTER);
+						frame.setLocation(SCREEN_SIZE.width/2 - 300, SCREEN_SIZE.height/2 - 300);
+						try {
+							File file = new File("Resources\\" + cmbProPaperSelect.getSelectedItem().toString());
+							FileReader fr = new FileReader(file);
+							BufferedReader br = new BufferedReader(fr);
+							String line = "";
+							while(br.ready())    {  
+								line += br.readLine() + "\r\n";   
+							}
+							list.setText(line);
 						}
-						list.setText(line);
-					}
-					catch(IOException e1) {
-						System.out.println("Error opening file");
-					}
-
+						catch(IOException e1) {
+							System.out.println("Error opening file");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "Please select an Author before assigning.", "Error", JOptionPane.ERROR_MESSAGE);
+					}		
 				} else {
 					CardLayout c = (CardLayout) myMainPanel.getLayout();
 					c.show(myMainPanel, "entry");
 				}
+				
 			}
 
 		}

@@ -1,5 +1,0 @@
-testpaper.txt 0 0
-yo.txt 0 0
-empty.txt 0 0
-Garbo.txt 0 0
-
