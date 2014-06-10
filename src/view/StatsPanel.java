@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -73,7 +74,7 @@ public class StatsPanel extends JPanel {
 	 */
 	private boolean test;
 
-	private JComboBox<String> cmbPaperBox;
+	private static JComboBox<String> cmbPaperBox;
 	private JList<String> paperList;
 
 	private JProgressBar progressBar;
@@ -257,9 +258,9 @@ public class StatsPanel extends JPanel {
 			for (int i = 0; i < papers.length; i++) {
 				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
 					papers[i] = Controller.getMyPapers().get(i).getFileName();	
-				//if(!test) {
+				if(!test) {
 					cmbPaperBox.addItem(Controller.getMyPapers().get(i).getFileName());
-				//}
+				}
 			}
 			paperList.setListData(papers);
 			
@@ -267,6 +268,13 @@ public class StatsPanel extends JPanel {
 		test = true;
 		
 	} 
+	/**
+	 * updates combo box when a new paper is added
+	 * @param s new paper name.
+	 */
+	public static void addNewPaper(String s) {
+		cmbPaperBox.addItem(s);
+	}
 	/**
 	 * ActionListener for the statspanel.
 	 * 

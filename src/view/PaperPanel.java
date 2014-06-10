@@ -182,6 +182,7 @@ public class PaperPanel extends JPanel {
 						if (i == JFileChooser.APPROVE_OPTION) {
 							// Add the paper to the users paper list
 							Paper p = new Paper(chooser.getSelectedFile());
+							Controller.updateStats(p.getFileName());
                             //TODO creates files to resources
 							Controller.getMyPapers().add(p);
 							Controller.addtoRecs(p.getFileName());

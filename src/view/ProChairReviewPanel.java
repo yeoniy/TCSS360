@@ -221,9 +221,9 @@ public class ProChairReviewPanel extends JPanel {
 			String[] authors = new String[size];
 			for (int i = 0; i < Controller.getAllAuthors().size(); i++) {
 				authors[i] = Controller.getAllAuthors().get(i).getName();
-				//if(!ran) {
+				if(!ran) {
 					cmbProAuthorSelectBox.addItem(authors[i]);
-				//}
+				}
 			}
 			cmbProAuthorSelectBox.setVisible(true);
 			ran = true;

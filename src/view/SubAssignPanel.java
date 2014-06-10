@@ -194,9 +194,9 @@ public class SubAssignPanel extends JPanel {
 				if (!Controller.getAllPapers().get(i).getFileName().equals("empty.txt"))
 					papers[i] = Controller.getAllPapers().get(i).getFileName();
 			}
-			//if(!test) {
+			if(!test) {
 				paperList.setListData(papers);
-			//}
+			}
 		} else {
 			paperList.setListData(new String[0]);
 		}

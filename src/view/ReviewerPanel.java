@@ -174,9 +174,9 @@ public class ReviewerPanel extends JPanel {
 			for (int i = 0; i < papers.length; i++) {
 				if (!Controller.getMyPapers().get(i).getFileName().equals("empty.txt"))
 					papers[i] = Controller.getMyPapers().get(i).getFileName();
-				//if(!test) {
+				if(!test) {
 					cmbPaperSelectBox.addItem(papers[i]);
-				//}	
+				}	
 			}
 			paperList.setListData(papers);
 		}

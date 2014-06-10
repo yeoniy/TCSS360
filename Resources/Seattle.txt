@@ -1,10 +1,10 @@
 NAME1,ID1,PASS1,ADMIN,empty,empty,empty,empty
-NAME2,ID2,PASS2,REVIEWER,testpaper.txt,yo.txt,empty,empty
+NAME2,ID2,PASS2,REVIEWER,empty,empty,empty,empty
 NAME3,ID3,PASS3,PROCHAIR,empty,empty,empty,empty
-NAME4,ID4,PASS4,SUBCHAIR,testpaper.txt,empty,empty,empty
-NAME5,ID4,PASS5,AUTHOR,NewTextDocument.txt,empty,empty,empty
+NAME4,ID4,PASS4,SUBCHAIR,empty,empty,empty,empty
+NAME5,ID4,PASS5,AUTHOR,empty,empty,empty,empty
 NAME6,ID6,PASS6,AUTHOR,empty,empty,empty,empty
-NAME7,ID7,PASS7,REVIEWER,testpaper.txt,NewTextDocument.txt,empty,empty
+NAME7,ID7,PASS7,REVIEWER,empty,empty,empty,empty
 NAME8,ID8,PASS8,SUBCHAIR,empty,empty,empty,empty
 Tim,Tim0,Tim,AUTHOR,empty,empty,empty,empty
 Test,Test0,Test,AUTHOR,empty,empty,empty,empty

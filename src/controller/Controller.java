@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 import javax.swing.JPanel;
 
+import view.StatsPanel;
+
 import model.Conference;
 import model.Paper;
 import model.Type;
@@ -125,6 +127,13 @@ public class Controller {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * updates the stats panel when a new file is added.
+	 * @param s file name as a string
+	 */
+	public static void updateStats(String s) {
+		StatsPanel.addNewPaper(s);
 	}
 	/**
 	 * adds new loaded file to the recfile.
